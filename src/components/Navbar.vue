@@ -7,7 +7,7 @@ export default {
   },
   methods: {
     openMenu(){
-
+        console.log('funziono')
     }
   }
 }
@@ -23,7 +23,7 @@ export default {
                 <RouterLink to="/">Home</RouterLink>
                 <RouterLink to="/ristoranti">Ristoranti</RouterLink>
                 <RouterLink to="/tipologia">Tipologie</RouterLink>
-                <button>Sei un ristoratore? &#129123;</button>
+                <button @click="openMenu()">Sei un ristoratore? &#129123;</button>
                 <div class="d-inline dropdown-log">
                     <ul class="drop-list">
                         <li>Accedi al tuo ristorante</li>
