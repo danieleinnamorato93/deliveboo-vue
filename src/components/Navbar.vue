@@ -29,6 +29,10 @@ nav {
     background-color: #4fae5a;
     img {
         height: 5.5rem;
+        transition: scale 150ms;
+    }
+    img:hover {
+        scale: (1.2);
     }
     h1 {
         margin-left: 20px;
