@@ -13,4 +13,7 @@ export default {
 </template>
 
 <style scoped lang="scss">
+* {
+  border: 2px solid red;
+}
 </style>
