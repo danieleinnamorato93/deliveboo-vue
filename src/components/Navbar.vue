@@ -21,8 +21,8 @@ export default {
                 <button @mouseover="isHidden = false">Sei un ristoratore? &#129123;</button>
                 <div class="d-inline dropdown-log" @mouseleave="isHidden = true">
                     <ul :class="{ none: isHidden }">
-                        <li>Accedi al tuo ristorante</li>
-                        <li>Registra il tuo ristorante</li>
+                        <li><a href="http://127.0.0.1:8000/login">Accedi al tuo ristorante</a></li>
+                        <li><a href="http://127.0.0.1:8000/register">Registra il tuo ristorante</a></li>
                     </ul>
                 </div>
             </div>
@@ -63,6 +63,7 @@ nav {
         border: 1px;
         background-color: #ea555f;
         padding: 5px;
+        border: 3px solid black;
         border-radius: 12px;
         color: black;
         display: inline;
@@ -78,6 +79,7 @@ nav {
             max-width: fit-content;
             padding: 0;
             margin: 0;
+            margin-top: 2px;
             left: 290px;
             top: 45px;
             li {
