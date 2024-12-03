@@ -32,6 +32,9 @@ nav {
 #nav-link {
     * {
         margin-right: 10px;
+        text-decoration: none;
+        color: white;
+        font-weight: 700;
     }
 }
 
