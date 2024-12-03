@@ -14,10 +14,12 @@ export default {
                 <img src="../../public/Food-Delivery-Service-PNG-High-Quality-Image.png" alt="logo">
                 <h1>Deliveboo - Food Delivery</h1>
             </div>
+            <!-- Sezione Link -->
             <div id="nav-link">
                 <RouterLink to="/">Home</RouterLink>
                 <RouterLink to="/ristoranti">Ristoranti</RouterLink>
                 <RouterLink to="/tipologia">Tipologie</RouterLink>
+                <!-- Sezione Log-In/Registrazione -->
                 <button @mouseover="isHidden = false">Sei un ristoratore? &#129123;</button>
                 <div class="d-inline dropdown-log" @mouseleave="isHidden = true">
                     <ul :class="{ none: isHidden }">
@@ -30,6 +32,7 @@ export default {
 </template>
 
 <style scoped lang="scss">
+// Stile Navbar
 nav {
     min-height: 2.5rem;
     background-color: #4fae5a;
@@ -50,6 +53,7 @@ nav {
     }
 }
 
+// Sezione Link
 #nav-link {
     position: relative;
     * {
@@ -59,43 +63,52 @@ nav {
         font-size: 1.2rem;
         font-weight: 700;
     }
+
+    
+    // bottone per menu a tendina
     button {
         border: 1px;
-        background-color: #ea555f;
         padding: 5px;
-        border: 3px solid black;
         border-radius: 12px;
-        color: black;
         display: inline;
+    }
+    
+    // proprietà in comune tra bottone e lista
+    button, .dropdown-log > ul > li {
+        border: 3px solid black;
+        background-color: #ea555f;
+        }
+    
+    button, ul > li > a {
+        color: black;
+    }
+
+    // Sezione menu a tendina
+
+    .dropdown-log > ul, .dropdown-log li {
+        max-width: fit-content;
+        margin: 0;
     }
 
     .dropdown-log{
-        * {
-            color: black;
-        }
         ul {
             position: absolute;
             list-style-type: none;
-            max-width: fit-content;
             padding: 0;
-            margin: 0;
             margin-top: 2px;
             left: 290px;
             top: 45px;
             li {
-                margin: 0;
                 margin-bottom: 2px;
                 width: 205px;
-                background-color: #ea555f;
-                border: 3px solid black;
                 border-radius: 12px;
                 padding: 5px;
-                max-width: fit-content;
             }
         }
     }
 }
 
+// classe per triggerare visibilità lista
 .none {
     display: none;
 }
