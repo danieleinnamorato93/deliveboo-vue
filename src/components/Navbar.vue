@@ -2,12 +2,7 @@
 export default {
   data() {
     return {
-      
-    }
-  },
-  methods: {
-    openMenu(){
-        console.log('funziono')
+      isHidden: true,
     }
   }
 }
@@ -23,9 +18,9 @@ export default {
                 <RouterLink to="/">Home</RouterLink>
                 <RouterLink to="/ristoranti">Ristoranti</RouterLink>
                 <RouterLink to="/tipologia">Tipologie</RouterLink>
-                <button @click="openMenu()">Sei un ristoratore? &#129123;</button>
-                <div class="d-inline dropdown-log">
-                    <ul class="drop-list">
+                <button @mouseover="isHidden = false">Sei un ristoratore? &#129123;</button>
+                <div class="d-inline dropdown-log" @mouseleave="isHidden = true">
+                    <ul :class="{ none: isHidden }">
                         <li>Accedi al tuo ristorante</li>
                         <li>Registra il tuo ristorante</li>
                     </ul>
@@ -56,6 +51,7 @@ nav {
 }
 
 #nav-link {
+    position: relative;
     * {
         margin-right: 20px;
         text-decoration: none;
@@ -69,27 +65,36 @@ nav {
         padding: 5px;
         border-radius: 12px;
         color: black;
+        display: inline;
     }
+
     .dropdown-log{
         * {
-           color: black;
+            color: black;
         }
         ul {
+            position: absolute;
             list-style-type: none;
             max-width: fit-content;
             padding: 0;
             margin: 0;
+            left: 290px;
+            top: 45px;
             li {
-                border: 1px;
-                border-bottom: 1px solid black;
+                margin: 0;
+                margin-bottom: 2px;
+                width: 205px;
                 background-color: #ea555f;
-                padding: 5px;
+                border: 3px solid black;
                 border-radius: 12px;
+                padding: 5px;
                 max-width: fit-content;
-
             }
         }
     }
 }
 
+.none {
+    display: none;
+}
 </style>
