@@ -4,6 +4,11 @@ export default {
     return {
       
     }
+  },
+  methods: {
+    openMenu(){
+
+    }
   }
 }
 </script>
@@ -18,7 +23,13 @@ export default {
                 <RouterLink to="/">Home</RouterLink>
                 <RouterLink to="/ristoranti">Ristoranti</RouterLink>
                 <RouterLink to="/tipologia">Tipologie</RouterLink>
-                <a href="#">Accedi al tuo Ristorante</a>
+                <button>Sei un ristoratore? &#129123;</button>
+                <div class="d-inline dropdown-log">
+                    <ul class="drop-list">
+                        <li>Accedi al tuo ristorante</li>
+                        <li>Registra il tuo ristorante</li>
+                    </ul>
+                </div>
             </div>
     </nav>
 </template>
@@ -52,8 +63,33 @@ nav {
         font-size: 1.2rem;
         font-weight: 700;
     }
-    :last-child {
+    button {
+        border: 1px;
+        background-color: #ea555f;
+        padding: 5px;
+        border-radius: 12px;
         color: black;
     }
+    .dropdown-log{
+        * {
+           color: black;
+        }
+        ul {
+            list-style-type: none;
+            max-width: fit-content;
+            padding: 0;
+            margin: 0;
+            li {
+                border: 1px;
+                border-bottom: 1px solid black;
+                background-color: #ea555f;
+                padding: 5px;
+                border-radius: 12px;
+                max-width: fit-content;
+
+            }
+        }
+    }
 }
+
 </style>
