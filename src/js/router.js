@@ -5,7 +5,6 @@ import Ristoranti from "../pages/Ristoranti.vue"
 const routes = [
   //{ path: "/about", component: AboutView },
   { path: '/', component: Home },
-  { path: '/ristoranti', component: Ristoranti }
 ];
 
 const router = createRouter({
