@@ -1,6 +1,5 @@
 <script>
 import RestaurantCard from '../components/RestaurantCard.vue';
-import RestaurantCard from '../components/RestaurantCard.vue';
 
 export default {
   
