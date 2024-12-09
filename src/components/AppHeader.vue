@@ -19,7 +19,7 @@ export default {
                 <RouterLink to="/">Home</RouterLink>
                 <RouterLink to="/checkout">Carrello</RouterLink>
                 <!-- Sezione Log-In/Registrazione -->
-                <button>Acceddi al tuo Ristorante</button>
+                <button><a href="http://127.0.0.1:8000/login">Acceddi al tuo Ristorante</a></button>
                 <button><a href="http://127.0.0.1:8000/register">Registra il tuo Ristorante</a></button>
             </div>
     </nav>
