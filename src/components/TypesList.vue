@@ -29,27 +29,25 @@ export default {
         store.clickedTypes.splice(index, 1);
       }
     },
-    prev() {
-      // Se siamo all'inizio, torniamo alla fine
-      if (this.currentIndex <= 0) {
-        this.currentIndex = store.typesList.length - this.thumbnailsPerPage;
-      } else {
-        this.currentIndex -= 1;
-      }
-    },
-    next() {
-
-      // Se siamo alla fine, torniamo all'inizio
-      if (this.currentIndex + this.thumbnailsPerPage >= store.typesList.length) {
-        this.currentIndex = 0;
-      } else {
-        this.currentIndex += 1;
-      }
-
-    },
     getImage(img) {
       // URL absoluta para o Laravel
       return img ? `http://127.0.0.1:8000${img}` : '';
+    },
+    prev() {
+      // Se il primo elemento della finestra visibile è il primo della lista, vai alla fine
+      if (this.currentIndex <= 0) {
+        this.currentIndex = store.typesList.length - this.thumbnailsPerPage; // Vai alla fine della lista
+      } else {
+        this.currentIndex -= 1; // Torna indietro di uno
+      }
+    },
+    next() {
+      // Se l'ultimo elemento della finestra visibile è l'ultimo della lista, torna all'inizio
+      if (this.currentIndex + this.thumbnailsPerPage >= store.typesList.length) {
+        this.currentIndex = 0; // Torna all'inizio
+      } else {
+        this.currentIndex += 1; // Scorri di uno
+      }
     },
   }
 }
