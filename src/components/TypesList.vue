@@ -9,9 +9,7 @@ export default {
     };
   },
   methods: {
-    showSingleType(typeId) {
-      this.$router.push({ name: "types.show", params: { id: typeId } });
-    },
+   
   },
 };
 </script>
@@ -22,7 +20,7 @@ export default {
       <div class="col-12" v-for="type in store.TypesList" :key="type.id">
         <div :id="'carousel-' + type.id" class="carousel slide">
           <div class="carousel-inner">
-            <div class="carousel-item" :class="{ active: index === 0 }" @click="showSingleType(type.id)">
+            <div class="carousel-item" :class="{ active: index === 0 }">
               <img src="..." class="d-block w-100" alt="..." />
             </div>
           </div>

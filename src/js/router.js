@@ -7,7 +7,6 @@ const routes = [
   //{ path: "/about", component: AboutView },
   { path: '/', component: Home },
   { path: '/checkout', component: Checkout },
-  { path: '/types/:id', component: TypesList, name:'types.show' },
 
 ];
 
