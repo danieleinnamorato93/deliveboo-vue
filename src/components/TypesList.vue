@@ -30,20 +30,22 @@ export default {
       }
     },
     next() {
-      // Se siamo alla fine, torniamo all'inizio
-      if (this.currentIndex + this.thumbnailsPerPage >= store.typesList.length) {
-        this.currentIndex = 0;
-      } else {
-        this.currentIndex += 1;
-      }
-    },
-    prev() {
       // Se siamo all'inizio, torniamo alla fine
       if (this.currentIndex <= 0) {
         this.currentIndex = store.typesList.length - this.thumbnailsPerPage;
       } else {
         this.currentIndex -= 1;
       }
+    },
+    prev() {
+
+      // Se siamo alla fine, torniamo all'inizio
+      if (this.currentIndex + this.thumbnailsPerPage >= store.typesList.length) {
+        this.currentIndex = 0;
+      } else {
+        this.currentIndex += 1;
+      }
+
     },
     getImage(img) {
       // URL absoluta para o Laravel
@@ -57,15 +59,15 @@ export default {
     <div class="row">
       <div class="col-12">
         <div class="thumbnails-wrapper">
-          <button class="btn prev" @click="prev">⬅️</button>
+          <button class="btn prev" @click="prev">prima</button>
           <div class="thumbnails d-flex">
             <article v-for="type in visibleThumbnails" :key="type.id" class="thumbnail"
               :class="{ 'active': store.clickedTypes.includes(type.id) }" @click="getTypeId(type.id)">
               <img :src="getImage(type.logo)" :alt="type.name" class="adaptive-cover">
-              <h4>{{type.name}}</h4>
+              <h4>{{ type.name }}</h4>
             </article>
           </div>
-          <button class="btn next" @click="next">➡️</button>
+          <button class="btn next" @click="next">dopo</button>
         </div>
       </div>
     </div>
