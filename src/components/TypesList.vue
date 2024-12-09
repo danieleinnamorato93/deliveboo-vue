@@ -21,6 +21,9 @@ export default {
         store.clickedTypes.splice(index, 1);
       }
     },
+    getImage(img){
+    return `http://127.0.0.1:8000${img}`;  // URL absoluta para o Laravel
+    },
   },
 }
 </script>
@@ -31,7 +34,8 @@ export default {
       <div class="col-12">
         <div class="thumbnails d-flex">
           <article class="thumbnail" v-for="type in store.typesList" :key="type.id">
-            <img :src="type.logo" :alt="type.name" class="h-100">
+            <img :src="getImage(type.logo)" :alt="type.name" width="100"> 
+            <!-- <img :src="type.logo" :alt="type.name" class="h-100"> -->
           </article>
         </div>
       </div>
