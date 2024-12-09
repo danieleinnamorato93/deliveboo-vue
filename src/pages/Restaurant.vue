@@ -1,13 +1,12 @@
 <script>
 import RestaurantCard from '../components/RestaurantCard.vue';
-import RestaurantCard from '../components/RestaurantCard.vue';
 import {store} from '../js/store.js';
 
 export default {
   name:"Restaurant",
   data() {
     return {
-     
+     restaurant: null,
     }
   },
   component: {
