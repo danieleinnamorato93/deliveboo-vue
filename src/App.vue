@@ -1,7 +1,6 @@
 <script>
 import { RouterLink, RouterView } from "vue-router";
-import Navbar from "./components/Navbar.vue";
-import Type from "./components/Type.vue";
+import AppHeader from "./components/AppHeader.vue";
 
 export default {
   data() {
@@ -9,15 +8,13 @@ export default {
   },
 
   components: {
-    Navbar,
-    Type
+    AppHeader,
   },
 };
 </script>
 
 <template>
-  <Navbar />
-  <Type />
+  <AppHeader />
   <RouterView />
 </template>
 

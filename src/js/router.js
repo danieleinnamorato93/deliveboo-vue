@@ -1,11 +1,11 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "../pages/Home.vue";
-import Ristoranti from "../pages/Ristoranti.vue"
+import Checkout from "../pages/Checkout.vue";
 
 const routes = [
   //{ path: "/about", component: AboutView },
   { path: '/', component: Home },
-  { path: '/ristoranti', component: Ristoranti }
+  { path: '/checkout', component: Checkout }
 ];
 
 const router = createRouter({

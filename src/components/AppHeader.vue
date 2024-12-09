@@ -12,21 +12,20 @@ export default {
         <nav class="d-flex align-items-center justify-content-between p-3">
             <div>
                 <img src="../../public/Food-Delivery-Service-PNG-High-Quality-Image.png" alt="logo">
-                <h1>Deliveboo - Food Delivery</h1>
+                <RouterLink to="/" class="link"><h1>Deliveboo - Food Delivery </h1></RouterLink>
             </div>
             <!-- Sezione Link -->
             <div id="nav-link">
                 <RouterLink to="/">Home</RouterLink>
-                <RouterLink to="/ristoranti">Ristoranti</RouterLink>
-                <RouterLink to="/tipologia">Tipologie</RouterLink>
-                <!-- Sezione Log-In/Registrazione -->
+                <RouterLink to="/checkout">Carrello</RouterLink>
+                <!-- Sezione Log-In/Registrazione
                 <button @mouseover="isHidden = false">Sei un ristoratore? &#129123;</button>
                 <div class="d-inline dropdown-log" @mouseleave="isHidden = true">
                     <ul :class="{ none: isHidden }">
                         <li><a href="http://127.0.0.1:8000/login">Accedi al tuo ristorante</a></li>
                         <li><a href="http://127.0.0.1:8000/register">Registra il tuo ristorante</a></li>
                     </ul>
-                </div>
+                </div> -->
             </div>
     </nav>
 </template>
@@ -51,6 +50,10 @@ nav {
         font-weight: 700;
         text-decoration: underline;
     }
+}
+
+.link {
+    text-decoration: none;
 }
 
 // Sezione Link

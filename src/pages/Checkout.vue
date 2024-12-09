@@ -9,9 +9,8 @@ export default {
 </script>
 
 <template>
-<h1>Ecco i ristoranti</h1>
+<h1>Ciao sono il carrello</h1>
 </template>
 
 <style scoped lang="scss">
-
 </style>
