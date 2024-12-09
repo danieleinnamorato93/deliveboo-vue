@@ -4,12 +4,12 @@ export default {
   data() {
     return {
       store,
-    };
+    }
   },
   methods: {
     
   },
-};
+}
 </script>
 
 <template>
