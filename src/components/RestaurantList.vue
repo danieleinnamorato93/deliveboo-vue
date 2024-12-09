@@ -5,10 +5,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      restaurantList: [],
-      /* Placejolder endpoint
-      apiRestaurantUrl:http://localhost:5173/,
-      */
+ 
     };
   },
 
