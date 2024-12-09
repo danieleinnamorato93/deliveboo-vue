@@ -29,7 +29,7 @@ export default {
         store.clickedTypes.splice(index, 1);
       }
     },
-    next() {
+    prev() {
       // Se siamo all'inizio, torniamo alla fine
       if (this.currentIndex <= 0) {
         this.currentIndex = store.typesList.length - this.thumbnailsPerPage;
@@ -37,7 +37,7 @@ export default {
         this.currentIndex -= 1;
       }
     },
-    prev() {
+    next() {
 
       // Se siamo alla fine, torniamo all'inizio
       if (this.currentIndex + this.thumbnailsPerPage >= store.typesList.length) {
