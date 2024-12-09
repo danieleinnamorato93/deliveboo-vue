@@ -34,6 +34,27 @@ export default {
         console.log('tipi:',store.typesList)
         })
       },
+
+      showRestaurantTypes() {
+       selectedTypes = [];
+       selectedRestaurantTypes = store.restaurantsList.filter(restaurant => {
+          if (restaurant.types.some(type => clickedTypes.includes(type.id))) {
+             selectedTypes.push(restaurant);
+          return true;
+         }
+          return false;
+        });
+         return selectedTypes;
+      }
+
+  },
+
+  computed:{
+    shownTypes(){
+      if(store.clickedTypes.length > 0){
+        this.showRestaurantTypes()
+      }
+    }
   },
 
   created(){
@@ -46,14 +67,25 @@ export default {
 </script>
 
 <template>
+  
 <h2>Sono la lista dei ristoranti</h2>
+
 <ul>
-  <li v-for=" restaurant in store.restaurantsList" :key="restaurant.id">
+  <li v-if="shownTypes">
+
     <RestaurantCard
+    v-for=" restaurant in this.selectedTypes" :key="restaurant.id"
+    :restaurantObject = 'restaurant'
+    />
+  </li>
+  <li v-else>
+    <RestaurantCard
+    v-for=" restaurant in store.restaurantsList" :key="restaurant.id"
     :restaurantObject = 'restaurant'
     />
   </li>
 </ul>
+
 </template>
 
 <style scoped lang="scss">
