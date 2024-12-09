@@ -1,5 +1,6 @@
 <script>
 import RestaurantCard from '../components/RestaurantCard.vue';
+import RestaurantCard from '../components/RestaurantCard.vue';
 import {store} from '../js/store.js';
 
 export default {
@@ -23,9 +24,7 @@ export default {
 <template>
 <h1>Sono un singolo ristorante</h1>
 
-    <div v-for="restaurant in restaurantsList" :key="restaurant.id">
-      <RestaurantCard :restaurantObject="restaurant" />
-    </div>
+<RestaurantCard :restaurantObject = 'restaurant' />
   
 </template>
 
