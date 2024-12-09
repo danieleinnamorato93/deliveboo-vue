@@ -35,7 +35,7 @@ export default {
 
         
         <div class="card w-100 mt-3">
-          <img src="..." class="card-img-top" alt="...">
+          <!-- <img src="..." class="card-img-top" alt="..."> -->
           <div class="card-body">
             <h5 class="card-title">{{ restaurant.name }}</h5>
             <p class="card-text">{{ restaurant.address }}</p>
