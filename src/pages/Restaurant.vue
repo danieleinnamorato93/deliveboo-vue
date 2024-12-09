@@ -41,7 +41,21 @@ export default {
             <p class="card-text">{{ restaurant.address }}</p>
           </div>  
           <ul class="list-group list-group-flush">
-            <li class="list-group-item" v-for="plate in restaurant.plates">{{ plate.name}}</li>
+            <li class="list-group-item" v-for="plate in restaurant.plates">
+              <h5>{{ plate.name }}</h5>
+              <h6>Ingredienti:</h6>
+              <p> 
+                {{ plate.description }} 
+              </p>
+              <h6>Prezzo: {{ plate.price }}€</h6>
+              <h6>Disponibilità:</h6>
+              <p v-if="plate.description">
+                  Disponibile
+              </p>
+              <p v-else>
+                Non Disponibile
+              </p>
+            </li>
           </ul>
         </div>
         
