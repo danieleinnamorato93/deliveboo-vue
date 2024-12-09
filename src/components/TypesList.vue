@@ -1,15 +1,13 @@
 <script>
-import { store } from "../store";
+import { store } from '../js/store';
 export default {
   data() {
     return {
       store,
-      clickedType: [],
-      currentIndex: 0,
     };
   },
   methods: {
-   
+    
   },
 };
 </script>
