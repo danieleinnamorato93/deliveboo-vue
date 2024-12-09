@@ -15,7 +15,7 @@ export default {
   components: {
     RestaurantCard,
   },
-  
+
   methods: {
           //chiamata principale per ottenere la lista dei ristoranti
     getRestaurants (){
@@ -46,8 +46,10 @@ export default {
 <template>
 <h2>Sono la lista dei ristoranti</h2>
 <ul>
-  <li v-for="n in 5">
-    <RestaurantCard />
+  <li v-for=" restaurant in store.restaurantsList" :key="restaurant.id">
+    <RestaurantCard
+    :restaurantObject = 'restaurant'
+    />
   </li>
 </ul>
 </template>
