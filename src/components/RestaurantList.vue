@@ -1,14 +1,14 @@
 <script>
 import RestaurantCard from "./RestaurantCard.vue";
 import axios from "axios";
-import {store} from '../js/store.js'
+import { store } from '../js/store.js'
 
 export default {
   data() {
     return {
       store,
-      apiRestaurants:'http://127.0.0.1:8000/api/restaurants',
-      apiTypes:'http://127.0.0.1:8000/api/types',
+      apiRestaurants: 'http://127.0.0.1:8000/api/restaurants',
+      apiTypes: 'http://127.0.0.1:8000/api/types',
     };
   },
 
@@ -17,47 +17,50 @@ export default {
   },
 
   methods: {
-          //chiamata principale per ottenere la lista dei ristoranti
-    getRestaurants (){
+    //chiamata principale per ottenere la lista dei ristoranti
+    getRestaurants() {
       axios.get(this.apiRestaurants)
         .then((response) => {
-        store.restaurantsList = response.data.results;
-        console.log('ristoranti:',store.restaurantsList);
+          store.restaurantsList = response.data.results;
+          console.log('ristoranti:', store.restaurantsList);
         })
-      },
+    },
 
-      // chiamata per ottenere le tipologie dei ristoranti
-    getTypes (){
+    // chiamata per ottenere le tipologie dei ristoranti
+    getTypes() {
       axios.get(this.apiTypes)
-        .then((response)=> {
-        store.typesList = response.data.results;
-        console.log('tipi:',store.typesList)
+        .then((response) => {
+          store.typesList = response.data.results;
+          console.log('tipi:', store.typesList)
         })
-      },
+    },
 
-      showRestaurantTypes() {
-       selectedTypes = [];
-       selectedRestaurantTypes = store.restaurantsList.filter(restaurant => {
-          if (restaurant.types.some(type => clickedTypes.includes(type.id))) {
-             selectedTypes.push(restaurant);
+    showRestaurantTypes() {
+      const selectedTypes = [];
+      let selectedRestaurantTypes = store.restaurantsList.filter(restaurant => {
+        if (restaurant.types.some(type => store.clickedTypes.includes(type.id))) {
+          selectedTypes.push(restaurant);
           return true;
-         }
-          return false;
-        });
-         return selectedTypes;
-      }
+        }
+        return false;
+      });
+      console.log('ristoranti cliccati',selectedRestaurantTypes);
+      console.log('tipi cliccati',selectedTypes);
+
+      return selectedTypes;
+    }
 
   },
 
-  computed:{
-    shownTypes(){
-      if(store.clickedTypes.length > 0){
+  computed: {
+    shownTypes() {
+      if (store.clickedTypes.length > 0) {
         this.showRestaurantTypes()
       }
     }
   },
 
-  created(){
+  created() {
     this.getRestaurants();
     this.getTypes();
   },
@@ -67,24 +70,19 @@ export default {
 </script>
 
 <template>
-  
-<h2>Sono la lista dei ristoranti</h2>
 
-<ul>
-  <li v-if="shownTypes">
+  <h2>Sono la lista dei ristoranti</h2>
 
-    <RestaurantCard
-    v-for=" restaurant in this.selectedTypes" :key="restaurant.id"
-    :restaurantObject = 'restaurant'
-    />
-  </li>
-  <li v-else>
-    <RestaurantCard
-    v-for=" restaurant in store.restaurantsList" :key="restaurant.id"
-    :restaurantObject = 'restaurant'
-    />
-  </li>
-</ul>
+  <ul>
+    <li v-if="shownTypes">
+
+      <RestaurantCard v-for=" restaurant in this.selectedTypes" :key="restaurant.id" :restaurantObject='restaurant' />
+    </li>
+    <li v-else>
+      <RestaurantCard v-for=" restaurant in store.restaurantsList" :key="restaurant.id"
+        :restaurantObject='restaurant' />
+    </li>
+  </ul>
 
 </template>
 
