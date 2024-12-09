@@ -28,9 +28,28 @@ export default {
 </script>
 
 <template>
-<h1>Sono un singolo ristorante</h1>
-<h2>Ciao io sono {{ restaurant.name }} </h2>
-</template>
+  <div class="container"> 
+
+    <div class="row justify-content-center ">
+      <div class="col-6">
+
+        
+        <div class="card w-100 mt-3">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{ restaurant.name }}</h5>
+            <p class="card-text">{{ restaurant.address }}</p>
+          </div>  
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" v-for="plate in restaurant.plates">{{ plate.name}}</li>
+          </ul>
+        </div>
+        
+        
+      </div>
+    </div>
+    </div>
+    </template>
 
 <style scoped lang="scss">
 
