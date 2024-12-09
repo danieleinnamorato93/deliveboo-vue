@@ -1,4 +1,5 @@
 <script>
+import RestaurantList from "../components/RestaurantList.vue";
 import TypesList from "../components/TypesList.vue"
 
 export default {
@@ -8,7 +9,8 @@ export default {
     }
   },
   components: {
-    TypesList
+    TypesList,
+    RestaurantList
   }
 }
 </script>
@@ -16,6 +18,7 @@ export default {
 <template>
 <TypesList />
 <h1>Questa è la home</h1>
+<RestaurantList />
 </template>
 
 <style scoped lang="scss">
