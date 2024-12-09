@@ -15,13 +15,27 @@ export default {
                 <RouterLink to="/" class="link"><h1>Deliveboo - Food Delivery </h1></RouterLink>
             </div>
             <!-- Sezione Link -->
-            <div id="nav-link">
+            <div class="nav-link">
                 <RouterLink to="/">Home</RouterLink>
                 <RouterLink to="/checkout">Carrello</RouterLink>
-                <!-- Sezione Log-In/Registrazione -->
-                <button><a href="http://127.0.0.1:8000/login">Accedi al tuo Ristorante</a></button>
-                <button><a href="http://127.0.0.1:8000/register">Registra il tuo Ristorante</a></button>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  Sei un Ristoratore?
+                </button>
             </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="log-btn me-2"><a href="http://127.0.0.1:8000/login">Accedi al tuo ristorante</a></button>
+                        <button type="button" class="log-btn me-2"><a href="http://127.0.0.1:8000/register">Registra il tuo ristorante</a></button>
+                        <button type="button" class="close-btn" data-bs-dismiss="modal">Chiudi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </nav>
 </template>
 
@@ -29,7 +43,7 @@ export default {
 // Stile Navbar
 nav {
     min-height: 2.5rem;
-    background-color: #5DD39E;
+    background-color: #4fae5a;
     img {
         height: 5.5rem;
         transition: scale 150ms;
@@ -52,8 +66,7 @@ nav {
 }
 
 // Sezione Link
-#nav-link {
-    position: relative;
+.nav-link {
     * {
         margin-right: 20px;
         text-decoration: none;
@@ -61,53 +74,29 @@ nav {
         font-size: 1.2rem;
         font-weight: 700;
     }
-
-    
-    // bottone per menu a tendina
-    button {
-        border: 1px;
-        padding: 5px;
-        border-radius: 12px;
-        display: inline;
-    }
-    
-    // proprietà in comune tra bottone e lista
-    button, .dropdown-log > ul > li {
-        border: 3px solid black;
-        background-color: #ea555f;
-        }
-    
-    button, ul > li > a {
-        color: black;
-    }
-
-    // Sezione menu a tendina
-
-    .dropdown-log > ul, .dropdown-log li {
-        max-width: fit-content;
-        margin: 0;
-    }
-
-    .dropdown-log{
-        ul {
-            position: absolute;
-            list-style-type: none;
-            padding: 0;
-            margin-top: 2px;
-            left: 290px;
-            top: 45px;
-            li {
-                margin-bottom: 2px;
-                width: 205px;
-                border-radius: 12px;
-                padding: 5px;
-            }
-        }
-    }
 }
 
-// classe per triggerare visibilità lista
-.none {
-    display: none;
+button {
+    border: 1px;
+    padding: 5px;
+    border-radius: 12px;
+    display: inline;
+    border: 3px solid black;
+    background-color: #ea555f;
+    color: black;
+}
+
+
+.log-btn {
+    background-color: #4fae5a;
+}
+
+.close-btn {
+    background-color: #ea555f;
+}
+
+a {
+    text-decoration: underline;
+    color: black;
 }
 </style>
