@@ -16,8 +16,16 @@ export default {
 </script>
 
 <template>
-  <h2>Sono la lista dei ristoranti</h2>
-  <RestaurantCard />
+<h2>Sono la lista dei ristoranti</h2>
+<ul>
+  <li v-for="n in 5">
+    <RestaurantCard />
+  </li>
+</ul>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+ul {
+  list-style-type: none;
+}
+</style>
