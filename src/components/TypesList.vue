@@ -45,7 +45,11 @@ export default {
         this.currentIndex -= 1;
       }
     },
-  },
+    getImage(img) {
+      // URL absoluta para o Laravel
+      return img ? `http://127.0.0.1:8000${img}` : '';
+    },
+  }
 }
 </script>
 <template>
@@ -57,7 +61,7 @@ export default {
           <div class="thumbnails d-flex">
             <article v-for="type in visibleThumbnails" :key="type.id" class="thumbnail"
               :class="{ 'active': store.clickedTypes.includes(type.id) }" @click="getTypeId(type.id)">
-              <img :src="type.logo" :alt="type.name" class="adaptive-cover">
+              <img :src="getImage(type.logo)" :alt="type.name" class="adaptive-cover">
             </article>
           </div>
           <button class="btn next" @click="next">➡️</button>
@@ -73,7 +77,7 @@ export default {
   justify-content: center;
   align-items: center;
   position: relative;
-  
+
   .thumbnails {
     display: flex;
     overflow: hidden;
