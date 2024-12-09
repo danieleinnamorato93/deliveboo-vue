@@ -4,6 +4,12 @@ export default {
     return {
       
     }
+  },
+  props: {
+    restaurantObject: {
+      type: Object, required: true,
+    }
+
   }
 }
 </script>
@@ -16,8 +22,8 @@ export default {
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h5 class="card-title">Ristorante Bello</h5>
-        <p class="card-text">Ciao, siamo la pizzeria più buona di tutta Italia</p>
+        <h5 class="card-title">{{restaurantObject.nameRest}}</h5>
+        <p class="card-text">{{restaurantObject.description }}</p>
       </div>
     </div>
   </div>

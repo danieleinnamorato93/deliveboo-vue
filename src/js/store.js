@@ -2,7 +2,21 @@ import {reactive} from "vue";
 
 
 export const store = reactive ({
-restaurantsList: ['prova1', 'prova2','prova3'],
+restaurantsList: [
+    {
+        nameRest : 'pippo',
+        description : 'bello ristorante',
+    },
+    {
+        nameRest : pluto,
+        description: 'bellissimo ristorante',
+    },
+    {
+        nameRest: paperino,
+        description: 'stramegafigo ristorante',
+    }
+    ],
+
 typesList: [],
 clickedTypes: [],
 });
