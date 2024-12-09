@@ -4,8 +4,14 @@ import { store } from './store.js'
 export default {
   data() {
     return {
-      store,
+      
     }
+  },
+  props: {
+    restaurantObject: {
+      type: Object, required: true,
+    }
+
   }
 }
 </script>
@@ -18,8 +24,9 @@ export default {
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h5 class="card-title">{{ store.restaurant.name }}</h5>
-        <p class="card-text">{{store.restaurant.address}}a</p>
+        <h5 class="card-title">{{restaurantObject.name}}</h5>
+        <h5 class="card-text">{{restaurantObject.types[0].name}}</h5>
+        <p class="card-text">Descrizione: {{restaurantObject.types[0].description }}</p>
       </div>
     </div>
   </div>
