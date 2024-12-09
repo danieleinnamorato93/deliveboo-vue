@@ -2,6 +2,7 @@
 import RestaurantCard from "./RestaurantCard.vue";
 import axios from "axios";
 import {store} from '../js/store.js'
+import { RouterLink } from "vue-router";
 
 export default {
   data() {
@@ -49,9 +50,9 @@ export default {
 <h2>Sono la lista dei ristoranti</h2>
 <ul>
   <li v-for=" restaurant in store.restaurantsList" :key="restaurant.id">
-    <RestaurantCard
-    :restaurantObject = 'restaurant'
-    />
+    <RouterLink :to="{name: 'singleRestaurant', params: { id :  restaurant.id  }}">
+      <RestaurantCard :restaurantObject = 'restaurant' />
+    </RouterLink>
   </li>
 </ul>
 </template>

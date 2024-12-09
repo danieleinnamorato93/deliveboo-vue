@@ -1,10 +1,11 @@
 <script>
-import { store } from './store.js'
+import { RouterLink } from 'vue-router';
+import { store } from '../js/store.js'
 
 export default {
   data() {
     return {
-      
+      store,
     }
   },
   props: {
@@ -12,16 +13,16 @@ export default {
       type: Object, required: true,
     }
 
-  }
+  },
 }
 </script>
 
 <template>
-<div class="card mb-3" style="max-width: 540px;">
+  <div class="card mb-3" style="max-width: 540px;">
   <div class="row g-0">
-    <div class="col-md-4">
-      <img src="{{ store.restaurant->image }}" class="img-fluid rounded-start" alt="...">
-    </div>
+    <!-- <div class="col-md-4">
+      <img src="" class="img-fluid rounded-start" alt="...">
+    </div> -->
     <div class="col-md-8">
       <div class="card-body">
         <h5 class="card-title">{{restaurantObject.name}}</h5>
