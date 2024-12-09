@@ -22,8 +22,9 @@ export default {
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h5 class="card-title">{{restaurantObject.nameRest}}</h5>
-        <p class="card-text">{{restaurantObject.description }}</p>
+        <h5 class="card-title">{{restaurantObject.name}}</h5>
+        <h5 class="card-text">{{restaurantObject.types[0].name}}</h5>
+        <p class="card-text">Descrizione: {{restaurantObject.types[0].description }}</p>
       </div>
     </div>
   </div>

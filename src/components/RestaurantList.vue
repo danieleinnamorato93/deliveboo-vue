@@ -7,22 +7,8 @@ export default {
   data() {
     return {
       store,
-      apiRestaurants:'',
-      apiTypes:'',
-      restaurantsList: [
-    {
-        nameRest : 'pippo',
-        description : 'bello ristorante',
-    },
-    {
-        nameRest : 'pluto',
-        description: 'bellissimo ristorante',
-    },
-    {
-        nameRest: 'paperino',
-        description: 'stramegafigo ristorante',
-    }
-    ],
+      apiRestaurants:'http://127.0.0.1:8000/api/restaurants',
+      apiTypes:'http://127.0.0.1:8000/api/types',
     };
   },
 
@@ -35,7 +21,8 @@ export default {
     getRestaurants (){
       axios.get(this.apiRestaurants)
         .then((response) => {
-        store.restaurantsList = response.data.data;
+        store.restaurantsList = response.data.results;
+        console.log('ristoranti:',store.restaurantsList);
         })
       },
 
@@ -43,7 +30,8 @@ export default {
     getTypes (){
       axios.get(this.apiTypes)
         .then((response)=> {
-        store.typesList = response.data;
+        store.typesList = response.data.results;
+        console.log('tipi:',store.typesList)
         })
       },
   },
@@ -60,7 +48,7 @@ export default {
 <template>
 <h2>Sono la lista dei ristoranti</h2>
 <ul>
-  <li v-for=" restaurant in /* store. */restaurantsList" :key="restaurant.id">
+  <li v-for=" restaurant in store.restaurantsList" :key="restaurant.id">
     <RestaurantCard
     :restaurantObject = 'restaurant'
     />
