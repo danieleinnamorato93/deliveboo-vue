@@ -5,7 +5,7 @@ export default {
     return {
       store,
       currentIndex: 0, // Indice dell'elemento corrente
-      thumbnailsPerPage: 8, // Numero di thumbnails da visualizzare per volta 
+      thumbnailsPerPage: 6, // Numero di thumbnails da visualizzare per volta 
     }
   },
   computed: {
@@ -62,6 +62,7 @@ export default {
             <article v-for="type in visibleThumbnails" :key="type.id" class="thumbnail"
               :class="{ 'active': store.clickedTypes.includes(type.id) }" @click="getTypeId(type.id)">
               <img :src="getImage(type.logo)" :alt="type.name" class="adaptive-cover">
+              <h4>{{type.name}}</h4>
             </article>
           </div>
           <button class="btn next" @click="next">➡️</button>
@@ -85,8 +86,8 @@ export default {
     gap: 10px;
 
     article.thumbnail {
-      width: 80px;
-      height: 80px;
+      width: 200px;
+      height: 200px;
       cursor: pointer;
 
       img.adaptive-cover {
