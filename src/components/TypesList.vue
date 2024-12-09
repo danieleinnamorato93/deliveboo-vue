@@ -4,16 +4,25 @@ export default {
   data() {
     return {
       store,
-    };
+      clickedType = [],
+      currentIndex = 0,
+    }
   },
-};
+  methods: {
+    showSingleType(typeId) {
+      this.$router.push({ name: 'types.show', params: { id: typeId } })
+    }
+  }
+}
 </script>
 
 <template>
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
-        <div id="carouselExample" class="carousel slide">
+        <div id="carouselExample" class="carousel slide" v-for="type in store.TypesList" 
+        :key="type.id"
+        @click="showSingleType(type.id)">
           <div class="carousel-inner">
             <div class="carousel-item">
               <img src="..." class="d-block w-100" alt="..." />
@@ -30,7 +39,6 @@ export default {
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
