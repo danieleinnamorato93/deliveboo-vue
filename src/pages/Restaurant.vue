@@ -1,6 +1,6 @@
 <script>
 import RestaurantCard from '../components/RestaurantCard.vue';
-import RestaurantCard from '../components/RestaurantCard.vue';
+
 import {store} from '../js/store.js';
 
 export default {
@@ -10,19 +10,16 @@ export default {
      restaurant: null,
     }
   },
-  component: {
-    RestaurantCard
+  components: {
+    RestaurantCard,
   },
-  computed: {
-    restaurantsList() {
-      return store.restaurantsList;
-    }
-  },
+ 
 }
 </script>
 
 <template>
-<h1>Sono un singolo ristorante</h1>
+<p>Restaurant ID: {{ $route.params.id }} </p>
+<h1>Sono un singolo ristorante </h1>
 
 <RestaurantCard :restaurantObject = 'restaurant' />
   
