@@ -26,35 +26,19 @@ export default {
 </script>
 
 <template>
-  <div id="app">
-    <div id="categoryCarousel" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <div v-for="(type, index) in store.typesList" :key="index" :class="['carousel-item', { active: index === 0 }]" @click="getTypeId(type.id)">
-          <div class="d-flex justify-content-center">
-            <div class="text-center mx-2">
-              <img :src="type.logo" class="rounded-circle" :alt="type.name" width="100">
-              <p>{{ type.name }}</p>
-            </div>
-          </div>
+  <section id="carousel-types" class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="thumbnails d-flex">
+          <article class="thumbnail" v-for="type in store.typesList" :key="type.id">
+            <img :src="type.logo" :alt="type.name" class="h-100">
+          </article>
         </div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#categoryCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#categoryCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
     </div>
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>
-.carousel-item{
-  background-color: blue;
-}
-.carousel-item img {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+
 </style>
