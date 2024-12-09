@@ -1,21 +1,15 @@
 <script>
-import TypesList from "../components/TypesList.vue"
-
 export default {
   data() {
     return {
       
     }
-  },
-  components: {
-    TypesList
   }
 }
 </script>
 
 <template>
-<TypesList />
-<h1>Questa è la home</h1>
+<h1>Sono un singolo ristorante</h1>
 </template>
 
 <style scoped lang="scss">
