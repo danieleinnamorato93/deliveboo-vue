@@ -38,9 +38,25 @@ export default {
 </script>
 
 <template>
-<p>Restaurant ID: {{ $route.params.id }} </p>
-<RestaurantCard :restaurantObject="restaurant" />  
-<h1>{{restaurant.name}}</h1>
+
+  <section class="mb-3">
+      <p>Restaurant ID: {{ $route.params.id }} </p>
+      <div class="row justify-content-center container-fluid">
+        <RestaurantCard :restaurantObject="restaurant" /> 
+      </div>
+  </section> 
+  <section class="container">    
+      <h1 class="text-center mb-5">{{restaurant.name}}</h1>
+      <ul class="list-unstyled">
+        <!-- Itera sobre os pratos e exibe o nome, descrição e preço -->
+        <li v-for="plate in restaurant.plates" :key="plate.name" class="mb-5">
+          <h3>{{ plate.name }}</h3>
+          <p>{{ plate.description }}</p>
+          <p>Ingredienti: {{ plate.ingredients }}</p>
+          <p>Prezzo: €{{ plate.price }}</p>
+        </li>
+      </ul>
+    </section>
 
 </template>
 
