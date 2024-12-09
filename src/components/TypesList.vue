@@ -9,9 +9,7 @@ export default {
     };
   },
   methods: {
-    showSingleType(typeId) {
-      this.$router.push({ name: "types.show", params: { id: typeId } });
-    },
+   
   },
 };
 </script>
