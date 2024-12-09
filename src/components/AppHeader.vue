@@ -19,13 +19,8 @@ export default {
                 <RouterLink to="/">Home</RouterLink>
                 <RouterLink to="/checkout">Carrello</RouterLink>
                 <!-- Sezione Log-In/Registrazione -->
-                <!-- <button @mouseover="isHidden = false">Sei un ristoratore? &#129123;</button>
-                <div class="d-inline dropdown-log" @mouseleave="isHidden = true">
-                    <ul :class="{ none: isHidden }">
-                        <li><a href="http://127.0.0.1:8000/login">Accedi al tuo ristorante</a></li>
-                        <li><a href="http://127.0.0.1:8000/register">Registra il tuo ristorante</a></li>
-                    </ul>
-                </div> -->
+                <button>Acceddi al tuo Ristorante</button>
+                <button><a href="http://127.0.0.1:8000/register">Registra il tuo Ristorante</a></button>
             </div>
     </nav>
 </template>
