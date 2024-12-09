@@ -15,7 +15,7 @@ export default {
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12" v-for="type in store.TypesList" :key="type.id">
+      <div class="col-12" v-for="type in store.typesList" :key="type.id">
         <div :id="'carousel-' + type.id" class="carousel slide">
           <div class="carousel-inner">
             <div class="carousel-item" :class="{ active: index === 0 }">
