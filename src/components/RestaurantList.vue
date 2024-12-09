@@ -9,6 +9,20 @@ export default {
       store,
       apiRestaurants:'',
       apiTypes:'',
+      restaurantsList: [
+    {
+        nameRest : 'pippo',
+        description : 'bello ristorante',
+    },
+    {
+        nameRest : 'pluto',
+        description: 'bellissimo ristorante',
+    },
+    {
+        nameRest: 'paperino',
+        description: 'stramegafigo ristorante',
+    }
+    ],
     };
   },
 
@@ -46,7 +60,7 @@ export default {
 <template>
 <h2>Sono la lista dei ristoranti</h2>
 <ul>
-  <li v-for=" restaurant in store.restaurantsList" :key="restaurant.id">
+  <li v-for=" restaurant in /* store. */restaurantsList" :key="restaurant.id">
     <RestaurantCard
     :restaurantObject = 'restaurant'
     />
