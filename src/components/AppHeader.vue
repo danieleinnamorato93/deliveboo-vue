@@ -34,7 +34,7 @@ export default {
 // Stile Navbar
 nav {
     min-height: 2.5rem;
-    background-color: #4fae5a;
+    background-color: #5DD39E;
     img {
         height: 5.5rem;
         transition: scale 150ms;
