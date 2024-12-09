@@ -35,16 +35,16 @@ export default {
     },
     prev() {
       if (this.currentIndex <= 0) {
-        this.currentIndex = store.typesList.length - this.thumbnailsPerPage; 
+        this.currentIndex = store.typesList.length - this.thumbnailsPerPage;
       } else {
-        this.currentIndex -= 1; 
+        this.currentIndex -= 1;
       }
     },
     next() {
       if (this.currentIndex + this.thumbnailsPerPage >= store.typesList.length) {
-        this.currentIndex = 0; 
+        this.currentIndex = 0;
       } else {
-        this.currentIndex += 1; 
+        this.currentIndex += 1;
       }
     },
   }
@@ -60,7 +60,9 @@ export default {
             <article v-for="type in visibleThumbnails" :key="type.id" class="thumbnail"
               :class="{ 'active': store.clickedTypes.includes(type.id) }" @click="getTypeId(type.id)">
               <img :src="getImage(type.logo)" :alt="type.name" class="adaptive-cover">
-              <h4>{{ type.name }}</h4>
+              <div>
+                <h4>{{ type.name }}</h4>
+              </div>
             </article>
           </div>
           <button class="btn next" @click="next">dopo</button>
@@ -84,9 +86,13 @@ export default {
     gap: 10px;
 
     article.thumbnail {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       width: 200px;
-      height: 200px;
+      height: 250px;
       cursor: pointer;
+      text-align: center;
 
       img.adaptive-cover {
         width: 100%;
