@@ -1,8 +1,10 @@
 <script>
-import { store } from '../js/store';
+import RestaurantCard from '../components/RestaurantCard.vue';
+import {store} from '../js/store.js';
 import axios from 'axios';
 
 export default {
+  name:"Restaurant",
   data() {
     return {
       store,
@@ -28,42 +30,27 @@ export default {
 </script>
 
 <template>
-  <div class="container"> 
 
-    <div class="row justify-content-center ">
-      <div class="col-6">
-
-        
-        <div class="card w-100 mt-3">
-          <!-- <img src="..." class="card-img-top" alt="..."> -->
-          <div class="card-body">
-            <h5 class="card-title">{{ restaurant.name }}</h5>
-            <p class="card-text">{{ restaurant.address }}</p>
-          </div>  
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item" v-for="plate in restaurant.plates">
-              <h5>{{ plate.name }}</h5>
-              <h6>Ingredienti:</h6>
-              <p> 
-                {{ plate.description }} 
-              </p>
-              <h6>Prezzo: {{ plate.price }}€</h6>
-              <h6>Disponibilità:</h6>
-              <p v-if="plate.description">
-                  Disponibile
-              </p>
-              <p v-else>
-                Non Disponibile
-              </p>
-            </li>
-          </ul>
-        </div>
-        
-        
+  <section class="mb-3">
+      <p>Restaurant ID: {{ $route.params.id }} </p>
+      <div class="row justify-content-center container-fluid">
+        <RestaurantCard :restaurantObject="restaurant" /> 
       </div>
-    </div>
-    </div>
-    </template>
+  </section> 
+  <section class="container">    
+      <h1 class="text-center mb-5">{{restaurant.name}}</h1>
+      <ul class="list-unstyled">
+        <!-- Itera sobre os pratos e exibe o nome, descrição e preço -->
+        <li v-for="plate in restaurant.plates" :key="plate.name" class="mb-5">
+          <h3>{{ plate.name }}</h3>
+          <p>{{ plate.description }}</p>
+          <p>Ingredienti: {{ plate.ingredients }}</p>
+          <p>Prezzo: €{{ plate.price }}</p>
+        </li>
+      </ul>
+    </section>
+
+</template>
 
 <style scoped lang="scss">
 
