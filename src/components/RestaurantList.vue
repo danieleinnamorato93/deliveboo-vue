@@ -79,7 +79,6 @@ export default {
       <RestaurantCard v-for="restaurant in displayedRestaurants" :key="restaurant.id" :restaurantObject="restaurant" />
     </ul>
   </div>
-<h2>Sono la lista dei ristoranti</h2>
 <ul>
   <li v-for=" restaurant in store.restaurantsList" :key="restaurant.id">
     <RouterLink :to="{name: 'singleRestaurant', params: { id :  restaurant.id  }}">
