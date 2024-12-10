@@ -55,7 +55,7 @@ export default {
     <div class="row">
       <div class="col-12">
         <div class="thumbnails-wrapper">
-          <button class="btn prev" @click="prev">prima</button>
+          <button class="btn prev" @click="prev">⬅️</button>
           <div class="thumbnails d-flex">
             <article v-for="type in visibleThumbnails" :key="type.id" class="thumbnail"
               :class="{ 'active': store.clickedTypes.includes(type.id) }" @click="getTypeId(type.id)">
@@ -65,7 +65,7 @@ export default {
               </div>
             </article>
           </div>
-          <button class="btn next" @click="next">dopo</button>
+          <button class="btn next" @click="next">➡️</button>
         </div>
       </div>
     </div>
