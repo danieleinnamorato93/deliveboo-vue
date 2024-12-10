@@ -76,16 +76,13 @@ export default {
   <div>
     <h2>Sono la lista dei ristoranti</h2>
     <ul>
+      <RouterLink :to="{name: 'singleRestaurant', params: { id :  restaurant.id  }}">
       <RestaurantCard v-for="restaurant in displayedRestaurants" :key="restaurant.id" :restaurantObject="restaurant" />
+      </RouterLink>
     </ul>
   </div>
-<ul>
-  <li v-for=" restaurant in store.restaurantsList" :key="restaurant.id">
-    <RouterLink :to="{name: 'singleRestaurant', params: { id :  restaurant.id  }}">
-      <RestaurantCard :restaurantObject = 'restaurant' />
-    </RouterLink>
-  </li>
-</ul>
+
+
 </template>
 <style scoped lang="scss">
 ul {
