@@ -7,8 +7,8 @@ export default {
   data() {
     return {
       apiUrl: 'http://127.0.0.1:8000/api/restaurants',
-      restaurant: null,  // Variável para armazenar o restaurante individual
-
+      restaurant: null,  // Variabile per il ristaurant
+      notFount: null,    //Variabile per il messagio 404
     }
   },
 
