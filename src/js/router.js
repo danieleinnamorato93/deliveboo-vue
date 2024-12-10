@@ -1,13 +1,13 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "../pages/Home.vue";
 import Checkout from "../pages/Checkout.vue";
-import TypesList from "../components/TypesList.vue";
+import Restaurant from "../pages/Restaurant.vue";
 
 const routes = [
   //{ path: "/about", component: AboutView },
   { path: '/', component: Home },
   { path: '/checkout', component: Checkout },
-
+  { path: '/restaurant/:id', component: Restaurant },
 ];
 
 const router = createRouter({
