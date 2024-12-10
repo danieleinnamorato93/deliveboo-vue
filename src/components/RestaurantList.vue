@@ -8,12 +8,17 @@ export default {
     return {
       store,
       apiRestaurants: "http://127.0.0.1:8000/api/restaurants",
+      filters: "?filters[types][id][$in]",
+      clickedTypes: store.clickedTypes,
       apiTypes: "http://127.0.0.1:8000/api/types",
+
     };
   },
+
   components: {
     RestaurantCard,
   },
+
   methods: {
     getRestaurants() {
       axios
@@ -26,6 +31,20 @@ export default {
           console.error("Errore nel caricamento dei ristoranti:", error);
         });
     },
+
+    getFilteredRestaurants() {
+
+      axios
+        .get(`${this.apiRestaurants}${this.filters}=[${this.clickedTypes.join(',')}]`)
+        .then((response) => {
+          store.clickedTypes = response.data.results;
+          console.log("Filtered Ristoranti:", store.clickedTypes);
+        })
+        .catch((error) => {
+          console.error("Errore nel caricamento dei ristoranti:", error);
+        });
+    },
+
     getTypes() {
       axios
         .get(this.apiTypes)
@@ -37,6 +56,7 @@ export default {
           console.error("Errore nel caricamento delle tipologie:", error);
         });
     },
+
     showRestaurantTypes() {
       store.filteredRestaurants = store.restaurantsList.filter((restaurant) => {
         for (let type of restaurant.types) {
@@ -48,7 +68,9 @@ export default {
       });
       console.log("Ristoranti filtrati:", store.filteredRestaurants);
     },
+
   },
+
   computed: {
     displayedRestaurants() {
       if (store.clickedTypes.length > 0) {
@@ -69,13 +91,14 @@ export default {
     this.getRestaurants();
     this.getTypes();
   },
-};
+
+}
 </script>
 <template>
   <div>
     <h2>Sono la lista dei ristoranti</h2>
     <ul>
-      <RestaurantCard v-for="restaurant in displayedRestaurants" :key="restaurant.id" :restaurantObject="restaurant" />
+      <RestaurantCard v-for="restaurant in displayedRestaurants " :key="restaurant.id" :restaurantObject="restaurant" />
     </ul>
   </div>
 </template>

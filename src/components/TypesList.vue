@@ -22,7 +22,7 @@ export default {
       if (index === -1) {
         store.clickedTypes.push(typeId);
         console.log('tutto ok visto', typeId);
-        console.log(store.clickedTypes);
+        console.log('store clickedTypes', store.clickedTypes);
 
       } else {
         // Se è presente, rimuovilo
