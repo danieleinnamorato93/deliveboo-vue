@@ -14,7 +14,7 @@ export default {
   
   methods: {
     getSingleRestaurant(){
-      axios.get(`${this.apiRestaurants}/${this.$route.params.id}`)
+      axios.get(`${this.apiUrl}/${this.$route.params.id}`)
         .then((response) => {
         this.restaurant = response.data.results;
         console.log(this.restaurant);
