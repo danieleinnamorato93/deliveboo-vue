@@ -8,7 +8,7 @@ export default {
     return {
       apiUrl: 'http://127.0.0.1:8000/api/restaurants',
       restaurant: null,  // Variabile per il ristaurant
-      notFount: null,    //Variabile per il messagio 404
+      notFound: null,    //Variabile per il messagio 404
     }
   },
 
