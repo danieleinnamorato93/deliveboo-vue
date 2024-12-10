@@ -61,7 +61,7 @@ export default {
               :class="{ 'active': store.clickedTypes.includes(type.id) }" @click="getTypeId(type.id)">
               <img :src="getImage(type.logo)" :alt="type.name" class="adaptive-cover">
               <div>
-                <h6>{{ type.name }}</h6>
+                <h6 class="fw-bold">{{ type.name }}</h6>
               </div>
             </article>
           </div>
