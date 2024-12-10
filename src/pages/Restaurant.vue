@@ -20,6 +20,9 @@ export default {
             this.restaurant = response.data.results; //aggingi i dati nella variabile
             notFount = null; //Varibille vuota
             console.log(this.restaurant);
+          }else{
+            restaurant = null;
+            this.notFound = 'Ristorante non esiste!';
           }
           
         })
