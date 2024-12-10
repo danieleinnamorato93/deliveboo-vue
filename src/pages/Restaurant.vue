@@ -1,5 +1,4 @@
 <script>
-import RestaurantCard from '../components/RestaurantCard.vue';
 import axios from 'axios';
 
 export default {
