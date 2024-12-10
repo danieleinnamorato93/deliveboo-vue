@@ -22,7 +22,7 @@ export default {
       axios.get(this.apiRestaurants)
         .then((response) => {
           store.restaurantsList = response.data.results;
-          console.log('ristoranti:', store.restaurantsList);
+          // console.log('ristoranti:', store.restaurantsList);
         })
     },
 
@@ -31,40 +31,15 @@ export default {
       axios.get(this.apiTypes)
         .then((response) => {
           store.typesList = response.data.results;
-          console.log('tipi:', store.typesList)
+          // console.log('tipi:', store.typesList)
         })
     },
-
-    showRestaurantTypes() {
-      const selectedTypes = [];
-      let selectedRestaurantTypes = store.restaurantsList.filter(restaurant => {
-        if (restaurant.types.some(type => store.clickedTypes.includes(type.id))) {
-          selectedTypes.push(restaurant);
-          return true;
-        }
-        return false;
-      });
-      console.log('ristoranti cliccati',selectedRestaurantTypes);
-      console.log('tipi cliccati',selectedTypes);
-
-      return selectedTypes;
-    }
-
-  },
-
-  computed: {
-    shownTypes() {
-      if (store.clickedTypes.length > 0) {
-        this.showRestaurantTypes()
-      }
-    }
   },
 
   created() {
     this.getRestaurants();
     this.getTypes();
   },
-
 };
 
 </script>
@@ -74,13 +49,8 @@ export default {
   <h2>Sono la lista dei ristoranti</h2>
 
   <ul>
-    <li v-if="shownTypes">
-
-      <RestaurantCard v-for=" restaurant in this.selectedTypes" :key="restaurant.id" :restaurantObject='restaurant' />
-    </li>
-    <li v-else>
-      <RestaurantCard v-for=" restaurant in store.restaurantsList" :key="restaurant.id"
-        :restaurantObject='restaurant' />
+    <li>
+      <RestaurantCard v-for=" restaurant in store.restaurantsList" :key="restaurant.id" :restaurantObject='restaurant' />
     </li>
   </ul>
 
