@@ -12,7 +12,7 @@ export default {
         <nav class="d-flex align-items-center justify-content-between p-3">
             <div>
                 <img src="../../public/Food-Delivery-Service-PNG-High-Quality-Image.png" alt="logo">
-                <RouterLink to="/" class="link"><h1>Deliveboo - Food Delivery </h1></RouterLink>
+                <RouterLink to="/" ><h1 class="text-decoration-none">Deliveboo - Food Delivery </h1></RouterLink>
             </div>
             <!-- Sezione Link -->
             <div class="nav-link">
@@ -44,6 +44,9 @@ export default {
 nav {
     min-height: 2.5rem;
     background-color: #4fae5a;
+    a{
+        text-decoration: none;
+    }
     img {
         height: 5.5rem;
         transition: scale 150ms;
@@ -61,9 +64,6 @@ nav {
     }
 }
 
-.link {
-    text-decoration: none;
-}
 
 // Sezione Link
 .nav-link {

@@ -74,10 +74,9 @@ export default {
 </script>
 <template>
   <div>
-    <h2>Sono la lista dei ristoranti</h2>
     <ul>
-      <li v-for="restaurant in displayedRestaurants" :key="restaurant.id">
-        <RouterLink :to="{ name: 'singleRestaurant', params: { id: restaurant.id } }">
+      <li v-for="restaurant in displayedRestaurants" :key="restaurant.id" >
+        <RouterLink  class="text-decoration-none" :to="{ name: 'singleRestaurant', params: { id: restaurant.id } }">
           <RestaurantCard :restaurantObject="restaurant" />
         </RouterLink>
       </li>
@@ -87,5 +86,7 @@ export default {
 <style scoped lang="scss">
 ul {
   list-style-type: none;
+
+
 }
 </style>
