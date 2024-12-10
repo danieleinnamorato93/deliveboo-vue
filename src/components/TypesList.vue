@@ -121,7 +121,7 @@ export default {
       &.active {
         transform: scale(1.1);
         border: 3px solid #ff9800;
-        box-shadow: 0 0 6px rgba(255, 152, 0, 0.5);
+        box-shadow: 0 0 6px rgba(255, 152, 0, 0.7);
         border-radius: 15px;
       }
     }
@@ -129,6 +129,7 @@ export default {
     .btn {
       position: absolute;
       top: 50%;
+      transform: translateY(-50%);
       z-index: 1;
       color: #fff;
       font-size: 2rem;
