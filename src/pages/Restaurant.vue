@@ -16,8 +16,12 @@ export default {
     getSingleRestaurant(){
       axios.get(`${this.apiUrl}/${this.$route.params.id}`)
         .then((response) => {
-          this.restaurant = response.data.results;
-          console.log(this.restaurant);
+          if ("il ID del ristorante existe"){
+            this.restaurant = response.data.results; //aggingi i dati nella variabile
+            notFount = null; //Varibille vuota
+            console.log(this.restaurant);
+          }
+          
         })
     },
   },
