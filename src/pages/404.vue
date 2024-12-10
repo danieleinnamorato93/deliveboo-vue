@@ -7,7 +7,6 @@ export default {
     }
 }
 </script>
-
 <template>
     <div class="error-page">
         <h1>Errore 404</h1>
@@ -16,4 +15,9 @@ export default {
     </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.error-page {
+    text-align: center;
+    margin-top: 50px;
+}
+</style>
