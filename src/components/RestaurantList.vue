@@ -75,7 +75,11 @@ export default {
   <div>
     <h2>Sono la lista dei ristoranti</h2>
     <ul>
-      <RestaurantCard v-for="restaurant in displayedRestaurants" :key="restaurant.id" :restaurantObject="restaurant" />
+      <RestaurantCard
+        v-for="restaurant in displayedRestaurants"
+        :key="restaurant.id"
+        :restaurantObject="restaurant"
+      />
     </ul>
   </div>
 </template>
