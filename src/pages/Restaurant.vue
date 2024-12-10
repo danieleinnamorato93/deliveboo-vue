@@ -16,7 +16,7 @@ export default {
     getSingleRestaurant(){
       axios.get(`${this.apiUrl}/${this.$route.params.id}`)
         .then((response) => {
-          if (response.data && response.data.results){
+          if (response.data.results){
             this.restaurant = response.data.results; //aggingi i dati nella variabile
             this.notFount = null; //Varibille vuota
             console.log(this.restaurant);
@@ -45,7 +45,7 @@ export default {
 <template>
   <!-- se non trova il ID del ristorante fa vedere l'erore-->
   <div v-if="notFound" >
-    <h2>404 errore</h2>
+    <h2>{{ notFound }}</h2>
   </div>
 
   <!-- Se trova il ID del ristorante mostra in pagina -->
