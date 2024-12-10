@@ -16,7 +16,7 @@ export default {
     getSingleRestaurant(){
       axios.get(`${this.apiUrl}/${this.$route.params.id}`)
         .then((response) => {
-          if ("il ID del ristorante existe"){
+          if (response.data && response.data.results){
             this.restaurant = response.data.results; //aggingi i dati nella variabile
             this.notFount = null; //Varibille vuota
             console.log(this.restaurant);
@@ -37,19 +37,13 @@ export default {
 
 <template>
   <!-- se non trova il ID del ristorante fa vedere l'erore-->
-  <div v-if="notFound">
-    <h2>not found</h2>
+  <div v-if="notFound" >
+    <h2>404 errore</h2>
   </div>
 
   <!-- Se trova il ID del ristorante mostra in pagina -->
   <div v-else>
-    <section class="mb-3">
-         <p>Restaurant ID: {{ $route.params.id }} </p>
-         <div class="row justify-content-center container-fluid">
-              <RestaurantCard :restaurantObject="restaurant" />
-         </div>
-    </section>
-    <section class="container">
+    <section class="container py-3">
           <h1 class="text-center mb-5">{{ restaurant.name }}</h1>
           <ul class="list-unstyled">
               <!-- Itera sobre os pratos e exibe o nome, descrição e preço -->
