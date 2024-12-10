@@ -79,6 +79,7 @@ export default {
       return store.restaurantsList;
     },
   },
+
   watch: {
     "store.clickedTypes": {
       handler() {
@@ -87,6 +88,7 @@ export default {
       deep: true,
     },
   },
+  
   created() {
     this.getRestaurants();
     this.getTypes();
