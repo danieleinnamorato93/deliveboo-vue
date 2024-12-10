@@ -36,10 +36,14 @@ export default {
 
 <template>
   <!-- Mostra il messaggio di errore se l'ID del ristorante non è valido -->
-  <div v-if="notFound">
-    <h2>Ristorante non trovato</h2>
-    <p>L'ID fornito non corrisponde a nessun ristorante esistente.</p>
-    <router-link to="/">Torna alla homepage</router-link>
+  <div v-if="notFound" class="container">
+    <div class="row py-3">
+      <div class="col-12">
+        <h2>Ristorante non trovato</h2>
+        <p>L'ID fornito non corrisponde a nessun ristorante esistente.</p>
+        <router-link to="/">Torna alla homepage</router-link>
+      </div>
+    </div>
   </div>
 
   <!-- Mostra le informazioni del ristorante se l'ID è valido -->
