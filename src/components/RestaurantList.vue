@@ -74,9 +74,8 @@ export default {
 </script>
 <template>
   <div>
-    <h2>Sono la lista dei ristoranti</h2>
     <ul>
-      <li v-for="restaurant in displayedRestaurants" :key="restaurant.id">
+      <li v-for="restaurant in displayedRestaurants" :key="restaurant.id" class="d-flex justify-content-center">
         <RouterLink :to="{ name: 'singleRestaurant', params: { id: restaurant.id } }">
           <RestaurantCard :restaurantObject="restaurant" />
         </RouterLink>
