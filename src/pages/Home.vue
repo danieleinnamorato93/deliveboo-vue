@@ -5,7 +5,7 @@ import TypesList from "../components/TypesList.vue"
 export default {
   data() {
     return {
-      
+
     }
   },
   components: {
@@ -16,11 +16,8 @@ export default {
 </script>
 
 <template>
-<TypesList />
-<h1>Questa è la home</h1>
-<RestaurantList />
+  <TypesList />
+  <RestaurantList />
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>
