@@ -1,15 +1,14 @@
 <script>
 import RestaurantCard from '../components/RestaurantCard.vue';
-import {store} from '../js/store.js';
 import axios from 'axios';
 
 export default {
   name:"Restaurant",
   data() {
     return {
-      store,
-      apiRestaurants:'http://127.0.0.1:8000/api/restaurants',
-      restaurant: [],
+      apiUrl:'http://127.0.0.1:8000/api/restaurants',
+      restaurant: null,  // Variável para armazenar o restaurante individual
+
     }
   },
   
