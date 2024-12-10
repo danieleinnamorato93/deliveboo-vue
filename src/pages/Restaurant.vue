@@ -29,7 +29,9 @@ export default {
 </script>
 
 <template>
-
+<div v-if="notFound">
+      <h2>not found</h2>
+</div>
   <section class="mb-3">
       <p>Restaurant ID: {{ $route.params.id }} </p>
       <div class="row justify-content-center container-fluid">
