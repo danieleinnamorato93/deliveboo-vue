@@ -24,8 +24,15 @@ export default {
             this.restaurant = null;
             this.notFound = 'Ristorante non esiste!';
           }
-          
         })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+        .finally(function () {
+           // always executed
+           console.log("chiamata axios finita!")
+        });
     },
   },
 
