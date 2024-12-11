@@ -1,11 +1,11 @@
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   name: "Restaurant",
   data() {
     return {
-      apiUrl: 'http://127.0.0.1:8000/api/restaurants',
+      apiUrl: "http://127.0.0.1:8000/api/restaurants",
       restaurant: null,
       notFound: false,
     };
@@ -13,7 +13,8 @@ export default {
 
   methods: {
     getSingleRestaurant() {
-      axios.get(`${this.apiUrl}/${this.$route.params.id}`)
+      axios
+        .get(`${this.apiUrl}/${this.$route.params.id}`)
         .then((response) => {
           this.restaurant = response.data.results;
           this.notFound = false;
@@ -30,7 +31,7 @@ export default {
 
   created() {
     this.getSingleRestaurant();
-  }
+  },
 };
 </script>
 
@@ -49,7 +50,7 @@ export default {
   <!-- Mostra le informazioni del ristorante se l'ID è valido -->
   <div v-else>
     <section class="mb-3">
-      <p>Restaurant ID: {{ $route.params.id }} </p>
+      <!--<p>Restaurant ID: {{ $route.params.id }} </p>-->
       <div class="row justify-content-center container-fluid">
         <RestaurantCard :restaurantObject="restaurant" />
       </div>
@@ -63,10 +64,20 @@ export default {
           <p>{{ plate.description }}</p>
           <p>Ingredienti: {{ plate.ingredients }}</p>
           <p>Prezzo: €{{ plate.price }}</p>
+          <!--!FINTO BOTTONE PER IL CARRELLO-->
+          <button type="submit" class="btn btn-outline-success">Ordina</button>
         </li>
       </ul>
     </section>
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+h1 {
+  color: red;
+  font-weight: bold;
+}
+h3 {
+  color: #4fae5a;
+}
+</style>
