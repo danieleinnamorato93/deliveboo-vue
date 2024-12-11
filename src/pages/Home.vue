@@ -10,7 +10,7 @@ export default {
     TypesList,
     RestaurantList,
   },
-};
+}
 </script>
 
 <template>
