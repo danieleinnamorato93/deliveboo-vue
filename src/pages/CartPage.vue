@@ -1,5 +1,4 @@
 <script>
-import { useCart } from '../composables/useCart';
 export default {
   data() {
     return {
