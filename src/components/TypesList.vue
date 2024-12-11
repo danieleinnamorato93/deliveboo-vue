@@ -11,7 +11,7 @@
         <div class="thumbnails-wrapper d-flex align-items-center">
           <!-- Pulsante precedente -->
           <button
-            class="btn btn-outline-danger me-4 fs-5 d-md-block"
+            class="btn btn-outline-success me-4 fs-5 d-md-block"
             @click="prev"
             aria-label="Previous"
           >
@@ -44,7 +44,7 @@
 
           <!-- Pulsante successivo -->
           <button
-            class="btn btn-outline-danger ms-4 fs-5 d-md-block"
+            class="btn btn-outline-success ms-4 fs-5 d-md-block"
             @click="next"
             aria-label="Next"
           >
@@ -133,6 +133,7 @@ h1 {
 h5 {
   color: darkgrey;
 }
+
 .thumbnails-wrapper {
   display: flex;
   justify-content: center;
@@ -172,6 +173,7 @@ h5 {
         object-fit: cover;
         margin-bottom: 10px;
         border-radius: 15px;
+        box-shadow: 0 0 10px rgba(11, 48, 2, 0.7);
       }
     }
 
