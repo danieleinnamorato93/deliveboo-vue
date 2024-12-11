@@ -151,10 +151,20 @@ h5 {
       display: flex;
       flex-direction: column;
       align-items: center;
-
       max-width: 100%;
       cursor: pointer;
       text-align: center;
+      border: 3px solid transparent;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 15px;
+      &.active {
+        border-color: #4fae5a;
+        box-shadow: 0 0 6px rgba(21, 94, 3, 0.7);
+        transform: scale(1.1);
+      }
+      &:hover {
+        transform: scale(1.05);
+      }
 
       img.adaptive-cover {
         width: 100%;
@@ -162,16 +172,6 @@ h5 {
         object-fit: cover;
         margin-bottom: 10px;
         border-radius: 15px;
-        transition: transform 0.3s ease, box-shadow 0.6s ease;
-      }
-      &.active {
-        border: 3px solid #4fae5a;
-        box-shadow: 0 0 6px rgba(21, 94, 3, 0.7);
-        border-radius: 15px;
-        transform: scale(1.1);
-      }
-      :hover {
-        transform: scale(1.1);
       }
     }
 
