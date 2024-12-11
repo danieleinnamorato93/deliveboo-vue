@@ -29,25 +29,26 @@ export default {
     addToCart(plateObj) {
       // Se la quantità non è definita o inferiore a 1, la impostiamo a 1
       const quantity = plateObj.quantity && plateObj.quantity > 0 ? plateObj.quantity : 1;
-      // Crea un oggetto del piatto da aggiungere al carrello
+      // Crea un oggetto del piatto da aggiungere al carrello con le proprità richieste
       const item = {
         id: plateObj.id,
         name: plateObj.name,
         price: plateObj.price,
         quantity: quantity,
       };
-      // Recupera il carrello dal localStorage
+      // controlla se abbiamo un carrello in localstorage converisone da string a obj
       let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-      // facciamo un controllo sull'esistenza del piatto nel carrello
+      // controlla se ci sono elementi all'interno del carrello
       const existingItem = cart.find(item => item.id === plateObj.id);
 
       if (existingItem) {
+        // se abbiamo un item andiamo a modificarne la quantità
         existingItem.quantity += quantity;
       } else {
         cart.push(item);
       }
-      // qui salvataggio nel localStorage
+      // qui salvataggio nel localStorage, conversione da obj a string
       localStorage.setItem('cart', JSON.stringify(cart));
 
       alert(`${plateObj.name} aggiunto al carrello con quantità ${quantity}`);
