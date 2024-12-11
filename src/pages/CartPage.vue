@@ -38,17 +38,15 @@ export default {
 
     // Invia l'ordine al server Laravel
     submitOrder() {
-      this.order.total = this.totalAmount; 
+      this.order.total = this.totalAmount;
       const orderData = {
-        customer: {
-          first_name: this.order.first_name,
-          last_name: this.order.last_name,
-          email: this.order.email,
-          phone_number: this.order.phone_number,
-          address: this.order.address,
-          // payment_method: this.order.paymentMethod
-        },
-        total_amount: this.order.total,
+        first_name: this.order.first_name,
+        last_name: this.order.last_name,
+        email: this.order.email,
+        phone_number: this.order.phone_number,
+        address: this.order.address,
+        // payment_method: this.order.paymentMethod
+        total: this.order.total,
         items: this.cart.map(item => ({
           plate_id: item.id,
           quantity: item.quantity
@@ -92,8 +90,8 @@ export default {
             <div class="d-flex align-items-baseline">
               <div class="mb-2">
                 <!-- Modifica la quantità -->
-                <input type="number" v-model.number="item.quantity" min="1" 
-                  @change="updateCartItem(index)" class="form-control" style="width: 80px;" />
+                <input type="number" v-model.number="item.quantity" min="1" @change="updateCartItem(index)"
+                  class="form-control" style="width: 80px;" />
               </div>
               <button @click="removeFromCart(index)" class="btn btn-danger">Rimuovi</button>
             </div>
