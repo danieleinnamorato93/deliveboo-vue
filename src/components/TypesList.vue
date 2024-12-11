@@ -2,6 +2,12 @@
   <section id="carousel-types" class="container-fluid mt-5">
     <div class="row justify-content-center">
       <div class="col-12 col-lg-10">
+        <h1 class="text-center">
+          Dalla cucina al tuo tavolo, un viaggio di gusto
+        </h1>
+
+        <h5 class="text-center">Scegli pure tra:</h5>
+
         <div class="thumbnails-wrapper d-flex align-items-center">
           <!-- Pulsante precedente -->
           <button
@@ -121,6 +127,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h1 {
+  color: red;
+}
+h5 {
+  color: darkgrey;
+}
 .thumbnails-wrapper {
   display: flex;
   justify-content: center;
@@ -152,8 +164,8 @@ export default {
         transition: transform 0.3s ease, box-shadow 0.6s ease;
       }
       &.active {
-        border: 3px solid #ff9800;
-        box-shadow: 0 0 6px rgba(255, 152, 0, 0.7);
+        border: 3px solid #4fae5a;
+        box-shadow: 0 0 6px rgba(21, 94, 3, 0.7);
         border-radius: 15px;
         transform: scale(1.1);
       }
