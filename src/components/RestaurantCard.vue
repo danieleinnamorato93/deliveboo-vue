@@ -53,7 +53,7 @@ export default {
   &:hover {
     border: 3px solid #4fae5a;
     box-shadow: 0 0 10px rgba(21, 94, 3, 0.7);
-    transform: scale(1.07);
+    transform: scale(1.05);
   }
 }
 
