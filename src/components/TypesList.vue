@@ -23,7 +23,7 @@
             <div
               v-for="type in visibleThumbnails"
               :key="type.id"
-              class="col-12 col-md-4 col-lg-2"
+              class="col-8 col-md-4 col-lg-2"
             >
               <article
                 class="thumbnail d-flex flex-column align-items-center text-center"
@@ -88,7 +88,7 @@ export default {
       const width = window.innerWidth;
       if (width >= 992) this.thumbnailsPerPage = 5; // Desktop
       else if (width >= 768) this.thumbnailsPerPage = 4; // Tablet
-      else this.thumbnailsPerPage = 1; // Mobile
+      else this.thumbnailsPerPage = 2; // Mobile
     },
     getTypeId(typeId) {
       // cerca indice typeid
