@@ -2,7 +2,7 @@
   <section id="carousel-types" class="container-fluid mt-5">
     <div class="row justify-content-center">
       <div class="col-12 col-lg-10">
-        <h1 class="text-center">
+        <h1 class="text-center fw-bold">
           Dalla cucina al tuo tavolo, un viaggio di gusto
         </h1>
 
@@ -11,7 +11,7 @@
         <div class="thumbnails-wrapper d-flex align-items-center">
           <!-- Pulsante precedente -->
           <button
-            class="btn btn-outline-danger me-2 fs-4 d-md-block"
+            class="btn btn-outline-danger me-4 fs-5 d-md-block"
             @click="prev"
             aria-label="Previous"
           >
@@ -44,7 +44,7 @@
 
           <!-- Pulsante successivo -->
           <button
-            class="btn btn-outline-danger ms-2 fs-4 d-md-block"
+            class="btn btn-outline-danger ms-4 fs-5 d-md-block"
             @click="next"
             aria-label="Next"
           >
@@ -138,7 +138,8 @@ h5 {
   justify-content: center;
   align-items: center;
   position: relative;
-  margin: 50px;
+  margin-bottom: 50px;
+  margin-top: 50px;
 
   .thumbnails {
     display: flex;
@@ -178,7 +179,6 @@ h5 {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      z-index: 1;
       color: #fff;
       font-size: 2rem;
       padding: 10px;

@@ -18,23 +18,25 @@ export default {
 </script>
 
 <template>
-  <div class="card mb-3" style="max-width: 540px">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img
-          src="../../public/1600w-9Gfim1S8fHg.webp"
-          class="img-fluid rounded-start"
-          alt="..."
-        />
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">{{ restaurantObject.name }}</h5>
+  <div class="card-wrapper container-fluid">
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img
+            src="../../public/1600w-9Gfim1S8fHg.webp"
+            class="img-fluid rounded-start"
+            alt="..."
+          />
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{ restaurantObject.name }}</h5>
 
-          <div v-for="(type, index) in restaurantObject.types" :key="index">
-            <span class="badge rounded-pill text-bg-danger m-1">
-              <h6 class="card-text">{{ type.name }}</h6>
-            </span>
+            <div v-for="(type, index) in restaurantObject.types" :key="index">
+              <span class="badge rounded-pill text-bg-danger m-1">
+                <h6 class="card-text">{{ type.name }}</h6>
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -45,6 +47,11 @@ export default {
 <style scoped lang="scss">
 .card {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  width: 600px;
+  width: 700px;
+}
+.card-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
