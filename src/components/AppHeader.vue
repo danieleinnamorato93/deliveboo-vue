@@ -17,7 +17,7 @@ export default {
             <!-- Sezione Link -->
             <div class="nav-link">
                 <RouterLink to="/">Home</RouterLink>
-                <RouterLink to="/checkout">Carrello</RouterLink>
+                <RouterLink to="/carrello">Carrello</RouterLink>
                 <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                   Sei un Ristoratore?
                 </button>
