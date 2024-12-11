@@ -11,10 +11,12 @@ export default {
 <template>
   <nav class="d-flex align-items-center justify-content-between p-3">
     <div class="d-flex align-items-center">
-      <img
-        src="../../public/Food-Delivery-Service-PNG-High-Quality-Image.png"
-        alt="logo"
-      />
+      <RouterLink to="/">
+        <img
+          src="../../public/Food-Delivery-Service-PNG-High-Quality-Image.png"
+          alt="logo"
+      /></RouterLink>
+
       <RouterLink to="/"
         ><h1 class="text-decoration-none d-none d-md-block ms-2">
           DeliveBoo
