@@ -135,15 +135,6 @@ export default {
                   <label for="email" class="form-label">Email</label>
                   <input type="email" v-model="order.email" id="email" name="email" class="form-control" required />
                 </div>
-                <div class="mb-3">
-                  <label for="payment" class="form-label">Metodo di pagamento</label>
-                  <!-- TODO DA RIVEDERE PER CHI HA FATTO I PAGAMENTI QUESTO PUNTO -->
-                  <select v-model="order.paymentMethod" id="payment" class="form-control" required>
-                    <option value="cash">Contante</option>
-                    <option value="credit_card">Carta di credito</option>
-                    <option value="paypal">PayPal</option>
-                  </select>
-                </div>
                 <input type="hidden" :value="totalAmount" />
                 <button type="submit" class="btn btn-primary mt-3">Vai al pagamento</button>
               </form>
