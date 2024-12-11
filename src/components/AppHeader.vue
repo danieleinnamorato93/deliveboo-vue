@@ -72,6 +72,7 @@ export default {
 nav {
   min-height: 2.5rem;
   background-color: #4fae5a;
+  box-shadow: 0 0 10px rgba(21, 94, 3, 0.7);
   a {
     text-decoration: none;
   }

@@ -64,8 +64,6 @@ export default {
           <p>{{ plate.description }}</p>
           <p>Ingredienti: {{ plate.ingredients }}</p>
           <p>Prezzo: €{{ plate.price }}</p>
-          <!--!FINTO BOTTONE PER IL CARRELLO-->
-          <button type="submit" class="btn btn-outline-success">Ordina</button>
         </li>
       </ul>
     </section>
