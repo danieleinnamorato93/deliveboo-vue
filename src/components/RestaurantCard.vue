@@ -1,33 +1,41 @@
 <script>
-import { RouterLink } from 'vue-router';
-import { store } from '../js/store.js'
+import { RouterLink } from "vue-router";
+import { store } from "../js/store.js";
 
 export default {
   data() {
     return {
       store,
-    }
+    };
   },
   props: {
     restaurantObject: {
-      type: Object, required: true,
-    }
-
+      type: Object,
+      required: true,
+    },
   },
-}
+};
 </script>
 
 <template>
-  <div class="card mb-3">
+  <div class="card mb-3" style="max-width: 540px">
     <div class="row g-0">
-      <!-- <div class="col-md-4">
-      <img src="" class="img-fluid rounded-start" alt="...">
-    </div> -->
+      <div class="col-md-4">
+        <img
+          src="../../public/1600w-9Gfim1S8fHg.webp"
+          class="img-fluid rounded-start"
+          alt="..."
+        />
+      </div>
       <div class="col-md-8">
         <div class="card-body">
           <h5 class="card-title">{{ restaurantObject.name }}</h5>
-          <h5 class="card-text">{{ restaurantObject.types[0].name }}</h5>
-          <p class="card-text">Descrizione: {{ restaurantObject.types[0].description }}</p>
+
+          <div v-for="(type, index) in restaurantObject.types" :key="index">
+            <span class="badge rounded-pill text-bg-danger m-1">
+              <h6 class="card-text">{{ type.name }}</h6>
+            </span>
+          </div>
         </div>
       </div>
     </div>

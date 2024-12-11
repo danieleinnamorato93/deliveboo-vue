@@ -1,7 +1,7 @@
 <script>
 import RestaurantCard from "./RestaurantCard.vue";
 import axios from "axios";
-import { store } from '../js/store.js'
+import { store } from "../js/store.js";
 import { RouterLink } from "vue-router";
 
 export default {
@@ -75,8 +75,11 @@ export default {
 <template>
   <div>
     <ul>
-      <li v-for="restaurant in displayedRestaurants" :key="restaurant.id" >
-        <RouterLink  class="text-decoration-none" :to="{ name: 'singleRestaurant', params: { id: restaurant.id } }">
+      <li v-for="restaurant in displayedRestaurants" :key="restaurant.id">
+        <RouterLink
+          class="text-decoration-none"
+          :to="{ name: 'singleRestaurant', params: { id: restaurant.id } }"
+        >
           <RestaurantCard :restaurantObject="restaurant" />
         </RouterLink>
       </li>
@@ -86,7 +89,5 @@ export default {
 <style scoped lang="scss">
 ul {
   list-style-type: none;
-
-
 }
 </style>
