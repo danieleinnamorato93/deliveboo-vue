@@ -14,7 +14,7 @@ export default {
 </script>
 
 <template>
-<h1>Ciao sono il carrello</h1>
+<h1 class="mb-5">Ciao sono il carrello</h1>
 
 <Payment/>
 </template>
