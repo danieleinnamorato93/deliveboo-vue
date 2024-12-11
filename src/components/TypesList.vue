@@ -173,7 +173,7 @@ h5 {
         object-fit: cover;
         margin-bottom: 10px;
         border-radius: 15px;
-        box-shadow: 0 0 10px rgba(11, 48, 2, 0.7);
+        box-shadow: 0 0 4px rgba(11, 48, 2, 0.7);
       }
     }
 
