@@ -46,7 +46,7 @@ export default {
           email: this.order.email,
           phone_number: this.order.phone_number,
           address: this.order.address,
-          payment_method: this.order.paymentMethod
+          // payment_method: this.order.paymentMethod
         },
         total_amount: this.order.total,
         items: this.cart.map(item => ({
