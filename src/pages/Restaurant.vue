@@ -26,14 +26,38 @@ export default {
           }
         });
     },
-  },
+    addToCart(plateObj) {
+      // Se la quantità non è definita o inferiore a 1, la impostiamo a 1
+      const quantity = plateObj.quantity && plateObj.quantity > 0 ? plateObj.quantity : 1;
+      // Crea un oggetto del piatto da aggiungere al carrello
+      const item = {
+        id: plateObj.id,
+        name: plateObj.name,
+        price: plateObj.price,
+        quantity: quantity,
+      };
+      // Recupera il carrello dal localStorage
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+      // facciamo un controllo sull'esistenza del piatto nel carrello
+      const existingItem = cart.find(item => item.id === plateObj.id);
+
+      if (existingItem) {
+        existingItem.quantity += quantity;
+      } else {
+        cart.push(item);
+      }
+      // qui salvataggio nel localStorage
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      alert(`${plateObj.name} aggiunto al carrello con quantità ${quantity}`);
+    },
+  },
   created() {
     this.getSingleRestaurant();
   }
 };
 </script>
-
 <template>
   <!-- Mostra il messaggio di errore se l'ID del ristorante non è valido -->
   <div v-if="notFound" class="container">
@@ -41,11 +65,10 @@ export default {
       <div class="col-12">
         <h2>Ristorante non trovato</h2>
         <p>L'ID fornito non corrisponde a nessun ristorante esistente.</p>
-        <router-link to="/">Torna alla homepage</router-link>
+        <router-link to="/">Torna alla Lista dei Ristoranti</router-link>
       </div>
     </div>
   </div>
-
   <!-- Mostra le informazioni del ristorante se l'ID è valido -->
   <div v-else>
     <section class="mb-3">
@@ -57,16 +80,30 @@ export default {
     <section class="container">
       <h1 class="text-center mb-5">{{ restaurant.name }}</h1>
       <ul class="list-unstyled">
-        <!-- Itera sui piatti e mostra nome, descrizione e prezzo -->
-        <li v-for="plate in restaurant.plates" :key="plate.name" class="mb-5">
-          <h3>{{ plate.name }}</h3>
-          <p>{{ plate.description }}</p>
-          <p>Ingredienti: {{ plate.ingredients }}</p>
-          <p>Prezzo: €{{ plate.price }}</p>
+        <!-- mostra solo i piatti disponibili -->
+        <li v-for="plate in restaurant.plates" :key="plate.id">
+          <div v-if="plate.visibility === 1">
+            <h3>{{ plate.name }}</h3>
+            <p>{{ plate.description }}</p>
+            <p>Ingredienti: {{ plate.ingredients }}</p>
+            <p>Prezzo: €{{ plate.price }}</p>
+            <!-- quantità e tasto carrello -->
+            <div class="d-flex justify-content-start gap-3">
+              <label for="quantity">Quantità</label>
+              <input type="number" v-model.number="plate.quantity" min="1" id="quantity" class="quantity-input"
+                placeholder="1"/>
+              <button class="btn btn-success" @click="addToCart(plate)">Aggiungi al carrello</button>
+            </div>
+          </div>
         </li>
       </ul>
     </section>
   </div>
 </template>
-
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.quantity-input {
+  width: 60px;
+  padding: 5px;
+  margin-left: 10px;
+}
+</style>
