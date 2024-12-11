@@ -1,0 +1,15 @@
+<script>
+export default {
+    name: 'Payment',
+    data() {
+        return {};
+    },
+
+};
+</script>
+
+<template>
+
+</template>
+
+<style scoped lang="scss"></style>
