@@ -116,13 +116,16 @@ export default {
         object-fit: cover;
         margin-bottom: 30px;
         border-radius: 15px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: transform 0.3s ease, box-shadow 0.6s ease;
       }
       &.active {
-        transform: scale(1.1);
         border: 3px solid #ff9800;
         box-shadow: 0 0 6px rgba(255, 152, 0, 0.7);
         border-radius: 15px;
+        transform: scale(1.1);
+      }
+      :hover {
+        transform: scale(1.1);
       }
     }
 
