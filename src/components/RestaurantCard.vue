@@ -48,7 +48,15 @@ export default {
 .card {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   width: 700px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    border: 3px solid #4fae5a;
+    box-shadow: 0 0 10px rgba(21, 94, 3, 0.7);
+    transform: scale(1.1);
+  }
 }
+
 .card-wrapper {
   display: flex;
   align-items: center;
