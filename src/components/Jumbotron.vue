@@ -18,7 +18,7 @@ export default {
           />
           <div class="overlay">
             <div class="claim">
-              <h1>Dalla cucina al tuo tavolo, un viaggio di gusto</h1>
+              <h1>Dalla cucina alla tua tavola, un viaggio di gusto</h1>
             </div>
           </div>
         </div>
@@ -42,17 +42,16 @@ export default {
     object-fit: cover;
   }
 
-  h1 {
-    color: #f25c00;
-    font-size: 3.5rem;
-  }
-
   .overlay {
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     background: linear-gradient(
       0deg,
       transparent 0,
@@ -61,13 +60,12 @@ export default {
     );
   }
 
-  .claim h1 {
-    position: absolute;
-    left: 10%;
-    bottom: 20%;
-
-    color: #f25c00;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  .claim {
+    h1 {
+      color: #f24c00;
+      font-size: 3rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
   }
 }
 </style>

@@ -6,6 +6,17 @@ export default {
 };
 </script>
 
-<template><h1>FOOTER</h1></template>
+<template>
+  <div class="container-fluid footer">
+    <div class="row">
+      <div class="col-12"></div>
+    </div>
+  </div>
+</template>
 
-<style scoped></style>
+<style scoped>
+.footer {
+  height: 200px;
+  background-color: #6b717e;
+}
+</style>

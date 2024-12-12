@@ -1,9 +1,10 @@
 <template>
   <section id="carousel-types" class="container-fluid mt-5">
+    <h3 class="text-center">
+      Hai fame? Scegli il ristorante perfetto per te e ordina subito!
+    </h3>
     <div class="row justify-content-center">
       <div class="col-12 col-lg-10">
-        <h5 class="text-center">Scegli pure tra:</h5>
-
         <div class="thumbnails-wrapper d-flex align-items-center">
           <!-- Pulsante precedente -->
           <button
@@ -123,7 +124,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h1,
+h3 {
+  color: #f24c00;
+  font-weight: bold;
+  margin-top: 20px;
+}
 h6 {
   color: #f24c00;
 }
