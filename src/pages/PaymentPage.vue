@@ -36,7 +36,7 @@ export default {
       axios.post('http://127.0.0.1:8000/api/braintree-transaction',transactionData)
         .then((response) => {
           console.log("transaction response", response);
-          
+
           if (response && response.data && response.data.success) {
             alert("pagamento effettuato con successo!");
             // qui dovremo fare redirect alla pagina di thank-you
@@ -67,8 +67,6 @@ export default {
           this.deviceDataInput.type = 'hidden';
           form.appendChild(this.deviceDataInput);
         }
-
-
         console.log('Braintree is working', this.dropinInstance);
       }).catch((error) => {
         console.error('BrainTree is not working properly!', error);
@@ -112,4 +110,5 @@ export default {
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+</style>
