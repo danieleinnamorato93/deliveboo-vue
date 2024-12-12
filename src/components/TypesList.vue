@@ -157,7 +157,7 @@ h5 {
       border-radius: 15px;
       &.active {
         border-color: #fc7a1e;
-        box-shadow: 0 0 6px rgba(155, 78, 6, 0.7);
+        box-shadow: 0 0 8px rgba(155, 78, 6, 0.7);
         transform: scale(1.1);
       }
       &:hover {

@@ -32,15 +32,19 @@ export default {
   position: relative;
   height: 600px;
   overflow: hidden;
-  padding: 0px;
+  padding: 0;
 
   .jumbo-img {
-    height: 100%;
+    position: absolute;
+    left: 0;
     width: 100%;
+    height: 100%;
     object-fit: cover;
   }
+
   h1 {
     color: #f25c00;
+    font-size: 3.5rem;
   }
 
   .overlay {
@@ -56,10 +60,14 @@ export default {
       rgba(0, 0, 0, 0.5)
     );
   }
-  .claim.h1 {
+
+  .claim h1 {
     position: absolute;
-    left: 0;
-    top: 0;
+    left: 10%;
+    bottom: 20%;
+
+    color: #f25c00;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   }
 }
 </style>
