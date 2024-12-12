@@ -129,10 +129,10 @@ export default {
 <style lang="scss" scoped>
 h1,
 h6 {
-  color: red;
+  color: #f24c00;
 }
 h5 {
-  color: darkgrey;
+  color: darkslategray;
 }
 
 .thumbnails-wrapper {
@@ -160,8 +160,8 @@ h5 {
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       border-radius: 15px;
       &.active {
-        border-color: #4fae5a;
-        box-shadow: 0 0 6px rgba(21, 94, 3, 0.7);
+        border-color: #fc7a1e;
+        box-shadow: 0 0 6px rgba(155, 78, 6, 0.7);
         transform: scale(1.1);
       }
       &:hover {
@@ -174,7 +174,7 @@ h5 {
         object-fit: cover;
         margin-bottom: 10px;
         border-radius: 15px;
-        box-shadow: 0 0 4px rgba(11, 48, 2, 0.7);
+        box-shadow: 0 0 4px rgba(48, 20, 2, 0.7);
       }
     }
 
@@ -182,7 +182,7 @@ h5 {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      color: #fff;
+      color: #faf6f6;
       font-size: 2rem;
       padding: 10px;
       cursor: pointer;

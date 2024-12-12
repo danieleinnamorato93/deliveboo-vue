@@ -1,4 +1,5 @@
 <script>
+import Jumbotron from "../components/Jumbotron.vue";
 import RestaurantList from "../components/RestaurantList.vue";
 import TypesList from "../components/TypesList.vue";
 
@@ -7,6 +8,7 @@ export default {
     return {};
   },
   components: {
+    Jumbotron,
     TypesList,
     RestaurantList,
   },
@@ -14,6 +16,7 @@ export default {
 </script>
 
 <template>
+  <Jumbotron />
   <TypesList />
   <RestaurantList />
 </template>
