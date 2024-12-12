@@ -11,7 +11,7 @@
         <div class="thumbnails-wrapper d-flex align-items-center">
           <!-- Pulsante precedente -->
           <button
-            class="btn btn-outline-success me-4 fs-5 d-md-block"
+            class="btn btn-outline-danger me-4 fs-5 d-md-block"
             @click="prev"
             aria-label="Previous"
           >
@@ -44,7 +44,7 @@
 
           <!-- Pulsante successivo -->
           <button
-            class="btn btn-outline-success ms-4 fs-5 d-md-block"
+            class="btn btn-outline-danger ms-4 fs-5 d-md-block"
             @click="next"
             aria-label="Next"
           >

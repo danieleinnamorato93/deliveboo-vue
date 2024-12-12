@@ -101,7 +101,7 @@ export default {
                 class="quantity-input"
                 placeholder="1"
               />
-              <button class="btn btn-success" @click="addToCart(plate)">
+              <button class="btn btn-outline-danger" @click="addToCart(plate)">
                 Aggiungi al carrello
               </button>
             </div>
@@ -113,11 +113,11 @@ export default {
 </template>
 <style scoped lang="scss">
 h1 {
-  color: red;
+  color: #f24c00;
   font-weight: bold;
 }
 h3 {
-  color: #4fae5a;
+  color: #fc7a1e;
 }
 
 .quantity-input {

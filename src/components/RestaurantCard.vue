@@ -51,8 +51,8 @@ export default {
   transition: border 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
-    border: 3px solid #4fae5a;
-    box-shadow: 0 0 10px rgba(21, 94, 3, 0.7);
+    border: 3px solid #fc7a1e;
+    box-shadow: 0 0 10px rgba(94, 47, 3, 0.7);
     transform: scale(1.05);
   }
 }
