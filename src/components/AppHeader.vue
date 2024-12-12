@@ -71,7 +71,7 @@ export default {
 // Stile Navbar
 nav {
   min-height: 2.5rem;
-  background-color: #4fae5a;
+  background-color: #fc7a1e;
   box-shadow: 0 0 10px rgba(21, 94, 3, 0.7);
   a {
     text-decoration: none;
@@ -87,7 +87,7 @@ nav {
     margin-left: 20px;
     display: inline;
     vertical-align: middle;
-    color: white;
+    color: #faf6f6;
     font-weight: 700;
     text-decoration: underline;
   }
@@ -98,7 +98,7 @@ nav {
   * {
     margin-right: 20px;
     text-decoration: none;
-    color: white;
+    color: #faf6f6;
     font-size: 1.2rem;
     font-weight: 700;
   }
@@ -109,21 +109,20 @@ button {
   padding: 5px;
   border-radius: 12px;
   display: inline;
-  border: 3px solid black;
-  background-color: #ea555f;
-  color: black;
+  background-color: #f24c00;
+  color: #faf6f6;
 }
 
 .log-btn {
-  background-color: #4fae5a;
+  background-color: #f24c00;
 }
 
 .close-btn {
-  background-color: #ea555f;
+  background-color: #f24c00;
 }
 
 a {
   text-decoration: underline;
-  color: black;
+  color: #faf6f6;
 }
 </style>
