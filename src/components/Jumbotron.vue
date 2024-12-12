@@ -6,6 +6,16 @@ export default {
 };
 </script>
 
-<template></template>
+<template>
+  <div class="jumbo"></div>
+</template>
 
-<style scoped></style>
+<style scoped>
+.jumbo {
+  min-height: 350px;
+  width: 100%;
+
+  background-position: center;
+  background-size: cover;
+}
+</style>
