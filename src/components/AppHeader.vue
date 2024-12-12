@@ -72,7 +72,7 @@ export default {
 nav {
   min-height: 2.5rem;
   background-color: #fc7a1e;
-  box-shadow: 0 0 10px rgba(21, 94, 3, 0.7);
+  box-shadow: 0 0 10px rgba(94, 44, 3, 0.7);
   a {
     text-decoration: none;
   }
@@ -111,6 +111,7 @@ button {
   display: inline;
   background-color: #f24c00;
   color: #faf6f6;
+  box-shadow: 0 0 10px rgba(94, 44, 3, 0.7);
 }
 
 .log-btn {
