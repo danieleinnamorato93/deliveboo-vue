@@ -86,9 +86,9 @@ export default {
               <div class="col-12 d-flex justify-content-center">
                 <!-- informazioni del ristorante -->
                 <div class="card" style="width: 18rem;">
-                  <div class="card-body">
-                    <h5 class="card-title">{{ restaurant.name }}</h5>
-                    <p class="card-text text-center">{{ restaurant.address }}</p>
+                  <div class="card-body text-center">
+                    <h5 class="card-title fw-bold">{{ restaurant.name }}</h5>
+                    <p class="card-text">Indirizzo: {{ restaurant.address }}</p>
                   </div>
                 </div>
               </div>
