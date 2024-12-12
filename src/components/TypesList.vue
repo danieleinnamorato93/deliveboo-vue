@@ -127,7 +127,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h1 {
+h1,
+h6 {
   color: red;
 }
 h5 {
