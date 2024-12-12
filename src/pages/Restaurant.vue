@@ -81,41 +81,39 @@ export default {
               <RestaurantCard :restaurantObject="restaurant" />
             </div>
           </section>
-          <section id="plates">
+          <section id="restaurant">
             <div class="row">
-              <div class="col-12">
+              <div class="col-12 d-flex justify-content-center">
                 <!-- informazioni del ristorante -->
                 <div class="card" style="width: 18rem;">
                   <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                      card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+                    <h5 class="card-title">{{ restaurant.name }}</h5>
+                    <!-- <h6 class="card-subtitle mb-2 text-body-secondary"> {{ restaurant.type }}</h6> -->
+                    <p class="card-text text-center">{{ restaurant.address }}</p>
                   </div>
                 </div>
               </div>
             </div>
-            <h1 class="text-center mb-5">{{ restaurant.name }}</h1>
-            <ul class="list-unstyled">
-              <!-- mostra solo i piatti disponibili -->
-              <li v-for="plate in restaurant.plates" :key="plate.id">
-                <div v-if="plate.visibility === 1">
-                  <h3>{{ plate.name }}</h3>
-                  <p>{{ plate.description }}</p>
-                  <p>Ingredienti: {{ plate.ingredients }}</p>
-                  <p>Prezzo: €{{ plate.price }}</p>
-                  <!-- quantità e tasto carrello -->
-                  <div class="d-flex justify-content-start gap-3">
-                    <label for="quantity">Quantità</label>
-                    <input type="number" v-model.number="plate.quantity" min="1" id="quantity" class="quantity-input"
-                      placeholder="1" />
-                    <button class="btn btn-success" @click="addToCart(plate)">Aggiungi al carrello</button>
+            <div id="plates">
+              <ul class="list-unstyled">
+                <!-- mostra solo i piatti disponibili -->
+                <li v-for="plate in restaurant.plates" :key="plate.id">
+                  <!-- info piatti del ristorante -->
+                  <div v-if="plate.visibility === 1">
+                    <h3>{{ plate.name }}</h3>
+                    <p>{{ plate.description }}</p>
+                    <p>Ingredienti: {{ plate.ingredients }}</p>
+                    <p>Prezzo: €{{ plate.price }}</p>
+
+                    <div class="d-flex justify-content-start gap-3">
+                      <label for="quantity">Quantità</label>
+                      <input type="number" v-model.number="plate.quantity" min="1" id="quantity" class="quantity-input"/>
+                      <button class="btn btn-success" @click="addToCart(plate)">Aggiungi al carrello</button>
+                    </div>
                   </div>
-                </div>
-              </li>
-            </ul>
+                </li>
+              </ul>
+            </div>
           </section>
         </div>
       </div>
