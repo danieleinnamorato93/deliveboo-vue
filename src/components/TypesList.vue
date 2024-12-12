@@ -2,10 +2,6 @@
   <section id="carousel-types" class="container-fluid mt-5">
     <div class="row justify-content-center">
       <div class="col-12 col-lg-10">
-        <h1 class="text-center fw-bold">
-          Dalla cucina al tuo tavolo, un viaggio di gusto
-        </h1>
-
         <h5 class="text-center">Scegli pure tra:</h5>
 
         <div class="thumbnails-wrapper d-flex align-items-center">

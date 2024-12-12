@@ -7,31 +7,59 @@ export default {
 </script>
 
 <template>
-  <div class="jumbo">
-    <div class="overlay"></div>
-  </div>
+  <main>
+    <section class="container-fluid jumbotron">
+      <div class="row">
+        <div class="col-12">
+          <img
+            class="jumbo-img"
+            src="../assets/imgs/pexels-horizon-content-2100060-3738730.jpg"
+            alt="jumbo-deliveboo"
+          />
+          <div class="overlay">
+            <div class="claim">
+              <h1>Dalla cucina al tuo tavolo, un viaggio di gusto</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 </template>
 
-<style scoped>
-.jumbo {
+<style lang="scss" scoped>
+.jumbotron {
   position: relative;
-  min-height: 540px;
+  height: 600px;
+  overflow: hidden;
+  padding: 0px;
 
-  background-image: url("../assets/imgs/pexels-horizon-content-2100060-3738730.jpg");
-  background-position: center;
-  background-size: cover;
-}
-.overlay {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    0deg,
-    transparent 0,
-    transparent 65%,
-    rgba(0, 0, 0, 0.5)
-  );
+  .jumbo-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  h1 {
+    color: #f25c00;
+  }
+
+  .overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 65%,
+      rgba(0, 0, 0, 0.5)
+    );
+  }
+  .claim.h1 {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
 }
 </style>
