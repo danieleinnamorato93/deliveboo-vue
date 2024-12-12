@@ -27,30 +27,45 @@ export default {
         });
     },
     addToCart(plateObj) {
-      // Se la quantità non è definita o inferiore a 1, la impostiamo a 1
+      // devo vedere 
+      console.log('Piatto aggiunto:', plateObj);
+
       const quantity = plateObj.quantity && plateObj.quantity > 0 ? plateObj.quantity : 1;
-      // Crea un oggetto del piatto da aggiungere al carrello con le proprità richieste
+
       const item = {
         id: plateObj.id,
         name: plateObj.name,
         price: plateObj.price,
         quantity: quantity,
+        restaurantId: this.$route.params.id,
       };
-      // controlla se abbiamo un carrello in localstorage converisone da string a obj
+
       let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-      // controlla se ci sono elementi all'interno del carrello
+      if (cart.length > 0) {
+        const firstRestaurantId = cart[0].restaurantId;
+
+        if (firstRestaurantId !== item.restaurantId) {
+          const userConfirmed = window.confirm("Hai già piatti di un altro ristorante nel carrello. Vuoi cambiare ristorante e svuotare il carrello?");
+
+          if (userConfirmed) {
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
+          } else {
+            // Interrompe l'esecuzione della funzione e non aggiunge il nuovo piatto al carrello
+            return;
+          }
+        }
+      }
       const existingItem = cart.find(item => item.id === plateObj.id);
 
       if (existingItem) {
-        // se abbiamo un item andiamo a modificarne la quantità
         existingItem.quantity += quantity;
       } else {
         cart.push(item);
       }
-      // qui salvataggio nel localStorage, conversione da obj a string
       localStorage.setItem('cart', JSON.stringify(cart));
-
+      // mi serve per vedere il funzionamento
       alert(`${plateObj.name} aggiunto al carrello con quantità ${quantity}`);
     },
   },
@@ -97,7 +112,6 @@ export default {
               <ul class="list-unstyled mb-4">
                 <!-- mostra solo i piatti disponibili -->
                 <li v-for="plate in restaurant.plates" :key="plate.id" class="m-4">
-                  <!-- info piatti del ristorante -->
                   <div v-if="plate.visibility === 1">
                     <h3>{{ plate.name }}</h3>
                     <p>{{ plate.description }}</p>
@@ -106,7 +120,8 @@ export default {
 
                     <div class="d-flex align-items-baseline justify-content-start gap-3 border-bottom pb-4">
                       <label for="quantity">Quantità</label>
-                      <input type="number" v-model.number="plate.quantity" min="1" id="quantity" class="quantity-input"/>
+                      <input type="number" v-model.number="plate.quantity" min="1" placeholder="1" id="quantity"
+                        class="quantity-input" />
                       <button class="btn btn-success" @click="addToCart(plate)">Aggiungi al carrello</button>
                     </div>
                   </div>
