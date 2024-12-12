@@ -84,7 +84,7 @@ export default {
       <h1 class="text-center mb-5">{{ restaurant.name }}</h1>
       <ul class="list-unstyled">
         <!-- mostra solo i piatti disponibili -->
-        <li v-for="plate in restaurant.plates" :key="plate.id">
+        <li class="mb-5" v-for="plate in restaurant.plates" :key="plate.id">
           <div v-if="plate.visibility === 1">
             <h3>{{ plate.name }}</h3>
             <p>{{ plate.description }}</p>
