@@ -88,16 +88,15 @@ export default {
                 <div class="card" style="width: 18rem;">
                   <div class="card-body">
                     <h5 class="card-title">{{ restaurant.name }}</h5>
-                    <!-- <h6 class="card-subtitle mb-2 text-body-secondary"> {{ restaurant.type }}</h6> -->
                     <p class="card-text text-center">{{ restaurant.address }}</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div id="plates">
-              <ul class="list-unstyled">
+            <div id="plates" class="mt-4">
+              <ul class="list-unstyled mb-4">
                 <!-- mostra solo i piatti disponibili -->
-                <li v-for="plate in restaurant.plates" :key="plate.id">
+                <li v-for="plate in restaurant.plates" :key="plate.id" class="m-4">
                   <!-- info piatti del ristorante -->
                   <div v-if="plate.visibility === 1">
                     <h3>{{ plate.name }}</h3>
@@ -105,7 +104,7 @@ export default {
                     <p>Ingredienti: {{ plate.ingredients }}</p>
                     <p>Prezzo: €{{ plate.price }}</p>
 
-                    <div class="d-flex justify-content-start gap-3">
+                    <div class="d-flex align-items-baseline justify-content-start gap-3 border-bottom pb-4">
                       <label for="quantity">Quantità</label>
                       <input type="number" v-model.number="plate.quantity" min="1" id="quantity" class="quantity-input"/>
                       <button class="btn btn-success" @click="addToCart(plate)">Aggiungi al carrello</button>
