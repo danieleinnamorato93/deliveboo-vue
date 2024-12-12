@@ -51,13 +51,12 @@ export default {
           quantity: item.quantity
         }))
       };
-      // Effettua la richiesta al backend
       axios.post('http://127.0.0.1:8000/api/orders', orderData)
         .then((response) => {
           console.log('Ordine completato con successo!',response);
           localStorage.removeItem('cart'); // Svuota il carrello
           this.cart = [];
-          this.$router.push(`/payment/${response.data.orderId}`); // Reindirizza alla homepage
+          this.$router.push(`/payment/${response.data.orderId}`); 
         })
         .catch(error => {
           console.error('Errore durante l\'invio dell\'ordine:', error);

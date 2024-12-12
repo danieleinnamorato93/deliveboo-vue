@@ -37,6 +37,7 @@ export default {
         name: plateObj.name,
         price: plateObj.price,
         quantity: quantity,
+        // aggiunta per il check
         restaurantId: this.$route.params.id,
       };
 
