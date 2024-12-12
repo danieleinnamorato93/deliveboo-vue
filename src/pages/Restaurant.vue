@@ -60,45 +60,66 @@ export default {
 };
 </script>
 <template>
-  <!-- Mostra il messaggio di errore se l'ID del ristorante non è valido -->
-  <div v-if="notFound" class="container">
-    <div class="row py-3">
+  <div class="container">
+    <div class="row">
       <div class="col-12">
-        <h2>Ristorante non trovato</h2>
-        <p>L'ID fornito non corrisponde a nessun ristorante esistente.</p>
-        <router-link to="/">Torna alla Lista dei Ristoranti</router-link>
-      </div>
-    </div>
-  </div>
-  <!-- Mostra le informazioni del ristorante se l'ID è valido -->
-  <div v-else>
-    <section class="mb-3">
-      <p>Restaurant ID: {{ $route.params.id }} </p>
-      <div class="row justify-content-center container-fluid">
-        <RestaurantCard :restaurantObject="restaurant" />
-      </div>
-    </section>
-    <section class="container">
-      <h1 class="text-center mb-5">{{ restaurant.name }}</h1>
-      <ul class="list-unstyled">
-        <!-- mostra solo i piatti disponibili -->
-        <li v-for="plate in restaurant.plates" :key="plate.id">
-          <div v-if="plate.visibility === 1">
-            <h3>{{ plate.name }}</h3>
-            <p>{{ plate.description }}</p>
-            <p>Ingredienti: {{ plate.ingredients }}</p>
-            <p>Prezzo: €{{ plate.price }}</p>
-            <!-- quantità e tasto carrello -->
-            <div class="d-flex justify-content-start gap-3">
-              <label for="quantity">Quantità</label>
-              <input type="number" v-model.number="plate.quantity" min="1" id="quantity" class="quantity-input"
-                placeholder="1"/>
-              <button class="btn btn-success" @click="addToCart(plate)">Aggiungi al carrello</button>
+        <!-- Mostra il messaggio di errore se l'ID del ristorante non è valido -->
+        <div v-if="notFound" class="container">
+          <div class="row py-3">
+            <div class="col-12">
+              <h2>Ristorante non trovato</h2>
+              <p>L'ID fornito non corrisponde a nessun ristorante esistente.</p>
+              <router-link to="/">Torna alla Lista dei Ristoranti</router-link>
             </div>
           </div>
-        </li>
-      </ul>
-    </section>
+        </div>
+        <!-- Mostra le informazioni del ristorante se l'ID è valido -->
+        <div v-else>
+          <section class="mb-3">
+            <!-- fa vedere la lista dei tipi di ristoranti -->
+            <div class="row justify-content-center">
+              <RestaurantCard :restaurantObject="restaurant" />
+            </div>
+          </section>
+          <section id="plates">
+            <div class="row">
+              <div class="col-12">
+                <!-- informazioni del ristorante -->
+                <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                      card's content.</p>
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h1 class="text-center mb-5">{{ restaurant.name }}</h1>
+            <ul class="list-unstyled">
+              <!-- mostra solo i piatti disponibili -->
+              <li v-for="plate in restaurant.plates" :key="plate.id">
+                <div v-if="plate.visibility === 1">
+                  <h3>{{ plate.name }}</h3>
+                  <p>{{ plate.description }}</p>
+                  <p>Ingredienti: {{ plate.ingredients }}</p>
+                  <p>Prezzo: €{{ plate.price }}</p>
+                  <!-- quantità e tasto carrello -->
+                  <div class="d-flex justify-content-start gap-3">
+                    <label for="quantity">Quantità</label>
+                    <input type="number" v-model.number="plate.quantity" min="1" id="quantity" class="quantity-input"
+                      placeholder="1" />
+                    <button class="btn btn-success" @click="addToCart(plate)">Aggiungi al carrello</button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <style scoped lang="scss">
