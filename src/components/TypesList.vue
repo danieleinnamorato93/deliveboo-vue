@@ -1,11 +1,70 @@
+<template>
+  <section id="carousel-types" class="container-fluid mt-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10">
+        <h1 class="text-center fw-bold">
+          Dalla cucina al tuo tavolo, un viaggio di gusto
+        </h1>
+
+        <h5 class="text-center">Scegli pure tra:</h5>
+
+        <div class="thumbnails-wrapper d-flex align-items-center">
+          <!-- Pulsante precedente -->
+          <button
+            class="btn btn-outline-success me-4 fs-5 d-md-block"
+            @click="prev"
+            aria-label="Previous"
+          >
+            &lsaquo;
+          </button>
+
+          <!-- Miniature -->
+          <div class="thumbnails row w-100 g-3">
+            <div
+              v-for="type in visibleThumbnails"
+              :key="type.id"
+              class="col-8 col-md-4 col-lg-2"
+            >
+              <article
+                class="thumbnail d-flex flex-column align-items-center text-center"
+                :class="{ active: store.clickedTypes.includes(type.id) }"
+                @click="getTypeId(type.id)"
+              >
+                <img
+                  :src="getImage(type.logo)"
+                  :alt="type.name"
+                  class="adaptive-cover img-fluid rounded"
+                />
+                <div class="mt-2">
+                  <h6 class="fw-bold">{{ type.name }}</h6>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <!-- Pulsante successivo -->
+          <button
+            class="btn btn-outline-success ms-4 fs-5 d-md-block"
+            @click="next"
+            aria-label="Next"
+          >
+            &rsaquo;
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
 <script>
 import { store } from "../js/store";
+
 export default {
   data() {
     return {
       store,
       currentIndex: 0, // Indice dell'elemento corrente
-      thumbnailsPerPage: 6, // Numero di thumbnails da visualizzare per volta
+      thumbnailsPerPage: 5, // Numero di thumbnails da visualizzare per volta
     };
   },
   computed: {
@@ -17,15 +76,26 @@ export default {
       );
     },
   },
+  mounted() {
+    this.updateThumbnailsPerPage();
+    window.addEventListener("resize", this.updateThumbnailsPerPage);
+  },
+  beforeUnmount() {
+    window.removeEventListener("resize", this.updateThumbnailsPerPage);
+  },
   methods: {
+    updateThumbnailsPerPage() {
+      const width = window.innerWidth;
+      if (width >= 992) this.thumbnailsPerPage = 5; // Desktop
+      else if (width >= 768) this.thumbnailsPerPage = 4; // Tablet
+      else this.thumbnailsPerPage = 2; // Mobile
+    },
     getTypeId(typeId) {
       // cerca indice typeid
       const index = store.clickedTypes.indexOf(typeId);
       // Se non è presente, aggiungilo
       if (index === -1) {
         store.clickedTypes.push(typeId);
-        console.log("tutto ok visto", typeId);
-        console.log(store.clickedTypes);
       } else {
         // Se è presente, rimuovilo
         store.clickedTypes.splice(index, 1);
@@ -55,74 +125,56 @@ export default {
   },
 };
 </script>
-<template>
-  <section id="carousel-types" class="container-fluid mt-5">
-    <div class="row">
-      <div class="col-12">
-        <div class="thumbnails-wrapper">
-          <button class="btn prev" @click="prev">⬅️</button>
-          <div class="thumbnails d-flex">
-            <article
-              v-for="type in visibleThumbnails"
-              :key="type.id"
-              class="thumbnail"
-              :class="{ active: store.clickedTypes.includes(type.id) }"
-              @click="getTypeId(type.id)"
-            >
-              <img
-                :src="getImage(type.logo)"
-                :alt="type.name"
-                class="adaptive-cover"
-              />
-              <div>
-                <h6 class="fw-bold">{{ type.name }}</h6>
-              </div>
-            </article>
-          </div>
-          <button class="btn next" @click="next">➡️</button>
-        </div>
-      </div>
-    </div>
-  </section>
-</template>
 
 <style lang="scss" scoped>
+h1,
+h6 {
+  color: red;
+}
+h5 {
+  color: darkgrey;
+}
+
 .thumbnails-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  margin: 50px;
+  margin-bottom: 50px;
+  margin-top: 50px;
 
   .thumbnails {
     display: flex;
-    overflow: hidden;
-    justify-content: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
 
     article.thumbnail {
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 200px;
-      height: 250px;
+      max-width: 100%;
       cursor: pointer;
       text-align: center;
-      margin: 15px;
+      border: 3px solid transparent;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 15px;
+      &.active {
+        border-color: #4fae5a;
+        box-shadow: 0 0 6px rgba(21, 94, 3, 0.7);
+        transform: scale(1.1);
+      }
+      &:hover {
+        transform: scale(1.05);
+      }
 
       img.adaptive-cover {
         width: 100%;
-        height: 200px;
+        height: 150px;
         object-fit: cover;
-        margin-bottom: 30px;
+        margin-bottom: 10px;
         border-radius: 15px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-      &.active {
-        transform: scale(1.1);
-        border: 3px solid #ff9800;
-        box-shadow: 0 0 6px rgba(255, 152, 0, 0.7);
-        border-radius: 15px;
+        box-shadow: 0 0 4px rgba(11, 48, 2, 0.7);
       }
     }
 
@@ -130,7 +182,6 @@ export default {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      z-index: 1;
       color: #fff;
       font-size: 2rem;
       padding: 10px;

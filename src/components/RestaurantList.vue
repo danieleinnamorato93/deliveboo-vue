@@ -73,7 +73,7 @@ export default {
 };
 </script>
 <template>
-  <div>
+  <div class="container">
     <ul>
       <li v-for="restaurant in displayedRestaurants" :key="restaurant.id">
         <RouterLink

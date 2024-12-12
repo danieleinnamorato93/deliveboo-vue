@@ -1,11 +1,11 @@
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   name: "Restaurant",
   data() {
     return {
-      apiUrl: 'http://127.0.0.1:8000/api/restaurants',
+      apiUrl: "http://127.0.0.1:8000/api/restaurants",
       restaurant: null,
       notFound: false,
     };
@@ -13,7 +13,8 @@ export default {
 
   methods: {
     getSingleRestaurant() {
-      axios.get(`${this.apiUrl}/${this.$route.params.id}`)
+      axios
+        .get(`${this.apiUrl}/${this.$route.params.id}`)
         .then((response) => {
           this.restaurant = response.data.results;
           this.notFound = false;
@@ -28,7 +29,8 @@ export default {
     },
     addToCart(plateObj) {
       // Se la quantità non è definita o inferiore a 1, la impostiamo a 1
-      const quantity = plateObj.quantity && plateObj.quantity > 0 ? plateObj.quantity : 1;
+      const quantity =
+        plateObj.quantity && plateObj.quantity > 0 ? plateObj.quantity : 1;
       // Crea un oggetto del piatto da aggiungere al carrello con le proprità richieste
       const item = {
         id: plateObj.id,
@@ -37,10 +39,10 @@ export default {
         quantity: quantity,
       };
       // controlla se abbiamo un carrello in localstorage converisone da string a obj
-      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
       // controlla se ci sono elementi all'interno del carrello
-      const existingItem = cart.find(item => item.id === plateObj.id);
+      const existingItem = cart.find((item) => item.id === plateObj.id);
 
       if (existingItem) {
         // se abbiamo un item andiamo a modificarne la quantità
@@ -49,14 +51,14 @@ export default {
         cart.push(item);
       }
       // qui salvataggio nel localStorage, conversione da obj a string
-      localStorage.setItem('cart', JSON.stringify(cart));
+      localStorage.setItem("cart", JSON.stringify(cart));
 
       alert(`${plateObj.name} aggiunto al carrello con quantità ${quantity}`);
     },
   },
   created() {
     this.getSingleRestaurant();
-  }
+  },
 };
 </script>
 <template>
@@ -73,7 +75,7 @@ export default {
   <!-- Mostra le informazioni del ristorante se l'ID è valido -->
   <div v-else>
     <section class="mb-3">
-      <p>Restaurant ID: {{ $route.params.id }} </p>
+      <!--<p>Restaurant ID: {{ $route.params.id }} </p>-->
       <div class="row justify-content-center container-fluid">
         <RestaurantCard :restaurantObject="restaurant" />
       </div>
@@ -91,9 +93,17 @@ export default {
             <!-- quantità e tasto carrello -->
             <div class="d-flex justify-content-start gap-3">
               <label for="quantity">Quantità</label>
-              <input type="number" v-model.number="plate.quantity" min="1" id="quantity" class="quantity-input"
-                placeholder="1"/>
-              <button class="btn btn-success" @click="addToCart(plate)">Aggiungi al carrello</button>
+              <input
+                type="number"
+                v-model.number="plate.quantity"
+                min="1"
+                id="quantity"
+                class="quantity-input"
+                placeholder="1"
+              />
+              <button class="btn btn-success" @click="addToCart(plate)">
+                Aggiungi al carrello
+              </button>
             </div>
           </div>
         </li>
@@ -102,6 +112,14 @@ export default {
   </div>
 </template>
 <style scoped lang="scss">
+h1 {
+  color: red;
+  font-weight: bold;
+}
+h3 {
+  color: #4fae5a;
+}
+
 .quantity-input {
   width: 60px;
   padding: 5px;
