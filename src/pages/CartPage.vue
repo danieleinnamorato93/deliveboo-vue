@@ -71,27 +71,27 @@ export default {
     },
 
     schema() {
-    return yup.object({
-      first_name: yup.string().trim()
-        .min(3, 'Il nome deve avere almeno 3 caratteri')
-        .required('Questo campo è obbligatorio'),
+      return yup.object({
+        first_name: yup.string().trim()
+          .min(3, 'Il nome deve avere almeno 3 caratteri')
+          .required('Questo campo è obbligatorio'),
 
-      last_name: yup.string().trim()
-        .min(3, 'Il cognome deve avere almeno 3 caratteri')
-        .required('Questo campo è obbligatorio'),
+        last_name: yup.string().trim()
+          .min(3, 'Il cognome deve avere almeno 3 caratteri')
+          .required('Questo campo è obbligatorio'),
 
-      phone_number: yup.string().trim()
-        .required('Questo campo è obbligatorio')
-        .matches(/^[0-9]{10}$/, 'Il numero di telefono deve essere composto solo da cifre (10 cifre)'),
+        phone_number: yup.string().trim()
+          .required('Questo campo è obbligatorio')
+          .matches(/^[0-9]{10}$/, 'Il numero di telefono deve essere composto solo da cifre (10 cifre)'),
 
-      address: yup.string().trim()
-        .required('Questo campo è obbligatorio')
-        .min(3, 'L\'indirizzo deve contenere almeno 3 caratteri')
-        .matches(/\d/, 'L\'indirizzo deve contenere almeno un numero'),
+        address: yup.string().trim()
+          .required('Questo campo è obbligatorio')
+          .min(3, 'L\'indirizzo deve contenere almeno 3 caratteri')
+          .matches(/\d/, 'L\'indirizzo deve contenere almeno un numero'),
 
-      email: yup.string().email().required('Questo campo è obbligatorio')
-    });
-  }
+        email: yup.string().email().required('Questo campo è obbligatorio')
+      });
+    }
   },
 
   methods: {
@@ -162,7 +162,11 @@ export default {
     //     return true;
     //   },
     // },
-
+    onInvalidSubmit({ values, errors, results }) {
+      console.log(values); // current form values
+      console.log(errors); // a map of field names and their first error message
+      console.log(results); // a detailed map of field names and their validation results
+    },
 
     // Invia l'ordine al server Laravel
     submitOrder() {
@@ -244,7 +248,7 @@ export default {
             </div>
             <div class="col-12">
 
-              <form ref="form" @submit="submitOrder" :validation-schema="schema" method="post" autocomplete="off">
+              <form ref="form" @submit="submitOrder" :validation-schema="schema" method="post" autocomplete="off" @invalid-submit="onInvalidSubmit">
 
                 <!-- Nome -->
                 <div class="mb-3">
