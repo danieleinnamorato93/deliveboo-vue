@@ -35,10 +35,10 @@ export default {
     <div class="nav-link">
       <RouterLink to="/">Home</RouterLink>
 
-      <RouterLink to="/carrello">
+      <RouterLink to="/carrello" class="cart-box">
         <font-awesome-icon icon="cart-shopping" />
         <!-- conteggio degli articoli -->
-        <span v-if="cartCount > 0" class="badge bg-danger">{{
+        <span v-if="cartCount > 0" class="badge bg-danger cart-count">{{
           cartCount
         }}</span>
       </RouterLink>
@@ -97,6 +97,10 @@ nav {
     color: #faf6f6;
     font-weight: 700;
     text-decoration: underline;
+  }
+
+  .cart-box{
+    position: relative;
   }
 }
 
