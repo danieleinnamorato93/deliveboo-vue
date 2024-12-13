@@ -38,9 +38,10 @@ export default {
           console.log("transaction response", response);
 
           if (response && response.data && response.data.success) {
-            alert("pagamento effettuato con successo!");
+            // alert("pagamento effettuato con successo!");
             // qui dovremo fare redirect alla pagina di thank-you
             // per l'ordine con questo ID
+            this.$router.push(`/checkout/${this.$route.params.orderId}`);
           } else {
             alert("pagamento rifiutato");
           }
