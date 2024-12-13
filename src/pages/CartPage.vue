@@ -12,6 +12,13 @@ export default {
         email: '',  // Aggiunto campo email
         paymentMethod: 'cash',
         total: 0  // Aggiunta proprietà per il totale
+      },
+      errors:{
+        first_name: '',
+        last_name: '',
+        phone_number: '',
+        address: '',
+        email: '',
       }
     };
   },
@@ -35,6 +42,23 @@ export default {
       this.cart.splice(index, 1);
       localStorage.setItem('cart', JSON.stringify(this.cart));
     },
+
+    //------------VALIDATE---------------
+    validateForm(){
+      let valid = true;
+
+      //Pulisci caso abbia errore da prima
+      this.errors = {
+        first_name: '',
+        last_name: '',
+        phone_number: '',
+        address: '',
+        email: '',
+      };
+
+      
+    },
+
 
     // Invia l'ordine al server Laravel
     submitOrder() {
