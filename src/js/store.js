@@ -10,8 +10,12 @@ export const store = reactive({
     cart: [],
 
     get cartCount() {
-        return this.cart.reduce((total, item) => total + item.quantity, 0);
-    },
+        let total = 0;
+        for (let i = 0; i < this.cart.length; i++) {
+          total += this.cart[i].quantity;
+        }
+        return total;
+      },
 
     // Metodo per aggiungere un articolo al carrello
     addToCart(item) {

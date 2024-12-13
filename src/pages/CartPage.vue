@@ -20,10 +20,12 @@ export default {
   computed: {
     // Calcola il totale dell'ordine
     totalAmount() {
-      return this.store.cart.reduce(
-        (total, item) => total + item.price * item.quantity,
-        0
-      );
+      let total = 0;
+      for (let i = 0; i < this.store.cart.length; i++) {
+        const item = this.store.cart[i];
+        total += item.price * item.quantity;
+      }
+      return total;
     },
     cartCount() {
       return this.store.cartCount;
@@ -96,14 +98,8 @@ export default {
             <div class="d-flex align-items-baseline">
               <div class="mb-2">
                 <!-- Modifica la quantità -->
-                <input
-                  type="number"
-                  v-model.number="item.quantity"
-                  min="1"
-                  @change="updateCartItem(index)"
-                  class="form-control"
-                  style="width: 80px"
-                />
+                <input type="number" v-model.number="item.quantity" min="1" @change="updateCartItem(index)"
+                  class="form-control" style="width: 80px" />
               </div>
               <button @click="removeFromCart(index)" class="btn btn-danger">
                 Rimuovi
@@ -125,68 +121,30 @@ export default {
               <h3 class="my-4">Dati per l'ordine</h3>
             </div>
             <div class="col-12">
-              <form
-                @submit.prevent="submitOrder"
-                class="mb-4"
-                method="POST"
-                autocomplete="off"
-              >
+              <form @submit.prevent="submitOrder" class="mb-4" method="POST" autocomplete="off">
                 <div class="mb-3">
                   <label for="first_name" class="form-label">Nome</label>
-                  <input
-                    type="text"
-                    v-model="order.first_name"
-                    id="first_name"
-                    name="first_name"
-                    class="form-control"
-                    required
-                  />
+                  <input type="text" v-model="order.first_name" id="first_name" name="first_name" class="form-control"
+                    required />
                 </div>
                 <div class="mb-3">
                   <label for="last_name" class="form-label">Cognome</label>
-                  <input
-                    type="text"
-                    v-model="order.last_name"
-                    id="last_name"
-                    name="last_name"
-                    class="form-control"
-                    required
-                  />
+                  <input type="text" v-model="order.last_name" id="last_name" name="last_name" class="form-control"
+                    required />
                 </div>
                 <div class="mb-3">
-                  <label for="phone_number" class="form-label"
-                    >Numero di Telefono</label
-                  >
-                  <input
-                    type="text"
-                    v-model="order.phone_number"
-                    id="phone_number"
-                    name="phone_number"
-                    class="form-control"
-                    required
-                  />
+                  <label for="phone_number" class="form-label">Numero di Telefono</label>
+                  <input type="text" v-model="order.phone_number" id="phone_number" name="phone_number"
+                    class="form-control" required />
                 </div>
                 <div class="mb-3">
                   <label for="address" class="form-label">Indirizzo</label>
-                  <input
-                    type="text"
-                    v-model="order.address"
-                    id="address"
-                    name="address"
-                    class="form-control"
-                    required
-                  />
+                  <input type="text" v-model="order.address" id="address" name="address" class="form-control"
+                    required />
                 </div>
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
-                  <input
-                    type="email"
-                    v-model="order.email"
-                    id="email"
-                    name="email"
-                    class="form-control"
-                    required
-                  />
+                  <input type="email" v-model="order.email" id="email" name="email" class="form-control" required />
                 </div>
                 <input type="hidden" :value="totalAmount" />
                 <button type="submit" class="btn btn-primary mt-3">
