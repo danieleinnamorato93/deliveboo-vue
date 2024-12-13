@@ -1,13 +1,33 @@
 <script>
 import axios from 'axios';
-import { Field, ErrorMessage, Form} from 'vee-validate';
+import { Field, ErrorMessage, Form } from 'vee-validate';
 import * as yup from 'yup';
 
+const schema = yup.object({
+  first_name, last_name: yup.string().trim().min(3, 'Ilnome deve avere almeno 3 caratteri')
+    .tranform((value) => {
+      return value.chart(0).toUpperCase() + value.slice(1).toLowerCase();
+    })
+    .required('Questo campo è obbligatorio'),
+
+    phone_number: yup.string().trim().required('Questo campo è obbligatorio').transform(value => value.replace(/\s+/g, ''))
+    .matches(
+      /^[0-9]{10}$/, // Espressione regolare per garantire che siano presenti solo 10 cifre numeriche
+      'Il numero di telefono deve essere composto solo da cifre (10 cifre)')
+    .matches(
+      /^3\d{9,10}$/, // Numero di cellulare italiano che inizia con "3" ed è lungo 9 o 10 cifre
+      'Il numero di telefono deve iniziare con "3" e deve avere 9 o 10 cifre, esempio: 3112224455'
+    ),
+
+  email: yup.string().email().required(),
+
+});
+
 export default {
-  components:{
+  components: {
     Form,
     Field,
-    ErrorMessage
+    ErrorMessage,
   },
 
   data() {
@@ -22,7 +42,7 @@ export default {
         paymentMethod: 'cash',
         total: 0,  // Aggiunta proprietà per il total
       },
-      errors:{}, //Per i messagi di errore della validazione
+      errors: {}, //Per i messagi di errore della validazione
     };
   },
 
@@ -46,75 +66,89 @@ export default {
       localStorage.setItem('cart', JSON.stringify(this.cart));
     },
 
-    //-----------------FORMATAZIONE DEI DATI MANDATI PER L'UTENT NEL INPUT----------------------
-    // Formatazione Input (nome, cognome)
-    formatName(field) {
-      this.order[field] = this.order[field].trim().toLowerCase().slice(1).toLowerCase()
-    },
 
-    //Formatazione Input (Phone number)
-    formatPhoneNumber(field) {
-      let phoneNumber = this.order[field];
-      // Remove qualsiasi carattere che non sia un numero
-      phoneNumber = phoneNumber.replace(/\D/g, '');
-
-      // se non inizia +39
-      if (!phoneNumber.startsWith('39')) {
-        phoneNumber = '39' + phoneNumber;
-      }
-
-      this.order[field] = phoneNumber;
-    },
-
-    // Formatazione del indirizzo
-    formatAddress() {
-      let formattedValue = this.order.address.trim();
-      formattedValue = formattedValue.charAt(0).toUpperCase() + formattedValue.slice(1).toLowerCase();
-
-      this.order.address = formattedValue;
-    },
-
-    // Email
-    formatEmail() {
-      this.order.email = this.order.email.trim();
-    },
 
     //--------------------------------------VALIDAZIONE-------------------------------------------
+    // Nome e cognome
+    validateName(value) {
+      if (!value) {
+        return 'Questo campo è obbligatorio';
+      }
 
-    
+      if (value.length < 3) {
+        return 'Il nome deve avere almeno 3 caratteri';
+      }
+      return true;
+    },
 
-    // Invia l'ordine al server Laravel
-    submitOrder() {
-      this.order.total = this.totalAmount;
+    //Phone 
+    validatePhone(value) {
+      const phoneRegex = /^3\d{8,9}$/;
 
-      const orderData = {
-        first_name: this.order.first_name,
-        last_name: this.order.last_name,
-        email: this.order.email,
-        phone_number: this.order.phone_number,
-        address: this.order.address,
-        // payment_method: this.order.paymentMethod
-        total: this.order.total,
-        items: this.cart.map(item => ({
-          plate_id: item.id,
-          quantity: item.quantity
-        }))
-      };
-      // Effettua la richiesta al backend
-      axios.post('http://127.0.0.1:8000/api/orders', orderData)
-        .then(() => {
-          alert('Ordine completato con successo!');
-          localStorage.removeItem('cart'); // Svuota il carrello
-          this.cart = [];
-          this.$router.push('/'); // Reindirizza alla homepage
-        })
-        .catch(error => {
-          console.error('Errore durante l\'invio dell\'ordine:', error);
-          alert('Errore durante l\'invio. Riprova.');
-        });
-    }
+      if (!value) {
+        return 'Questo campo è obbligatorio';
+      }
+
+      if (!phoneRegex.test(value)) {
+        return 'Numero di cellulare non valido. Usa il formato corretto (es. 3201234567).';
+      }
+
+      return true;
+    },
+
+
+    //Email
+    validateEmail(value) {
+      // if the field is empty
+      if (!value) {
+        return 'Questo campo è obbligatorio';
+      }
+      // if the field is not a valid email
+      const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+      if (!regex.test(value)) {
+        return 'Questo campo deve essere un indirizzo email valido';
+      }
+      // All is good
+      return true;
+    },
+  },
+
+
+  // Invia l'ordine al server Laravel
+  submitOrder() {
+    // Submit values to API...
+    alert(JSON.stringify(values, null, 2))
+
+    this.order.total = this.totalAmount;
+
+    const orderData = {
+      first_name: this.order.first_name,
+      last_name: this.order.last_name,
+      email: this.order.email,
+      phone_number: this.order.phone_number,
+      address: this.order.address,
+      // payment_method: this.order.paymentMethod
+      total: this.order.total,
+      items: this.cart.map(item => ({
+        plate_id: item.id,
+        quantity: item.quantity
+      }))
+    };
+    // Effettua la richiesta al backend
+    axios.post('http://127.0.0.1:8000/api/orders', orderData)
+      .then(() => {
+        alert('Ordine completato con successo!');
+        localStorage.removeItem('cart'); // Svuota il carrello
+        this.cart = [];
+        this.$router.push('/'); // Reindirizza alla homepage
+      })
+      .catch(error => {
+        console.error('Errore durante l\'invio dell\'ordine:', error);
+        alert('Errore durante l\'invio. Riprova.');
+      });
   }
 }
+
 </script>
 <template>
   <div class="container">
@@ -156,48 +190,49 @@ export default {
               <h3 class="my-4">Dati per l'ordine</h3>
             </div>
             <div class="col-12">
-              
-                <form @submit="handleSubmit($event, submitOrder)">
 
-                  <!-- Nome -->
-                  <div class="mb-3">
-                    <label for="first_name" class="form-label">Nome</label>
-                    <Field name="first_name" id="first_name" type="text" class="form-control" />
-                    <ErrorMessage name="first_name" class="text-danger" />
-                  </div>
+              <form @submit="submitOrder" :validation-schema="schema" method="post" autocomplete="off">
 
-                  <!-- Cognome -->
-                  <div class="mb-3">
-                    <label for="last_name" class="form-label">Cognome</label>
-                    <Field name="last_name" id="last_name" type="text" class="form-control" />
-                    <ErrorMessage name="last_name" class="text-danger" />
-                  </div>
+                <!-- Nome -->
+                <div class="mb-3">
+                  <label for="first_name" class="form-label">Nome</label>
+                  <Field name="first_name" id="first_name" type="text" class="form-control" :rules="validateName" />
+                  <ErrorMessage name="first_name" class="text-danger" />
+                </div>
 
-                  <!-- Telefone -->
-                  <div class="mb-3">
-                    <label for="phone_number" class="form-label">Telefone</label>
-                    <Field name="phone_number" id="phone_number" type="text" class="form-control" />
-                    <ErrorMessage name="phone_number" class="text-danger" />
-                  </div>
+                <!-- Cognome -->
+                <div class="mb-3">
+                  <label for="last_name" class="form-label">Cognome</label>
+                  <Field name="last_name" id="last_name" type="text" class="form-control" :rules="validateName" />
+                  <ErrorMessage name="last_name" class="text-danger" />
+                </div>
 
-                  <!-- Endereço -->
-                  <div class="mb-3">
-                    <label for="address" class="form-label">Endereço</label>
-                    <Field name="address" id="address" type="text" class="form-control" />
-                    <ErrorMessage name="address" class="text-danger" />
-                  </div>
+                <!-- Telefone -->
+                <div class="mb-3">
+                  <label for="phone_number" class="form-label">Telefone</label>
+                  <Field name="phone_number" id="phone_number" type="text" class="form-control"
+                    :rules="validatePhone" />
+                  <ErrorMessage name="phone_number" class="text-danger" />
+                </div>
 
-                  <!-- Email -->
-                  <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <Field name="email" id="email" type="email" class="form-control" :rules="validateEmail"/>
-                    <ErrorMessage name="email" class="text-danger" />
-                  </div>
+                <!-- Endereço -->
+                <div class="mb-3">
+                  <label for="address" class="form-label">Endereço</label>
+                  <Field name="address" id="address" type="text" class="form-control" />
+                  <ErrorMessage name="address" class="text-danger" />
+                </div>
 
-                  <input type="hidden" :value="totalAmount" />
-                  <button type="submit" class="btn btn-primary">Enviar</button>
-                </form>
-            
+                <!-- Email -->
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <Field name="email" id="email" type="email" class="form-control" :rules="validateEmail" />
+                  <ErrorMessage name="email" class="text-danger" />
+                </div>
+
+                <input type="hidden" :value="totalAmount" />
+                <button type="submit" class="btn btn-primary">Enviar</button>
+              </form>
+
 
             </div>
           </div>
