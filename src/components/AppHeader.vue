@@ -1,30 +1,48 @@
 <script>
+import { store } from "../js/store.js"; // Importa la store
+import { RouterLink } from "vue-router";
+
 export default {
+  name: "AppHeader",
   data() {
     return {
       isHidden: true,
+      store, // Aggiungi la store ai dati
     };
+  },
+  computed: {
+    // Usa direttamente il getter cartCount dalla store
+    cartCount() {
+      return this.store.cartCount; // Usa il getter definito nella store
+    },
   },
 };
 </script>
-
 <template>
   <nav class="d-flex align-items-center justify-content-between p-3">
+    <!-- Logo -->
     <div class="d-flex align-items-center">
       <RouterLink to="/">
         <img src="../assets/imgs/gufetto.png" alt="logo"
       /></RouterLink>
 
-      <RouterLink to="/"
-        ><h1 class="text-decoration-none d-none d-md-block ms-2">
-          DeliveBoo
-        </h1></RouterLink
-      >
+      <RouterLink to="/">
+        <h1 class="text-decoration-none d-none d-md-block ms-2">DeliveBoo</h1>
+      </RouterLink>
     </div>
+
     <!-- Sezione Link -->
     <div class="nav-link">
       <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/carrello">Carrello</RouterLink>
+
+      <RouterLink to="/carrello">
+        <font-awesome-icon icon="cart-shopping" />
+        <!-- conteggio degli articoli -->
+        <span v-if="cartCount > 0" class="badge bg-danger">{{
+          cartCount
+        }}</span>
+      </RouterLink>
+
       <button
         type="button"
         data-bs-toggle="modal"
@@ -34,7 +52,7 @@ export default {
       </button>
     </div>
 
-    <!-- Modal -->
+    <!-- Modale -->
     <div
       class="modal fade"
       id="staticBackdrop"
@@ -74,13 +92,16 @@ nav {
   a {
     text-decoration: none;
   }
+
   img {
     height: 5.5rem;
     transition: scale 150ms;
   }
+
   img:hover {
     scale: (1.2);
   }
+
   h1 {
     margin-left: 20px;
     display: inline;

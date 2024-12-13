@@ -1,45 +1,42 @@
 <script>
+import { store } from "../js/store.js";
 import axios from "axios";
+
 export default {
   data() {
     return {
-      cart: JSON.parse(localStorage.getItem("cart")) || [], // Carica il carrello dal localStorage
+      store,
       order: {
         first_name: "",
         last_name: "",
         phone_number: "",
         address: "",
-        email: "", // Aggiunto campo email
+        email: "",
         paymentMethod: "cash",
-        total: 0, // Aggiunta proprietà per il totale
+        total: 0,
       },
     };
   },
-
   computed: {
     // Calcola il totale dell'ordine
     totalAmount() {
-      return this.cart.reduce(
+      return this.store.cart.reduce(
         (total, item) => total + item.price * item.quantity,
         0
       );
     },
-  },
-
-  methods: {
-    // Modifica la quantità di un piatto nel carrello
-    updateCartItem(index) {
-      const updatedCart = [...this.cart];
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
+    cartCount() {
+      return this.store.cartCount;
     },
-
+  },
+  methods: {
     // Rimuovi un piatto dal carrello
     removeFromCart(index) {
-      this.cart.splice(index, 1);
-      localStorage.setItem("cart", JSON.stringify(this.cart));
+      this.store.cart.splice(index, 1);
+      this.store.syncWithLocalStorage();
     },
 
-    // Invia l'ordine al server Laravel
+    // Invia l'ordine al server
     submitOrder() {
       this.order.total = this.totalAmount;
       const orderData = {
@@ -48,21 +45,22 @@ export default {
         email: this.order.email,
         phone_number: this.order.phone_number,
         address: this.order.address,
-        // payment_method: this.order.paymentMethod
         total: this.order.total,
-        items: this.cart.map((item) => ({
+        items: this.store.cart.map((item) => ({
           plate_id: item.id,
           quantity: item.quantity,
         })),
       };
-      // Effettua la richiesta al backend
+
+      // Invia l'ordine al server
       axios
         .post("http://127.0.0.1:8000/api/orders", orderData)
-        .then(() => {
-          alert("Ordine completato con successo!");
-          localStorage.removeItem("cart"); // Svuota il carrello
-          this.cart = [];
-          this.$router.push("/"); // Reindirizza alla homepage
+        .then((response) => {
+          console.log("Ordine completato con successo!", response);
+          // Svuota il carrello dopo l'ordine
+          this.store.clearCart();
+          // Reindirizza alla pagina di pagamento
+          this.$router.push(`/payment/${response.data.orderId}`);
         })
         .catch((error) => {
           console.error("Errore durante l'invio dell'ordine:", error);
@@ -70,17 +68,18 @@ export default {
         });
     },
   },
+  mounted() {
+    this.store.loadFromLocalStorage();
+  },
 };
 </script>
+
 <template>
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <h1 class="text-center my-4">Il tuo Carrello</h1>
-      </div>
-      <div class="col-12">
         <!-- PRIMO CONTROLLO NEL CASO SIA VUOTO -->
-        <div v-if="cart.length === 0">
+        <div v-if="store.cart.length === 0">
           <p>
             Il carrello è vuoto. Aggiungi piatti al carrello per procedere
             all'ordine.
@@ -89,7 +88,7 @@ export default {
         </div>
         <!-- Carrello con contenuto -->
         <div v-else>
-          <div v-for="(item, index) in cart" :key="item.id" class="mb-3">
+          <div v-for="(item, index) in store.cart" :key="item.id" class="mb-3">
             <div>
               <h4>{{ item.name }}</h4>
               <p>Prezzo: €{{ item.price }}</p>
@@ -201,27 +200,28 @@ export default {
     </div>
   </div>
 </template>
+
 <style scoped lang="scss">
 .container {
   max-width: 800px;
   margin: 0 auto;
-}
 
-h1,
-h3 {
-  font-size: 2em;
-}
+  h1,
+  h3 {
+    font-size: 2em;
+  }
 
-button {
-  margin-left: 10px;
-}
+  button {
+    margin-left: 10px;
+  }
 
-form {
-  margin-top: 20px;
-}
+  form {
+    margin-top: 20px;
+  }
 
-input,
-select {
-  margin-bottom: 15px;
+  input,
+  select {
+    margin-bottom: 15px;
+  }
 }
 </style>
