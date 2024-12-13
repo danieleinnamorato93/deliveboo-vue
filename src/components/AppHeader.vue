@@ -99,8 +99,20 @@ nav {
     text-decoration: underline;
   }
 
-  .cart-box{
+  .cart-box {
     position: relative;
+
+    .cart-count {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 5px 8px;
+      font-size: 10px;
+      background-color: red;
+      color: white;
+      border-radius: 50%;
+      transform: translate(85%, -65%);
+      }
   }
 }
 
@@ -138,5 +150,4 @@ button {
 a {
   text-decoration: underline;
   color: #faf6f6;
-}
-</style>
+}</style>
