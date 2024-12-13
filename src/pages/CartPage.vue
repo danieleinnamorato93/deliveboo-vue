@@ -61,6 +61,12 @@ export default {
         this.errors.first_name = 'Il nome è obbligatorio.';
         valid = false;
       }
+
+      // Validar cognome
+      if (!this.order.last_name.trim()) {
+        this.errors.last_name = 'Il cognome è obbligatorio.';
+        valid = false;
+      }
       
       return valid;
     },
