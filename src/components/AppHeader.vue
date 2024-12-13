@@ -26,7 +26,10 @@ export default {
     <!-- Sezione Link -->
     <div class="nav-link">
       <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/carrello">Carrello</RouterLink>
+      <RouterLink to="/carrello">
+        <font-awesome-icon icon="cart-shopping" />
+        Carrello
+      </RouterLink>
       <button
         type="button"
         data-bs-toggle="modal"
