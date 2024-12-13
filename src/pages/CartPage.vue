@@ -48,22 +48,22 @@ export default {
 
     // validazione del form
     formatName() {
-    this.order.first_name = this.order.first_name
-      .trim() 
-      .replace(/\s+/g, ' ') // Remove múltiplos espaços
-      .toLowerCase() // Coloca tudo em minúsculas
-      .replace(/^(.)/, (match) => match.toUpperCase()); // Primeira letra maiúscula
+      this.order.first_name = this.order.first_name
+        .trim()
+        .replace(/\s+/g, ' ') // Remove múltiplos espaços
+        .toLowerCase() // Coloca tudo em minúsculas
+        .replace(/^(.)/, (match) => match.toUpperCase()); // Primeira letra maiúscula
     },
 
 
     // Invia l'ordine al server Laravel
     submitOrder() {
-      // Formato prima di enviare l'ordine
+      //validazione: Formato prima di enviare l'ordine
       this.formatName();
 
 
       this.order.total = this.totalAmount;
-      
+
       const orderData = {
         first_name: this.order.first_name,
         last_name: this.order.last_name,
@@ -138,14 +138,15 @@ export default {
                   <label for="first_name" class="form-label">Nome</label>
                   <!--! validation name -->
                   <Field name="first_name" v-slot="{ field, meta }" :rules="firstNameRules">
-                    <input v-bind="field" type="text" id="first_name" class="form-control" v-model="order.first_name" @input="formatName" />
+                    <input type="text" v-model="order.first_name" id="first_name" name="first_name" class="form-control"
+                      @input="formatName('first_name')" required />
                     <span v-if="meta.touched && meta.error" class="text-danger">{{ meta.error }}</span>
                   </Field>
                 </div>
                 <div class="mb-3">
                   <label for="last_name" class="form-label">Cognome</label>
                   <input type="text" v-model="order.last_name" id="last_name" name="last_name" class="form-control"
-                    required />
+                    @input="formatName('last_name')" required />
                 </div>
                 <div class="mb-3">
                   <label for="phone_number" class="form-label">Numero di Telefono</label>
