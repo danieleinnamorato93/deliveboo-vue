@@ -56,7 +56,13 @@ export default {
         email: '',
       };
 
+      // Validar nome
+      if (!this.order.first_name.trim()) {
+        this.errors.first_name = 'Il nome è obbligatorio.';
+        valid = false;
+      }
       
+      return valid;
     },
 
 
