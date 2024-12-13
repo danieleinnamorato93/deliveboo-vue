@@ -91,6 +91,10 @@ export default {
       } else if (this.order.address.length < 3 || this.order.address.length > 30) {
         this.errors.address = 'L\'indirizzo deve avere tra 3 e 30 caratteri.';
         valid = false;
+      } else if (!/\d/.test(this.order.address)) {
+        // Verifica se há pelo menos um dígito numérico no endereço
+        this.errors.address = 'L\'indirizzo deve contenere almeno un numero.';
+        valid = false;
       }
       // Validar email
       const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -126,20 +130,20 @@ export default {
           }))
         };
 
-       
+
 
         // Effettua la richiesta al backend
         axios.post('http://127.0.0.1:8000/api/orders', orderData)
           .then(() => {
             alert('Ordine completato con successo!');
-            // localStorage.removeItem('cart'); // Svuota il carrello
-            // this.cart = [];
-            //this.$router.push('/'); // Reindirizza alla homepage
+            localStorage.removeItem('cart'); // Svuota il carrello
+            this.cart = [];
+            this.$router.push('/'); // Reindirizza alla homepage
           })
           .catch(error => {
-              console.error('Erro durante l\'invio dell\'ordine:', error);
-              alert('Errore durante l\'invio. Riprova.');
-            
+            console.error('Erro durante l\'invio dell\'ordine:', error);
+            alert('Errore durante l\'invio. Riprova.');
+
           });
 
       }
@@ -187,35 +191,36 @@ export default {
               <h3 class="my-4">Dati per l'ordine</h3>
             </div>
             <div class="col-12">
-              <form @submit.prevent="submitOrder" class="mb-4" method="POST" >
+              <form @submit.prevent="submitOrder" class="mb-4" method="POST">
                 <div class="mb-3">
                   <label for="first_name" class="form-label">Nome</label>
                   <input type="text" v-model="order.first_name" id="first_name" name="first_name" class="form-control"
-                    required />
+                    placeholder="Minimo 3 caratteri" required />
                   <span v-if="errors.first_name" class="text-danger">{{ errors.first_name }}</span>
 
                 </div>
                 <div class="mb-3">
                   <label for="last_name" class="form-label">Cognome</label>
                   <input type="text" v-model="order.last_name" id="last_name" name="last_name" class="form-control"
-                    required />
+                    placeholder="Minimo 3 caratteri" required />
                   <span v-if="errors.last_name" class="text-danger">{{ errors.last_name }}</span>
                 </div>
                 <div class="mb-3">
                   <label for="phone_number" class="form-label">Numero di Telefono</label>
                   <input type="text" v-model="order.phone_number" id="phone_number" name="phone_number"
-                    class="form-control" required />
+                    placeholder="10 cifre numeriche es.:3332224455" class="form-control" required />
                   <span v-if="errors.phone_number" class="text-danger">{{ errors.phone_number }}</span>
                 </div>
                 <div class="mb-3">
                   <label for="address" class="form-label">Indirizzo</label>
-                  <input type="text" v-model="order.address" id="address" name="address" class="form-control"
+                  <input type="text" v-model="order.address" id="address" name="address" class="form-control" placeholder="Via e numero"
                     required />
                   <span v-if="errors.address" class="text-danger">{{ errors.address }}</span>
                 </div>
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
-                  <input type="email" v-model="order.email" id="email" name="email" class="form-control" required />
+                  <input type="email" v-model="order.email" id="email" name="email" class="form-control"
+                    placeholder="es. utente@example.com" required />
                   <span v-if="errors.email" class="text-danger">{{ errors.email }}</span>
                 </div>
                 <input type="hidden" :value="totalAmount" />
