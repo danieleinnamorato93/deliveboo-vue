@@ -16,11 +16,7 @@ export default {
             src="../assets/imgs/pexels-horizon-content-2100060-3738730.jpg"
             alt="jumbo-deliveboo"
           />
-          <div class="overlay">
-            <div class="claim">
-              <h1>Dalla cucina alla tua tavola, un viaggio di gusto</h1>
-            </div>
-          </div>
+          <div class="overlay"></div>
         </div>
       </div>
     </section>
@@ -58,14 +54,6 @@ export default {
       transparent 65%,
       rgba(0, 0, 0, 0.5)
     );
-  }
-
-  .claim {
-    h1 {
-      color: #f24c00;
-      font-size: 3rem;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    }
   }
 }
 </style>
