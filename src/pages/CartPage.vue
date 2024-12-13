@@ -43,7 +43,7 @@ export default {
       localStorage.setItem('cart', JSON.stringify(this.cart));
     },
 
-    //------------VALIDATE---------------
+    //------------------------VALIDAZIONI--------------------------
     validateForm() {
       let valid = true;
 
@@ -63,6 +63,8 @@ export default {
       } else if (this.order.first_name.length < 3 || this.order.first_name.length > 20) {
         this.errors.first_name = 'Il nome deve avere tra 3 e 20 caratteri.';
         valid = false;
+      } else {
+        this.order.first_name = this.order.first_name.charAt(0).toUpperCase() + this.order.first_name.slice(1).toLowerCase();
       }
 
       // Validare cognome
@@ -72,6 +74,8 @@ export default {
       } else if (this.order.last_name.length < 3 || this.order.last_name.length > 30) {
         this.errors.last_name = 'Il cognome deve avere tra 3 e 30 caratteri.';
         valid = false;
+      }else {
+        this.order.last_name = this.order.last_name.charAt(0).toUpperCase() + this.order.last_name.slice(1).toLowerCase();
       }
 
       // Validare numero di telefono 
@@ -95,7 +99,11 @@ export default {
         // Verifica se há pelo menos um dígito numérico no endereço
         this.errors.address = 'L\'indirizzo deve contenere almeno un numero.';
         valid = false;
+      }else {
+        this.order.address = this.order.address.charAt(0).toUpperCase() + this.order.address.slice(1).toLowerCase();
       }
+
+
       // Validar email
       const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
       if (!this.order.email.trim()) {
@@ -208,13 +216,13 @@ export default {
                 <div class="mb-3">
                   <label for="phone_number" class="form-label">Numero di Telefono</label>
                   <input type="text" v-model="order.phone_number" id="phone_number" name="phone_number"
-                    placeholder="10 cifre numeriche es.:3332224455" class="form-control" required />
+                    placeholder="10 cifre numeriche. es.:3332224455" class="form-control" required />
                   <span v-if="errors.phone_number" class="text-danger">{{ errors.phone_number }}</span>
                 </div>
                 <div class="mb-3">
                   <label for="address" class="form-label">Indirizzo</label>
-                  <input type="text" v-model="order.address" id="address" name="address" class="form-control" placeholder="Via e numero"
-                    required />
+                  <input type="text" v-model="order.address" id="address" name="address" class="form-control"
+                    placeholder="Via e numero" required />
                   <span v-if="errors.address" class="text-danger">{{ errors.address }}</span>
                 </div>
                 <div class="mb-3">
