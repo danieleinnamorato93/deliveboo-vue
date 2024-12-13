@@ -27,10 +27,7 @@ export default {
       return this.cart.reduce((total, item) => total + item.price * item.quantity, 0);
     },
 
-    // Validazione con veeValidation
-    firstNameRules() {
-      return 'required|alpha_spaces';
-    },
+    
   },
 
   methods: {
@@ -47,8 +44,8 @@ export default {
     },
 
     // validazione del form
-    formatName() {
-      this.order.first_name = this.order.first_name
+    formatName(field) {
+      this.order[field] = this.order[field]
         .trim()
         .replace(/\s+/g, ' ') // Remove múltiplos espaços
         .toLowerCase() // Coloca tudo em minúsculas
@@ -59,8 +56,8 @@ export default {
     // Invia l'ordine al server Laravel
     submitOrder() {
       //validazione: Formato prima di enviare l'ordine
-      this.formatName();
-
+      this.formatName('first_name');
+      this.formatName('last_name');
 
       this.order.total = this.totalAmount;
 
