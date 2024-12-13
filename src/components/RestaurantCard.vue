@@ -27,11 +27,10 @@ export default {
         <div class="card-body">
           <h5 class="card-title">{{ restaurantObject.name }}</h5>
 
-            <div v-for="(type, index) in restaurantObject.types" :key="index">
-              <span class="badge rounded-pill text-bg-danger m-1">
-                <h6 class="card-text">{{ type.name }}</h6>
-              </span>
-            </div>
+          <div v-for="(type, index) in restaurantObject.types" :key="index">
+            <span class="badge rounded-pill text-bg-danger m-1">
+              <h6 class="card-text">{{ type.name }}</h6>
+            </span>
           </div>
         </div>
       </div>
