@@ -12,9 +12,7 @@ export default {
   <nav class="d-flex align-items-center justify-content-between p-3">
     <div class="d-flex align-items-center">
       <RouterLink to="/">
-        <img
-          src="../../public/Food-Delivery-Service-PNG-High-Quality-Image.png"
-          alt="logo"
+        <img src="../assets/imgs/gufetto.png" alt="logo"
       /></RouterLink>
 
       <RouterLink to="/"
