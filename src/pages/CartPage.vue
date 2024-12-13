@@ -25,7 +25,12 @@ export default {
     // Calcola il totale dell'ordine
     totalAmount() {
       return this.cart.reduce((total, item) => total + item.price * item.quantity, 0);
-    }
+    },
+
+    // Validazione con veeValidation
+    firstNameRules() {
+      return 'required|alpha_spaces';
+    },
   },
 
   methods: {
@@ -41,9 +46,24 @@ export default {
       localStorage.setItem('cart', JSON.stringify(this.cart));
     },
 
+    // validazione del form
+    formatName() {
+    this.order.first_name = this.order.first_name
+      .trim() 
+      .replace(/\s+/g, ' ') // Remove múltiplos espaços
+      .toLowerCase() // Coloca tudo em minúsculas
+      .replace(/^(.)/, (match) => match.toUpperCase()); // Primeira letra maiúscula
+    },
+
+
     // Invia l'ordine al server Laravel
     submitOrder() {
+      // Formato prima di enviare l'ordine
+      this.formatName();
+
+
       this.order.total = this.totalAmount;
+      
       const orderData = {
         first_name: this.order.first_name,
         last_name: this.order.last_name,
