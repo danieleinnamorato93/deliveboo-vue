@@ -56,31 +56,40 @@ export default {
         email: '',
       };
 
-      // Validar nome
+      // Validare nome
       if (!this.order.first_name.trim()) {
         this.errors.first_name = 'Il nome è obbligatorio.';
         valid = false;
       }
 
-      // Validar cognome
+      // Validare cognome
       if (!this.order.last_name.trim()) {
         this.errors.last_name = 'Il cognome è obbligatorio.';
         valid = false;
       }
 
-      // Validar numero di telefono 
-      const phoneRegex = /^[0-9]{10}$/;
-      if (!phoneRegex.test(this.order.phone_number)) {
+      // Validare numero di telefono 
+      const phoneRegex = /^[0-9]{10}$/; 
+      if (!phoneRegex.test(this.order.phone_number.trim())) {
         this.errors.phone_number = 'Il numero di telefono deve contenere 10 cifre.';
         valid = false;
       }
 
-      // Validar endereço
+      // Validare indirizzo
       if (!this.order.address.trim()) {
         this.errors.address = 'L\'indirizzo è obbligatorio.';
         valid = false;
       }
+
+      // Validar email
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+      if (!emailRegex.test(this.order.email)) {
+        this.errors.email = 'Indirizzo email non valido.';
+        valid = false;
+      }
+
       return valid;
+
     },
 
 
