@@ -13,7 +13,7 @@ export default {
         last_name: '',
         phone_number: '',
         address: '',
-        email: '',  // Aggiunto campo email
+        email: '',  
         paymentMethod: 'cash',
         total: 0,  // Aggiunta proprietà per il totale
 
@@ -26,7 +26,6 @@ export default {
     totalAmount() {
       return this.cart.reduce((total, item) => total + item.price * item.quantity, 0);
     },
-
   },
 
   methods: {
@@ -42,29 +41,41 @@ export default {
       localStorage.setItem('cart', JSON.stringify(this.cart));
     },
 
+    //-----------------FORMATAZIONE DEI DATI MANDATI PER L'UTENT NEL INPUT----------------------
     // Formatazione Input (nome, cognome)
     formatName(field) {
-      this.order[field] = this.order[field]
-        .trim()
-        .replace(/\s+/g, ' ') // Remove múltiplos espaços
-        .toLowerCase() // Coloca tudo em minúsculas
-        .replace(/^(.)/, (match) => match.toUpperCase()); // Primeira letra maiúscula
+      this.order[field] = this.order[field].trim().toLowerCase().slice(1).toLowerCase()
     },
-    
+
     //Formatazione Input (Phone number)
     formatPhoneNumber(field) {
       let phoneNumber = this.order[field];
-      // Remove qualquer caractere que não seja número
+      // Remove qualsiasi carattere che non sia un numero
       phoneNumber = phoneNumber.replace(/\D/g, '');
-      
-      // Se o número não começar com +39, adiciona o código do país
+
+      // se non inizia +39
       if (!phoneNumber.startsWith('39')) {
         phoneNumber = '39' + phoneNumber;
       }
 
-      // Atualiza o campo de telefone formatado
       this.order[field] = phoneNumber;
     },
+
+    // Formatazione del indirizzo
+    formatAddress() {
+      let formattedValue = this.order.address.trim();
+      formattedValue = formattedValue.charAt(0).toUpperCase() + formattedValue.slice(1).toLowerCase();
+
+      this.order.address = formattedValue;
+    },
+
+    // Email
+    formatEmail() {
+      this.order.email = this.order.email.trim();
+    },
+
+  //--------------------------------------FINE FORMATAZIONE-------------------------------------------
+
 
     // Invia l'ordine al server Laravel
     submitOrder() {
@@ -144,7 +155,7 @@ export default {
                 <!-- Nome -->
                 <div class="mb-3">
                   <label for="first_name" class="form-label">Nome</label>
-                  <Field name="first_name" v-slot="{ field, meta }" :rules="firstNameRules">
+                  <Field name="first_name" v-slot="{ field, meta }" :rules="['required', 'alpha']">
                     <input type="text" v-bind="field" v-model="order.first_name" id="first_name" name="first_name"
                       class="form-control" @input="formatName('first_name')" required />
                     <span v-if="meta.touched && meta.error" class="text-danger">{{ meta.error }}</span>
@@ -154,7 +165,7 @@ export default {
                 <!-- cognome -->
                 <div class="mb-3">
                   <label for="last_name" class="form-label">Cognome</label>
-                  <Field name="last_name" v-slot="{ field, meta }" :rules="lastNameRules">
+                  <Field name="last_name" v-slot="{ field, meta }" :rules="['required', 'alpha']">
                     <input type="text" v-bind="field" v-model="order.last_name" id="last_name" name="last_name"
                       class="form-control" @input="formatName('last_name')" required />
                     <span v-if="meta.touched && meta.error" class="text-danger">{{ meta.error }}</span>
@@ -164,23 +175,33 @@ export default {
                 <!-- Numero di telefono -->
                 <div class="mb-3">
                   <label for="phone_number" class="form-label">Numero di Telefono</label>
-                  <Field name="phone_number" v-slot="{ field, meta }" :rules="phoneNumberRules">
+                  <Field name="phone_number" v-slot="{ field, meta }" :rules="['required', 'regex:^\\+39\\d{9,10}$']">
                     <input type="text" v-bind="field" v-model="order.phone_number" id="phone_number" name="phone_number"
                       class="form-control" @input="formatPhoneNumber('phone_number')" required />
                     <span v-if="meta.touched && meta.error" class="text-danger">{{ meta.error }}</span>
                   </Field>
                 </div>
 
-
+                <!-- Indirizzo -->
                 <div class="mb-3">
                   <label for="address" class="form-label">Indirizzo</label>
-                  <input type="text" v-model="order.address" id="address" name="address" class="form-control"
-                    required />
+                  <Field name="address" v-slot="{ field, meta }" :rules="['required'," regex:^(?=.*\d).{3,}$"]">
+                    <input type="text" v-bind="field" v-model="order.address" id="address" name="address"
+                      class="form-control" @input="formatAddress" required />
+                    <span v-if="meta.touched && meta.error" class="text-danger">{{ meta.error }}</span>
+                  </Field>
                 </div>
+
+                <!-- Email -->
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
-                  <input type="email" v-model="order.email" id="email" name="email" class="form-control" required />
+                  <Field name="email" v-slot="{ field, meta }" :rules="['required', 'email']">
+                    <input type="email" v-bind="field" v-model="order.email" id="email" name="email"
+                      class="form-control" @input="formatEmail" required />
+                    <span v-if="meta.touched && meta.error" class="text-danger">{{ meta.error }}</span>
+                  </Field>
                 </div>
+
                 <input type="hidden" :value="totalAmount" />
                 <button type="submit" class="btn btn-primary mt-3">Vai al pagamento</button>
               </form>
