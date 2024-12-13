@@ -12,43 +12,29 @@ export default {
   <nav class="d-flex align-items-center justify-content-between p-3">
     <div class="d-flex align-items-center">
       <RouterLink to="/">
-        <img
-          src="../../public/Food-Delivery-Service-PNG-High-Quality-Image.png"
-          alt="logo"
-      /></RouterLink>
+        <img src="../../public/Food-Delivery-Service-PNG-High-Quality-Image.png" alt="logo" />
+      </RouterLink>
 
-      <RouterLink to="/"
-        ><h1 class="text-decoration-none d-none d-md-block ms-2">
+      <RouterLink to="/">
+        <h1 class="text-decoration-none d-none d-md-block ms-2">
           DeliveBoo
-        </h1></RouterLink
-      >
+        </h1>
+      </RouterLink>
     </div>
     <!-- Sezione Link -->
     <div class="nav-link">
       <RouterLink to="/">Home</RouterLink>
       <RouterLink to="/carrello">
-        <font-awesome-icon icon="cart-shopping" />
-        Carrello
+          <font-awesome-icon icon="cart-shopping" />
       </RouterLink>
-      <button
-        type="button"
-        data-bs-toggle="modal"
-        data-bs-target="#staticBackdrop"
-      >
+      <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
         Sei un Ristoratore?
       </button>
     </div>
 
     <!-- Modal -->
-    <div
-      class="modal fade"
-      id="staticBackdrop"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabindex="-1"
-      aria-labelledby="staticBackdropLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-body">
@@ -56,9 +42,7 @@ export default {
               <a href="http://127.0.0.1:8000/login">Accedi al tuo ristorante</a>
             </button>
             <button type="button" class="log-btn me-2">
-              <a href="http://127.0.0.1:8000/register"
-                >Registra il tuo ristorante</a
-              >
+              <a href="http://127.0.0.1:8000/register">Registra il tuo ristorante</a>
             </button>
             <button type="button" class="close-btn" data-bs-dismiss="modal">
               Chiudi
@@ -76,16 +60,20 @@ nav {
   min-height: 2.5rem;
   background-color: #4fae5a;
   box-shadow: 0 0 10px rgba(21, 94, 3, 0.7);
+
   a {
     text-decoration: none;
   }
+
   img {
     height: 5.5rem;
     transition: scale 150ms;
   }
+
   img:hover {
     scale: (1.2);
   }
+
   h1 {
     margin-left: 20px;
     display: inline;
