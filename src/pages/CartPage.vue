@@ -2,14 +2,8 @@
 import axios from 'axios';
 import { Field, ErrorMessage } from 'vee-validate';
 import { required, regex } from '@vee-validate/rules';
-import { defineRule } from 'vee-validate';
-
 
 export default {
-  components:{
-    Field,
-    ErrorMessage
-  },
 
   data() {
     return {
@@ -21,7 +15,8 @@ export default {
         address: '',
         email: '',  // Aggiunto campo email
         paymentMethod: 'cash',
-        total: 0  // Aggiunta proprietà per il totale
+        total: 0,  // Aggiunta proprietà per il totale
+
       }
     };
   },
@@ -31,20 +26,6 @@ export default {
     totalAmount() {
       return this.cart.reduce((total, item) => total + item.price * item.quantity, 0);
     },
-
-    // Validation vee
-    firstNameRules() {
-      return {
-        required: required,
-        regex: regex(/^[A-Za-zÀ-ÿ]+(?: [A-Za-zÀ-ÿ]+)*$/) // Nome com letras e espaços
-      };
-    },
-    lastNameRules() {
-      return {
-        required: required,
-        regex: regex(/^[A-Za-zÀ-ÿ]+(?: [A-Za-zÀ-ÿ]+)*$/) // Sobrenome com letras e espaços
-      };
-    }
 
   },
 
@@ -61,7 +42,7 @@ export default {
       localStorage.setItem('cart', JSON.stringify(this.cart));
     },
 
-    // validazione del form
+    // Formatazione Input (nome, cognome)
     formatName(field) {
       this.order[field] = this.order[field]
         .trim()
@@ -69,14 +50,24 @@ export default {
         .toLowerCase() // Coloca tudo em minúsculas
         .replace(/^(.)/, (match) => match.toUpperCase()); // Primeira letra maiúscula
     },
+    
+    //Formatazione Input (Phone number)
+    formatPhoneNumber(field) {
+      let phoneNumber = this.order[field];
+      // Remove qualquer caractere que não seja número
+      phoneNumber = phoneNumber.replace(/\D/g, '');
+      
+      // Se o número não começar com +39, adiciona o código do país
+      if (!phoneNumber.startsWith('39')) {
+        phoneNumber = '39' + phoneNumber;
+      }
 
+      // Atualiza o campo de telefone formatado
+      this.order[field] = phoneNumber;
+    },
 
     // Invia l'ordine al server Laravel
     submitOrder() {
-      //validazione: Formato prima di enviare l'ordine
-      this.formatName('first_name');
-      this.formatName('last_name');
-
       this.order.total = this.totalAmount;
 
       const orderData = {
@@ -154,10 +145,8 @@ export default {
                 <div class="mb-3">
                   <label for="first_name" class="form-label">Nome</label>
                   <Field name="first_name" v-slot="{ field, meta }" :rules="firstNameRules">
-                    <!-- Bind do Field para input -->
-                    <input v-bind="field" id="first_name" type="text" class="form-control" required
-                      @input="formatName('first_name')" />
-                    <!-- messagio di errore -->
+                    <input type="text" v-bind="field" v-model="order.first_name" id="first_name" name="first_name"
+                      class="form-control" @input="formatName('first_name')" required />
                     <span v-if="meta.touched && meta.error" class="text-danger">{{ meta.error }}</span>
                   </Field>
                 </div>
@@ -166,19 +155,23 @@ export default {
                 <div class="mb-3">
                   <label for="last_name" class="form-label">Cognome</label>
                   <Field name="last_name" v-slot="{ field, meta }" :rules="lastNameRules">
-                    <!-- Bind do Field per input -->
-                    <input v-bind="field" id="last_name" type="text" class="form-control" required
-                      @input="formatName('last_name')" />
-                    <!-- messagio de errore -->
+                    <input type="text" v-bind="field" v-model="order.last_name" id="last_name" name="last_name"
+                      class="form-control" @input="formatName('last_name')" required />
                     <span v-if="meta.touched && meta.error" class="text-danger">{{ meta.error }}</span>
                   </Field>
                 </div>
 
+                <!-- Numero di telefono -->
                 <div class="mb-3">
                   <label for="phone_number" class="form-label">Numero di Telefono</label>
-                  <input type="text" v-model="order.phone_number" id="phone_number" name="phone_number"
-                    class="form-control" required />
+                  <Field name="phone_number" v-slot="{ field, meta }" :rules="phoneNumberRules">
+                    <input type="text" v-bind="field" v-model="order.phone_number" id="phone_number" name="phone_number"
+                      class="form-control" @input="formatPhoneNumber('phone_number')" required />
+                    <span v-if="meta.touched && meta.error" class="text-danger">{{ meta.error }}</span>
+                  </Field>
                 </div>
+
+
                 <div class="mb-3">
                   <label for="address" class="form-label">Indirizzo</label>
                   <input type="text" v-model="order.address" id="address" name="address" class="form-control"
