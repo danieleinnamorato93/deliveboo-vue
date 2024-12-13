@@ -1,15 +1,26 @@
 <script>
+import { store } from "../js/store.js"; // Importa la store
+import { RouterLink } from "vue-router";
+
 export default {
+  name: "AppHeader",
   data() {
     return {
       isHidden: true,
-    };
+      store, // Aggiungi la store ai dati
+    }
   },
-};
+  computed: {
+    // Usa direttamente il getter cartCount dalla store
+    cartCount() {
+      return this.store.cartCount; // Usa il getter definito nella store
+    },
+  },
+}
 </script>
-
 <template>
   <nav class="d-flex align-items-center justify-content-between p-3">
+    <!-- Logo -->
     <div class="d-flex align-items-center">
       <RouterLink to="/">
         <img src="../../public/Food-Delivery-Service-PNG-High-Quality-Image.png" alt="logo" />
@@ -21,18 +32,23 @@ export default {
         </h1>
       </RouterLink>
     </div>
+
     <!-- Sezione Link -->
     <div class="nav-link">
       <RouterLink to="/">Home</RouterLink>
+
       <RouterLink to="/carrello">
-          <font-awesome-icon icon="cart-shopping" />
+        <font-awesome-icon icon="cart-shopping" />
+        <!-- conteggio degli articoli -->
+        <span v-if="cartCount > 0" class="badge bg-danger">{{ cartCount }}</span>
       </RouterLink>
+
       <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
         Sei un Ristoratore?
       </button>
     </div>
 
-    <!-- Modal -->
+    <!-- Modale -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
       aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog">
