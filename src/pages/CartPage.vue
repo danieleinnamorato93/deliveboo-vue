@@ -67,7 +67,19 @@ export default {
         this.errors.last_name = 'Il cognome è obbligatorio.';
         valid = false;
       }
-      
+
+      // Validar numero di telefono 
+      const phoneRegex = /^[0-9]{10}$/;
+      if (!phoneRegex.test(this.order.phone_number)) {
+        this.errors.phone_number = 'Il numero di telefono deve contenere 10 cifre.';
+        valid = false;
+      }
+
+      // Validar endereço
+      if (!this.order.address.trim()) {
+        this.errors.address = 'L\'indirizzo è obbligatorio.';
+        valid = false;
+      }
       return valid;
     },
 
