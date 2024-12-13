@@ -4,19 +4,30 @@ import { Field, ErrorMessage, Form } from 'vee-validate';
 import * as yup from 'yup';
 
 const schema = yup.object({
-  first_name, last_name: yup.string().trim().min(3, 'Ilnome deve avere almeno 3 caratteri')
+  first_name, last_name: yup.string().trim()
+    .min(3, 'Ilnome deve avere almeno 3 caratteri')
     .tranform((value) => {
       return value.chart(0).toUpperCase() + value.slice(1).toLowerCase();
     })
     .required('Questo campo è obbligatorio'),
 
-    phone_number: yup.string().trim().required('Questo campo è obbligatorio').transform(value => value.replace(/\s+/g, ''))
+  phone_number: yup.string().trim()
+    .required('Questo campo è obbligatorio')
+    .transform(value => value.replace(/\s+/g, ''))
     .matches(
       /^[0-9]{10}$/, // Espressione regolare per garantire che siano presenti solo 10 cifre numeriche
       'Il numero di telefono deve essere composto solo da cifre (10 cifre)')
     .matches(
       /^3\d{9,10}$/, // Numero di cellulare italiano che inizia con "3" ed è lungo 9 o 10 cifre
-      'Il numero di telefono deve iniziare con "3" e deve avere 9 o 10 cifre, esempio: 3112224455'
+      'Il numero di telefono deve iniziare con "3" e deve avere 9 o 10 cifre, es. 3112224455'
+    ),
+
+  adress: yup.string().trim()
+    .required('Questo campo è obbligatorio')
+    .min(3, 'L\'indirizzo deve contenere almeno 3 caratteri')
+    .matches(
+      /\d/, // Espressione regolare per garantire che l'indirizzo contenga almeno un numero
+      'L\'indirizzo deve contenere almeno un numero'
     ),
 
   email: yup.string().email().required(),
@@ -83,7 +94,7 @@ export default {
 
     //Phone 
     validatePhone(value) {
-      const phoneRegex = /^3\d{8,9}$/;
+      const phoneRegex = /^3\d{9,10}$/;
 
       if (!value) {
         return 'Questo campo è obbligatorio';
@@ -93,6 +104,18 @@ export default {
         return 'Numero di cellulare non valido. Usa il formato corretto (es. 3201234567).';
       }
 
+      return true;
+    },
+
+    //Adress
+    validateAdress(value) {
+      const addressRegex = /\d/; //deve avere al meno 1 numero
+      if (!value) {
+        return 'Questo campo è obbligatorio';
+      }
+      if (!addressRegex.test(value)) {
+        return 'L\'indirizzo deve contenere almeno un numero'; // Mensagem de erro se não houver números no endereço
+      }
       return true;
     },
 
@@ -106,7 +129,7 @@ export default {
       // if the field is not a valid email
       const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
       if (!regex.test(value)) {
-        return 'Questo campo deve essere un indirizzo email valido';
+        return 'Questo campo deve essere un indirizzo email valido, com @ e "."';
       }
       // All is good
       return true;
@@ -116,8 +139,6 @@ export default {
 
   // Invia l'ordine al server Laravel
   submitOrder() {
-    // Submit values to API...
-    alert(JSON.stringify(values, null, 2))
 
     this.order.total = this.totalAmount;
 
@@ -207,18 +228,18 @@ export default {
                   <ErrorMessage name="last_name" class="text-danger" />
                 </div>
 
-                <!-- Telefone -->
+                <!-- Contatto -->
                 <div class="mb-3">
-                  <label for="phone_number" class="form-label">Telefone</label>
+                  <label for="phone_number" class="form-label">Contatto</label>
                   <Field name="phone_number" id="phone_number" type="text" class="form-control"
                     :rules="validatePhone" />
                   <ErrorMessage name="phone_number" class="text-danger" />
                 </div>
 
-                <!-- Endereço -->
+                <!-- Indirizzo -->
                 <div class="mb-3">
-                  <label for="address" class="form-label">Endereço</label>
-                  <Field name="address" id="address" type="text" class="form-control" />
+                  <label for="address" class="form-label">Indirizzo</label>
+                  <Field name="address" id="address" type="text" class="form-control" :rules="validateAdress" />
                   <ErrorMessage name="address" class="text-danger" />
                 </div>
 
