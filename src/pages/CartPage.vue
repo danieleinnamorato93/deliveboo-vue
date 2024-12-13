@@ -1,11 +1,16 @@
 <script>
 import axios from 'axios';
-import { defineComponent } from 'vue';
-import { Fiel, Form, defineRule, validateField } from 'vee-validate';
-import * as yup from 'yup';
+import { Field, ErrorMessage } from 'vee-validate';
+import { required, regex } from '@vee-validate/rules';
+import { defineRule } from 'vee-validate';
 
 
 export default {
+  components:{
+    Field,
+    ErrorMessage
+  },
+
   data() {
     return {
       cart: JSON.parse(localStorage.getItem('cart')) || [],  // Carica il carrello dal localStorage
@@ -27,7 +32,20 @@ export default {
       return this.cart.reduce((total, item) => total + item.price * item.quantity, 0);
     },
 
-    
+    // Validation vee
+    firstNameRules() {
+      return {
+        required: required,
+        regex: regex(/^[A-Za-zÀ-ÿ]+(?: [A-Za-zÀ-ÿ]+)*$/) // Nome com letras e espaços
+      };
+    },
+    lastNameRules() {
+      return {
+        required: required,
+        regex: regex(/^[A-Za-zÀ-ÿ]+(?: [A-Za-zÀ-ÿ]+)*$/) // Sobrenome com letras e espaços
+      };
+    }
+
   },
 
   methods: {
@@ -131,20 +149,31 @@ export default {
             </div>
             <div class="col-12">
               <form @submit.prevent="submitOrder" class="mb-4" method="POST" autocomplete="off">
+
+                <!-- Nome -->
                 <div class="mb-3">
                   <label for="first_name" class="form-label">Nome</label>
-                  <!--! validation name -->
                   <Field name="first_name" v-slot="{ field, meta }" :rules="firstNameRules">
-                    <input type="text" v-model="order.first_name" id="first_name" name="first_name" class="form-control"
-                      @input="formatName('first_name')" required />
+                    <!-- Bind do Field para input -->
+                    <input v-bind="field" id="first_name" type="text" class="form-control" required
+                      @input="formatName('first_name')" />
+                    <!-- messagio di errore -->
                     <span v-if="meta.touched && meta.error" class="text-danger">{{ meta.error }}</span>
                   </Field>
                 </div>
+
+                <!-- cognome -->
                 <div class="mb-3">
                   <label for="last_name" class="form-label">Cognome</label>
-                  <input type="text" v-model="order.last_name" id="last_name" name="last_name" class="form-control"
-                    @input="formatName('last_name')" required />
+                  <Field name="last_name" v-slot="{ field, meta }" :rules="lastNameRules">
+                    <!-- Bind do Field per input -->
+                    <input v-bind="field" id="last_name" type="text" class="form-control" required
+                      @input="formatName('last_name')" />
+                    <!-- messagio de errore -->
+                    <span v-if="meta.touched && meta.error" class="text-danger">{{ meta.error }}</span>
+                  </Field>
                 </div>
+
                 <div class="mb-3">
                   <label for="phone_number" class="form-label">Numero di Telefono</label>
                   <input type="text" v-model="order.phone_number" id="phone_number" name="phone_number"
