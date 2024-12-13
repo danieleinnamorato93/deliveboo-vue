@@ -168,7 +168,7 @@ h5 {
 
       img.adaptive-cover {
         width: 100%;
-        height: 150px;
+        height: 170px;
         object-fit: cover;
         margin-bottom: 10px;
         border-radius: 15px;
