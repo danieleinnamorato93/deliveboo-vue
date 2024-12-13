@@ -4,12 +4,19 @@ import { Field, ErrorMessage, Form } from 'vee-validate';
 import * as yup from 'yup';
 
 const schema = yup.object({
-  first_name, last_name: yup.string().trim()
+  first_name: yup.string().trim()
     .min(3, 'Ilnome deve avere almeno 3 caratteri')
-    .tranform((value) => {
-      return value.chart(0).toUpperCase() + value.slice(1).toLowerCase();
+    .transform((value) => {
+      return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
     })
     .required('Questo campo è obbligatorio'),
+
+    last_name: yup.string().trim()
+    .min(3, 'O sobrenome deve ter pelo menos 3 caracteres')
+    .transform((value) => {
+      return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+    })
+    .required('Este campo é obrigatório'),
 
   phone_number: yup.string().trim()
     .required('Questo campo è obbligatorio')
@@ -94,8 +101,7 @@ export default {
 
     //Phone 
     validatePhone(value) {
-      const phoneRegex = /^3\d{9,10}$/;
-
+      const phoneRegex = /^3\d{9,10}$/; //iniziare com il numero 3, avere entro 9,10 carattere
       if (!value) {
         return 'Questo campo è obbligatorio';
       }
@@ -108,8 +114,8 @@ export default {
     },
 
     //Adress
-    validateAdress(value) {
-      const addressRegex = /\d/; //deve avere al meno 1 numero
+    validateAddress(value) {
+      const addressRegex = /\d/; //avere al meno 1 numero
       if (!value) {
         return 'Questo campo è obbligatorio';
       }
@@ -122,12 +128,12 @@ export default {
 
     //Email
     validateEmail(value) {
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       // if the field is empty
       if (!value) {
         return 'Questo campo è obbligatorio';
       }
       // if the field is not a valid email
-      const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
       if (!regex.test(value)) {
         return 'Questo campo deve essere un indirizzo email valido, com @ e "."';
       }
