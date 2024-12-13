@@ -13,7 +13,7 @@ export default {
         paymentMethod: 'cash',
         total: 0  // Aggiunta proprietà per il totale
       },
-      errors:{
+      errors: {
         first_name: '',
         last_name: '',
         phone_number: '',
@@ -44,7 +44,7 @@ export default {
     },
 
     //------------VALIDATE---------------
-    validateForm(){
+    validateForm() {
       let valid = true;
 
       //Pulisci caso abbia errore da prima
@@ -60,18 +60,27 @@ export default {
       if (!this.order.first_name.trim()) {
         this.errors.first_name = 'Il nome è obbligatorio.';
         valid = false;
+      } else if (this.order.first_name.length < 3 || this.order.first_name.length > 20) {
+        this.errors.first_name = 'Il nome deve avere tra 3 e 20 caratteri.';
+        valid = false;
       }
 
       // Validare cognome
       if (!this.order.last_name.trim()) {
         this.errors.last_name = 'Il cognome è obbligatorio.';
         valid = false;
+      } else if (this.order.last_name.length < 3 || this.order.last_name.length > 30) {
+        this.errors.last_name = 'Il cognome deve avere tra 3 e 30 caratteri.';
+        valid = false;
       }
 
       // Validare numero di telefono 
-      const phoneRegex = /^[0-9]{10}$/; 
-      if (!phoneRegex.test(this.order.phone_number.trim())) {
-        this.errors.phone_number = 'Il numero di telefono deve contenere 10 cifre.';
+      const phoneRegex = /^[0-9]{10}$/;
+      if (!this.order.phone_number.trim()) {
+        this.errors.phone_number = 'Il numero di telefono è obbligatorio.';
+        valid = false;
+      } else if (!phoneRegex.test(this.order.phone_number.trim())) {
+        this.errors.phone_number = 'Il numero di telefono deve contenere 10 cifre numeriche.';
         valid = false;
       }
 
@@ -79,11 +88,16 @@ export default {
       if (!this.order.address.trim()) {
         this.errors.address = 'L\'indirizzo è obbligatorio.';
         valid = false;
+      } else if (this.order.address.length < 3 || this.order.address.length > 30) {
+        this.errors.address = 'L\'indirizzo deve avere tra 3 e 30 caratteri.';
+        valid = false;
       }
-
       // Validar email
       const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-      if (!emailRegex.test(this.order.email)) {
+      if (!this.order.email.trim()) {
+        this.errors.email = 'L\'email è obbligatoria.';
+        valid = false;
+      } else if (!emailRegex.test(this.order.email)) {
         this.errors.email = 'Indirizzo email non valido.';
         valid = false;
       }
@@ -96,36 +110,39 @@ export default {
     // Invia l'ordine al server Laravel
     submitOrder() {
       //validare prima del invio del'ordine
-      if (this.validateForm()){
+      if (this.validateForm()) {
         this.order.total = this.totalAmount;
-      const orderData = {
-        first_name: this.order.first_name,
-        last_name: this.order.last_name,
-        email: this.order.email,
-        phone_number: this.order.phone_number,
-        address: this.order.address,
-        // payment_method: this.order.paymentMethod
-        total: this.order.total,
-        items: this.cart.map(item => ({
-          plate_id: item.id,
-          quantity: item.quantity
-        }))
-      };
-      // Effettua la richiesta al backend
-      axios.post('http://127.0.0.1:8000/api/orders', orderData)
-        .then(() => {
-          alert('Ordine completato con successo!');
-          localStorage.removeItem('cart'); // Svuota il carrello
-          this.cart = [];
-          this.$router.push('/'); // Reindirizza alla homepage
-        })
-        .catch(error => {
-          setTimeout(() => {
-          console.error('Erro durante l\'invio dell\'ordine:', error);
-          alert('Errore durante l\'invio. Riprova.');
-        }, 1000); 
-        });
-    
+        const orderData = {
+          first_name: this.order.first_name,
+          last_name: this.order.last_name,
+          email: this.order.email,
+          phone_number: this.order.phone_number,
+          address: this.order.address,
+          // payment_method: this.order.paymentMethod
+          total: this.order.total,
+          items: this.cart.map(item => ({
+            plate_id: item.id,
+            quantity: item.quantity
+          }))
+        };
+
+       
+
+        // Effettua la richiesta al backend
+        axios.post('http://127.0.0.1:8000/api/orders', orderData)
+          .then(() => {
+            alert('Ordine completato con successo!');
+            localStorage.removeItem('cart'); // Svuota il carrello
+            this.cart = [];
+            this.$router.push('/'); // Reindirizza alla homepage
+          })
+          .catch(error => {
+            
+              console.error('Erro durante l\'invio dell\'ordine:', error);
+              alert('Errore durante l\'invio. Riprova.');
+            
+          });
+
       }
     }
   }
@@ -171,13 +188,13 @@ export default {
               <h3 class="my-4">Dati per l'ordine</h3>
             </div>
             <div class="col-12">
-              <form @submit.prevent="submitOrder" class="mb-4" method="POST" autocomplete="off">
+              <form @submit.prevent="submitOrder" class="mb-4" method="POST" >
                 <div class="mb-3">
                   <label for="first_name" class="form-label">Nome</label>
                   <input type="text" v-model="order.first_name" id="first_name" name="first_name" class="form-control"
                     required />
                   <span v-if="errors.first_name" class="text-danger">{{ errors.first_name }}</span>
-                  
+
                 </div>
                 <div class="mb-3">
                   <label for="last_name" class="form-label">Cognome</label>
@@ -195,7 +212,7 @@ export default {
                   <label for="address" class="form-label">Indirizzo</label>
                   <input type="text" v-model="order.address" id="address" name="address" class="form-control"
                     required />
-                    <span v-if="errors.address" class="text-danger">{{ errors.address }}</span>
+                  <span v-if="errors.address" class="text-danger">{{ errors.address }}</span>
                 </div>
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
@@ -216,6 +233,7 @@ export default {
 .text-danger {
   color: red;
 }
+
 .container {
   max-width: 800px;
   margin: 0 auto;
