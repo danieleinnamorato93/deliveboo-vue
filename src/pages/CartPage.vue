@@ -1,8 +1,9 @@
 <script>
 import axios from 'axios';
 import { defineComponent } from 'vue';
-import {Fiel, Form, defineRule, validateField} from 'vee-validate';
+import { Fiel, Form, defineRule, validateField } from 'vee-validate';
 import * as yup from 'yup';
+
 
 export default {
   data() {
@@ -115,8 +116,11 @@ export default {
               <form @submit.prevent="submitOrder" class="mb-4" method="POST" autocomplete="off">
                 <div class="mb-3">
                   <label for="first_name" class="form-label">Nome</label>
-                  <input type="text" v-model="order.first_name" id="first_name" name="first_name" class="form-control"
-                    required />
+                  <!--! validation name -->
+                  <Field name="first_name" v-slot="{ field, meta }" :rules="firstNameRules">
+                    <input v-bind="field" type="text" id="first_name" class="form-control" v-model="order.first_name" @input="formatName" />
+                    <span v-if="meta.touched && meta.error" class="text-danger">{{ meta.error }}</span>
+                  </Field>
                 </div>
                 <div class="mb-3">
                   <label for="last_name" class="form-label">Cognome</label>
