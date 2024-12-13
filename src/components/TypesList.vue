@@ -127,7 +127,7 @@ h3 {
   margin-top: 20px;
 }
 h6 {
-  color: #f24c00;
+  color: #333333;
 }
 h5 {
   color: darkslategray;

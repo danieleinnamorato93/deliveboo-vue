@@ -7,29 +7,28 @@ export default {
 </script>
 
 <template>
-  <div class="claim-container text-center">
-    <h1 class="claim">Dalla cucina alla tua tavola, un viaggio di gusto</h1>
-  </div>
-  <h3 class="text-center call">
-    Hai fame? Scegli il ristorante perfetto per te e ordina subito!
-  </h3>
+  <template>
+    <div
+      class="claim-container text-center d-flex justify-content-center align-items-center"
+    >
+      <h1 class="claim display-5 display-md-4 display-lg-3 text-wrap">
+        Dalla cucina alla tua tavola, un viaggio di gusto
+      </h1>
+    </div>
+    <h3 class="call mt-3 fw-bold text-wrap text-center fs-5 fs-md-4 fs-lg-3">
+      Hai fame? Scegli il ristorante perfetto per te e ordina subito!
+    </h3>
+  </template>
 </template>
 
 <style lang="scss" scoped>
 .claim-container {
-  height: 110px;
+  height: auto;
   background-color: #fae7d3;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .claim {
-    font-size: 3.3rem;
-    color: #333333;
-  }
+  padding: 2rem;
 }
+
 .call {
-  margin-top: 20px;
-  font-size: 2.1rem;
-  font-weight: bolder;
+  margin-top: 1rem;
 }
 </style>
