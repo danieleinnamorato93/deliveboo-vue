@@ -18,11 +18,9 @@ export default {
 </script>
 
 <template>
-  <div class="card mb-3" style="max-width: 540px">
+  
+  <div class="card mb-3" ">
     <div class="row g-0">
-      <div class="col-md-4">
-        <img src="../../public/1600w-9Gfim1S8fHg.webp" class="img-fluid rounded-start" alt="..." />
-      </div>
       <div class="col-md-8">
         <div class="card-body">
           <h5 class="card-title">{{ restaurantObject.name }}</h5>
