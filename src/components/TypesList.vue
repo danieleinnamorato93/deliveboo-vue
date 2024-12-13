@@ -1,8 +1,5 @@
 <template>
   <section id="carousel-types" class="container-fluid mt-5">
-    <h3 class="text-center">
-      Hai fame? Scegli il ristorante perfetto per te e ordina subito!
-    </h3>
     <div class="row justify-content-center">
       <div class="col-12 col-lg-10">
         <div class="thumbnails-wrapper d-flex align-items-center">

@@ -49,10 +49,10 @@ export default {
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-body">
-            <button type="button" class="log-btn me-2">
+            <button type="button" class="log-btn m-3">
               <a href="http://127.0.0.1:8000/login">Accedi al tuo ristorante</a>
             </button>
-            <button type="button" class="log-btn me-2">
+            <button type="button" class="log-btn m-1">
               <a href="http://127.0.0.1:8000/register"
                 >Registra il tuo ristorante</a
               >
@@ -120,6 +120,8 @@ button {
 
 .close-btn {
   background-color: #f24c00;
+  margin-left: 15px;
+  text-align: center;
 }
 
 a {
