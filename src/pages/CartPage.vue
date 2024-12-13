@@ -1,5 +1,9 @@
 <script>
 import axios from 'axios';
+import { defineComponent } from 'vue';
+import {Fiel, Form, defineRule, validateField} from 'vee-validate';
+import * as yup from 'yup';
+
 export default {
   data() {
     return {
