@@ -23,7 +23,7 @@ export default {
 
 <style lang="scss" scoped>
 .claim-container {
-  height: auto;
+  height: 100px;
   background-color: #fae7d3;
   padding: 2rem;
 }
