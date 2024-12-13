@@ -95,7 +95,9 @@ export default {
 
     // Invia l'ordine al server Laravel
     submitOrder() {
-      this.order.total = this.totalAmount;
+      //validare prima del invio del'ordine
+      if (this.validateForm()){
+        this.order.total = this.totalAmount;
       const orderData = {
         first_name: this.order.first_name,
         last_name: this.order.last_name,
@@ -118,9 +120,13 @@ export default {
           this.$router.push('/'); // Reindirizza alla homepage
         })
         .catch(error => {
-          console.error('Errore durante l\'invio dell\'ordine:', error);
+          setTimeout(() => {
+          console.error('Erro durante l\'invio dell\'ordine:', error);
           alert('Errore durante l\'invio. Riprova.');
+        }, 1000); 
         });
+    
+      }
     }
   }
 }
