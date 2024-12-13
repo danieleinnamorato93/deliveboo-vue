@@ -132,12 +132,11 @@ export default {
         axios.post('http://127.0.0.1:8000/api/orders', orderData)
           .then(() => {
             alert('Ordine completato con successo!');
-            localStorage.removeItem('cart'); // Svuota il carrello
-            this.cart = [];
-            this.$router.push('/'); // Reindirizza alla homepage
+            // localStorage.removeItem('cart'); // Svuota il carrello
+            // this.cart = [];
+            //this.$router.push('/'); // Reindirizza alla homepage
           })
           .catch(error => {
-            
               console.error('Erro durante l\'invio dell\'ordine:', error);
               alert('Errore durante l\'invio. Riprova.');
             
