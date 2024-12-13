@@ -1,9 +1,14 @@
 <script>
 import axios from 'axios';
-import { Field, ErrorMessage } from 'vee-validate';
-import { required, regex } from '@vee-validate/rules';
+import { Field, ErrorMessage, Form} from 'vee-validate';
+import * as yup from 'yup';
 
 export default {
+  components:{
+    Form,
+    Field,
+    ErrorMessage
+  },
 
   data() {
     return {
@@ -13,11 +18,11 @@ export default {
         last_name: '',
         phone_number: '',
         address: '',
-        email: '',  
+        email: '',
         paymentMethod: 'cash',
-        total: 0,  // Aggiunta proprietà per il totale
-
-      }
+        total: 0,  // Aggiunta proprietà per il total
+      },
+      errors:{}, //Per i messagi di errore della validazione
     };
   },
 
@@ -74,8 +79,9 @@ export default {
       this.order.email = this.order.email.trim();
     },
 
-  //--------------------------------------FINE FORMATAZIONE-------------------------------------------
+    //--------------------------------------VALIDAZIONE-------------------------------------------
 
+    
 
     // Invia l'ordine al server Laravel
     submitOrder() {
@@ -150,61 +156,49 @@ export default {
               <h3 class="my-4">Dati per l'ordine</h3>
             </div>
             <div class="col-12">
-              <form @submit.prevent="submitOrder" class="mb-4" method="POST" autocomplete="off">
+              
+                <form @submit="handleSubmit($event, submitOrder)">
 
-                <!-- Nome -->
-                <div class="mb-3">
-                  <label for="first_name" class="form-label">Nome</label>
-                  <Field name="first_name" v-slot="{ field, meta }" :rules="['required', 'alpha']">
-                    <input type="text" v-bind="field" v-model="order.first_name" id="first_name" name="first_name"
-                      class="form-control" @input="formatName('first_name')" required />
-                    <span v-if="meta.touched && meta.error" class="text-danger">{{ meta.error }}</span>
-                  </Field>
-                </div>
+                  <!-- Nome -->
+                  <div class="mb-3">
+                    <label for="first_name" class="form-label">Nome</label>
+                    <Field name="first_name" id="first_name" type="text" class="form-control" />
+                    <ErrorMessage name="first_name" class="text-danger" />
+                  </div>
 
-                <!-- cognome -->
-                <div class="mb-3">
-                  <label for="last_name" class="form-label">Cognome</label>
-                  <Field name="last_name" v-slot="{ field, meta }" :rules="['required', 'alpha']">
-                    <input type="text" v-bind="field" v-model="order.last_name" id="last_name" name="last_name"
-                      class="form-control" @input="formatName('last_name')" required />
-                    <span v-if="meta.touched && meta.error" class="text-danger">{{ meta.error }}</span>
-                  </Field>
-                </div>
+                  <!-- Cognome -->
+                  <div class="mb-3">
+                    <label for="last_name" class="form-label">Cognome</label>
+                    <Field name="last_name" id="last_name" type="text" class="form-control" />
+                    <ErrorMessage name="last_name" class="text-danger" />
+                  </div>
 
-                <!-- Numero di telefono -->
-                <div class="mb-3">
-                  <label for="phone_number" class="form-label">Numero di Telefono</label>
-                  <Field name="phone_number" v-slot="{ field, meta }" :rules="['required', 'regex:^\\+39\\d{9,10}$']">
-                    <input type="text" v-bind="field" v-model="order.phone_number" id="phone_number" name="phone_number"
-                      class="form-control" @input="formatPhoneNumber('phone_number')" required />
-                    <span v-if="meta.touched && meta.error" class="text-danger">{{ meta.error }}</span>
-                  </Field>
-                </div>
+                  <!-- Telefone -->
+                  <div class="mb-3">
+                    <label for="phone_number" class="form-label">Telefone</label>
+                    <Field name="phone_number" id="phone_number" type="text" class="form-control" />
+                    <ErrorMessage name="phone_number" class="text-danger" />
+                  </div>
 
-                <!-- Indirizzo -->
-                <div class="mb-3">
-                  <label for="address" class="form-label">Indirizzo</label>
-                  <Field name="address" v-slot="{ field, meta }" :rules="['required'," regex:^(?=.*\d).{3,}$"]">
-                    <input type="text" v-bind="field" v-model="order.address" id="address" name="address"
-                      class="form-control" @input="formatAddress" required />
-                    <span v-if="meta.touched && meta.error" class="text-danger">{{ meta.error }}</span>
-                  </Field>
-                </div>
+                  <!-- Endereço -->
+                  <div class="mb-3">
+                    <label for="address" class="form-label">Endereço</label>
+                    <Field name="address" id="address" type="text" class="form-control" />
+                    <ErrorMessage name="address" class="text-danger" />
+                  </div>
 
-                <!-- Email -->
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email</label>
-                  <Field name="email" v-slot="{ field, meta }" :rules="['required', 'email']">
-                    <input type="email" v-bind="field" v-model="order.email" id="email" name="email"
-                      class="form-control" @input="formatEmail" required />
-                    <span v-if="meta.touched && meta.error" class="text-danger">{{ meta.error }}</span>
-                  </Field>
-                </div>
+                  <!-- Email -->
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <Field name="email" id="email" type="email" class="form-control" :rules="validateEmail"/>
+                    <ErrorMessage name="email" class="text-danger" />
+                  </div>
 
-                <input type="hidden" :value="totalAmount" />
-                <button type="submit" class="btn btn-primary mt-3">Vai al pagamento</button>
-              </form>
+                  <input type="hidden" :value="totalAmount" />
+                  <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+            
+
             </div>
           </div>
         </div>
