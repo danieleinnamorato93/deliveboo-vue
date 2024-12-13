@@ -113,25 +113,31 @@ export default {
                   <label for="first_name" class="form-label">Nome</label>
                   <input type="text" v-model="order.first_name" id="first_name" name="first_name" class="form-control"
                     required />
+                  <span v-if="errors.first_name" class="text-danger">{{ errors.first_name }}</span>
+                  
                 </div>
                 <div class="mb-3">
                   <label for="last_name" class="form-label">Cognome</label>
                   <input type="text" v-model="order.last_name" id="last_name" name="last_name" class="form-control"
                     required />
+                  <span v-if="errors.last_name" class="text-danger">{{ errors.last_name }}</span>
                 </div>
                 <div class="mb-3">
                   <label for="phone_number" class="form-label">Numero di Telefono</label>
                   <input type="text" v-model="order.phone_number" id="phone_number" name="phone_number"
                     class="form-control" required />
+                  <span v-if="errors.phone_number" class="text-danger">{{ errors.phone_number }}</span>
                 </div>
                 <div class="mb-3">
                   <label for="address" class="form-label">Indirizzo</label>
                   <input type="text" v-model="order.address" id="address" name="address" class="form-control"
                     required />
+                    <span v-if="errors.address" class="text-danger">{{ errors.address }}</span>
                 </div>
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
                   <input type="email" v-model="order.email" id="email" name="email" class="form-control" required />
+                  <span v-if="errors.email" class="text-danger">{{ errors.email }}</span>
                 </div>
                 <input type="hidden" :value="totalAmount" />
                 <button type="submit" class="btn btn-primary mt-3">Vai al pagamento</button>
@@ -144,6 +150,9 @@ export default {
   </div>
 </template>
 <style scoped lang="scss">
+.text-danger {
+  color: red;
+}
 .container {
   max-width: 800px;
   margin: 0 auto;
