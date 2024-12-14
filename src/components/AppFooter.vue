@@ -6,7 +6,7 @@
         <ul class="list-unstyled">
           <li><a href="#" class="text-white text-decoration-none">Home</a></li>
           <li>
-            <RouterLink to="/carrello">
+            <RouterLink class="text-decoration-none" to="/carrello">
               <a href="" class="text-white text-decoration-none">Carrello</a>
             </RouterLink>
           </li>
@@ -30,7 +30,11 @@
       </div>
 
       <div class="col-md-3">
-        <h5 class="fw-bold">Info Legali</h5>
+        <h5 class="fw-bold">Lavora con Noi</h5>
+        <a href="#" class="text-white text-decoration-none"
+          >Scopri le opportunità</a
+        >
+        <h5 class="fw-bold mt-4">Info Legali</h5>
         <ul class="list-unstyled">
           <li>
             <a href="#" class="text-white text-decoration-none"
@@ -43,10 +47,6 @@
             >
           </li>
         </ul>
-        <h5 class="fw-bold mt-3">Lavora con Noi</h5>
-        <a href="#" class="text-white text-decoration-none"
-          >Scopri le opportunità</a
-        >
       </div>
     </div>
   </div>
