@@ -40,7 +40,7 @@ export default {
           console.error("Errore nel caricamento dei ristoranti:", error);
         });
     },
-
+// rivedi dove usarla in questa pagina
     getFilteredRestaurants() {
 
       axios
@@ -95,7 +95,8 @@ export default {
 
   computed: {
     displayedRestaurants() {
-      if (store.clickedTypes.length > 0) {
+      if (store.clickedTypes.length > 0 && store.clickedTypes) {
+        this.getFilteredRestaurants();
         return store.filteredRestaurants;
       }
       return store.restaurantsList;
