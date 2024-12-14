@@ -1,22 +1,39 @@
 <template>
   <section id="carousel-types" class="container-fluid mt-5">
     <!-- Titolo della sezione -->
-    <h3 class=" mt-3 fw-bold text-wrap text-center fs-5 fs-md-4 fs-lg-3">Di che cosa hai voglia? </h3>
+    <h3 class="mt-3 fw-bold text-wrap text-center fs-5 fs-md-4 fs-lg-3">
+      Di che cosa hai voglia?
+    </h3>
 
     <div class="row justify-content-center">
       <div class="col-12 col-lg-10">
         <div class="thumbnails-wrapper d-flex align-items-center">
           <!-- Pulsante precedente -->
-          <button class="btn btn-outline-dark me-4 fs-5 d-md-block" @click="prev" aria-label="Previous">
+          <button
+            class="btn btn-outline-dark me-4 fs-5 d-md-block"
+            @click="prev"
+            aria-label="Previous"
+          >
             &lsaquo;
           </button>
 
           <!-- Miniature -->
           <div class="thumbnails row w-100 g-3">
-            <div v-for="type in visibleThumbnails" :key="type.id" class="col-8 col-md-4 col-lg-2">
-              <article class="thumbnail d-flex flex-column align-items-center text-center"
-                :class="{ active: store.clickedTypes.includes(type.id) }" @click="getTypeId(type.id)">
-                <img :src="getImage(type.logo)" :alt="type.name" class="adaptive-cover img-fluid rounded" />
+            <div
+              v-for="type in visibleThumbnails"
+              :key="type.id"
+              class="col-8 col-md-4 col-lg-2"
+            >
+              <article
+                class="thumbnail d-flex flex-column align-items-center text-center"
+                :class="{ active: store.clickedTypes.includes(type.id) }"
+                @click="getTypeId(type.id)"
+              >
+                <img
+                  :src="getImage(type.logo)"
+                  :alt="type.name"
+                  class="adaptive-cover img-fluid rounded"
+                />
                 <div class="mt-2">
                   <h6 class="fw-bold">{{ type.name }}</h6>
                 </div>
@@ -25,7 +42,11 @@
           </div>
 
           <!-- Pulsante successivo -->
-          <button class="btn btn-outline-dark ms-4 fs-5 d-md-block" @click="next" aria-label="Next">
+          <button
+            class="btn btn-outline-dark ms-4 fs-5 d-md-block"
+            @click="next"
+            aria-label="Next"
+          >
             &rsaquo;
           </button>
         </div>
