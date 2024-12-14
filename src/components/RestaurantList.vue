@@ -117,7 +117,7 @@ export default {
     </section>
     <section>
       <nav>
-        <ul class="list_unstyled d-flex justify-content-between">
+        <ul class="list_unstyled d-flex justify-content-center gap-2">
           <li>
             <button class="btn btn-outline-dark" @click="previusPage" :class="{ 'disabled' : firstPage}"><< Prev</button>
           </li>
