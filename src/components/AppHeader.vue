@@ -19,7 +19,7 @@ export default {
 };
 </script>
 <template>
-  <nav class="d-flex align-items-center justify-content-between p-3">
+  <nav class="d-flex align-items-center justify-content-between p-1">
     <!-- Logo -->
     <div class="d-flex align-items-center">
       <RouterLink to="/">
@@ -150,4 +150,5 @@ button {
 a {
   text-decoration: underline;
   color: #faf6f6;
-}</style>
+}
+</style>

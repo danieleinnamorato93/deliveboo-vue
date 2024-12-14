@@ -16,11 +16,16 @@ export default {
     RestaurantCard,
   },
   methods: {
-    getRestaurants() {
-      axios
-        .get(this.apiRestaurants)
+    getRestaurants(pageNumber) {
+      console.log('chiamata axios iniziata')
+      axios.get(this.apiRestaurants, {
+        params:{
+          page: pageNumber
+        }
+      })
         .then((response) => {
-          store.restaurantsList = response.data.results;
+          console.log(response.data.results.data);
+          store.restaurantsList = response.data.results.data;
           console.log("Ristoranti:", store.restaurantsList);
         })
         .catch((error) => {
@@ -67,7 +72,7 @@ export default {
     },
   },
   created() {
-    this.getRestaurants();
+    this.getRestaurants(1);
     this.getTypes();
   },
 };
