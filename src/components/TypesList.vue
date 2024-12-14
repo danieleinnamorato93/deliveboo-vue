@@ -7,7 +7,7 @@
       <div class="col-12 col-lg-10">
         <div class="thumbnails-wrapper d-flex align-items-center">
           <!-- Pulsante precedente -->
-          <button class="btn btn-outline-danger me-4 fs-5 d-md-block" @click="prev" aria-label="Previous">
+          <button class="btn btn-outline-dark me-4 fs-5 d-md-block" @click="prev" aria-label="Previous">
             &lsaquo;
           </button>
 
@@ -25,7 +25,7 @@
           </div>
 
           <!-- Pulsante successivo -->
-          <button class="btn btn-outline-danger ms-4 fs-5 d-md-block" @click="next" aria-label="Next">
+          <button class="btn btn-outline-dark ms-4 fs-5 d-md-block" @click="next" aria-label="Next">
             &rsaquo;
           </button>
         </div>
