@@ -26,7 +26,7 @@ export default {
 <style lang="scss" scoped>
 .jumbotron {
   position: relative;
-  height: 600px;
+  height: 25rem;
   overflow: hidden;
   padding: 0;
 

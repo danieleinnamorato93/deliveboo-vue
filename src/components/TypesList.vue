@@ -1,34 +1,24 @@
 <template>
   <section id="carousel-types" class="container-fluid mt-5">
+    <!-- Titolo della sezione -->
+    <h3 class="call mt-3 fw-bold text-wrap text-center fs-5 fs-md-4 fs-lg-3">
+      Hai fame? Scegli il ristorante perfetto per te e ordina subito!
+    </h3>
+
     <div class="row justify-content-center">
       <div class="col-12 col-lg-10">
         <div class="thumbnails-wrapper d-flex align-items-center">
           <!-- Pulsante precedente -->
-          <button
-            class="btn btn-outline-danger me-4 fs-5 d-md-block"
-            @click="prev"
-            aria-label="Previous"
-          >
+          <button class="btn btn-outline-danger me-4 fs-5 d-md-block" @click="prev" aria-label="Previous">
             &lsaquo;
           </button>
 
           <!-- Miniature -->
           <div class="thumbnails row w-100 g-3">
-            <div
-              v-for="type in visibleThumbnails"
-              :key="type.id"
-              class="col-8 col-md-4 col-lg-2"
-            >
-              <article
-                class="thumbnail d-flex flex-column align-items-center text-center"
-                :class="{ active: store.clickedTypes.includes(type.id) }"
-                @click="getTypeId(type.id)"
-              >
-                <img
-                  :src="getImage(type.logo)"
-                  :alt="type.name"
-                  class="adaptive-cover img-fluid rounded"
-                />
+            <div v-for="type in visibleThumbnails" :key="type.id" class="col-8 col-md-4 col-lg-2">
+              <article class="thumbnail d-flex flex-column align-items-center text-center"
+                :class="{ active: store.clickedTypes.includes(type.id) }" @click="getTypeId(type.id)">
+                <img :src="getImage(type.logo)" :alt="type.name" class="adaptive-cover img-fluid rounded" />
                 <div class="mt-2">
                   <h6 class="fw-bold">{{ type.name }}</h6>
                 </div>
@@ -37,11 +27,7 @@
           </div>
 
           <!-- Pulsante successivo -->
-          <button
-            class="btn btn-outline-danger ms-4 fs-5 d-md-block"
-            @click="next"
-            aria-label="Next"
-          >
+          <button class="btn btn-outline-danger ms-4 fs-5 d-md-block" @click="next" aria-label="Next">
             &rsaquo;
           </button>
         </div>
@@ -126,9 +112,11 @@ h3 {
   font-weight: bold;
   margin-top: 20px;
 }
+
 h6 {
   color: #333333;
 }
+
 h5 {
   color: darkslategray;
 }
@@ -157,11 +145,13 @@ h5 {
       border: 3px solid transparent;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       border-radius: 15px;
+
       &.active {
         border-color: #fc7a1e;
         box-shadow: 0 0 8px rgba(155, 78, 6, 0.7);
         transform: scale(1.1);
       }
+
       &:hover {
         transform: scale(1.05);
       }
