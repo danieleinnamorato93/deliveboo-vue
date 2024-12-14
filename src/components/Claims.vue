@@ -7,7 +7,7 @@ export default {
 </script>
 
 <template>
-  <template>
+
     <div
       class="claim-container text-center d-flex justify-content-center align-items-center"
     >
@@ -18,7 +18,7 @@ export default {
     <h3 class="call mt-3 fw-bold text-wrap text-center fs-5 fs-md-4 fs-lg-3">
       Hai fame? Scegli il ristorante perfetto per te e ordina subito!
     </h3>
-  </template>
+
 </template>
 
 <style lang="scss" scoped>
