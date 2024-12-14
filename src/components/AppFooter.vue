@@ -62,8 +62,12 @@ export default {
 
 <style scoped>
 .footer {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
   background-color: #6b717e;
-  height: 230px;
 }
 .footer h5 {
   margin-bottom: 15px;
