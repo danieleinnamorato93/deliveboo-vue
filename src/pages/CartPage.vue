@@ -22,7 +22,7 @@ export default {
         address: '',
         email: '',
       }
-    };
+    }
   },
   computed: {
     // Calcola il totale dell'ordine
@@ -157,7 +157,7 @@ export default {
   mounted() {
     this.store.loadFromLocalStorage();
   },
-};
+}
 </script>
 
 <template>
@@ -205,7 +205,7 @@ export default {
               <h3 class="my-4">Dati per l'ordine</h3>
             </div>
             <div class="col-12">
-              <form @submit.prevent="submitOrder" class="mb-4" method="POST">
+              <form @submit.prevent="submitOrder" class="mb-4" method="POST" autocomplete="off">
                 <div class="mb-3">
                   <label for="first_name" class="form-label">Nome</label>
                   <input type="text" v-model="order.first_name" id="first_name" name="first_name" class="form-control"
