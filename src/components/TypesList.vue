@@ -74,6 +74,9 @@ export default {
       // Se non è presente, aggiungilo
       if (index === -1) {
         store.clickedTypes.push(typeId);
+        console.log('tutto ok visto', typeId);
+        console.log('store clickedTypes', store.clickedTypes);
+
       } else {
         // Se è presente, rimuovilo
         store.clickedTypes.splice(index, 1);
