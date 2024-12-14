@@ -7,17 +7,15 @@ export default {
 </script>
 
 <template>
-    <div class="claim-container text-center py-5">
+    <section id="claim" class="text-center py-5">
       <h1>
         Dalla cucina alla tua tavola, un viaggio di gusto
       </h1>
-    </div>
+    </section>
 </template>
 
 <style lang="scss" scoped>
-.claim-container {
+#claim {
   background-color: #fae7d3;
-  // padding-top: 3rem;
-  // padding-bottom:3rem;
 }
 </style>
