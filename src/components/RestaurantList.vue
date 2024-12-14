@@ -74,18 +74,16 @@ export default {
 </script>
 <template>
   <div class="container">
-    <ul>
-      <li v-for="restaurant in displayedRestaurants" :key="restaurant.id">
-        <RouterLink
-          class="text-decoration-none"
-          :to="{ name: 'singleRestaurant', params: { id: restaurant.id } }"
-        >
+    <div class="row">
+      <div v-for="restaurant in displayedRestaurants" :key="restaurant.id" class="col-6 col-md-4">
+        <RouterLink class="text-decoration-none" :to="{ name: 'singleRestaurant', params: { id: restaurant.id } }">
           <RestaurantCard :restaurantObject="restaurant" />
         </RouterLink>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 </template>
+
 <style scoped lang="scss">
 ul {
   list-style-type: none;

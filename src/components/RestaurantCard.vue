@@ -18,19 +18,13 @@ export default {
 </script>
 
 <template>
-  <div class="card mb-3" >
-    <div class="row">
-      <div class="col-md-8">
-        <div class="card-body p-3">
-          <h5 class="card-title">{{ restaurantObject.name }}</h5>
-          <p class="card-text">{{ restaurantObject.address }}</p>
-          <div v-for="(type, index) in restaurantObject.types" :key="index">
-            <span class="badge rounded-pill text-bg-danger m-1">
-              {{ type.name }}
-            </span>
-          </div>
-        </div>
-      </div>
+  <div class="card mb-2 p-2">
+    <h5 class="card-title">{{ restaurantObject.name }}</h5>
+    <p class="card-text">{{ restaurantObject.address }}</p>
+    <div v-for="(type, index) in restaurantObject.types" :key="index" class="d-flex  mb-1">
+      <span class="badge rounded-pill text-bg-danger ">
+        {{ type.name }}
+      </span>
     </div>
   </div>
 </template>
@@ -39,7 +33,7 @@ export default {
 .card {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   transition: border 0.3s ease, box-shadow 0.3s ease;
-  height: 7rem;
+
 
   &:hover {
     border: 3px solid #fc7a1e;
@@ -47,5 +41,4 @@ export default {
     transform: scale(1.05);
   }
 }
-
 </style>
