@@ -11,9 +11,9 @@ export default {
         last_name: '',
         phone_number: '',
         address: '',
-        email: '',  // Aggiunto campo email
+        email: '',
         paymentMethod: 'cash',
-        total: 0  // Aggiunta proprietà per il totale
+        total: 0
       },
       errors: {
         first_name: '',
@@ -39,11 +39,11 @@ export default {
     },
   },
   methods: {
-    // Rimuovi un piatto dal carrello
     removeFromCart(index) {
       this.store.cart.splice(index, 1);
-      localStorage.setItem('cart', JSON.stringify(this.cart));
+      this.store.syncWithLocalStorage();
     },
+
 
     //------------------------VALIDAZIONI--------------------------
     validateForm() {
@@ -76,7 +76,7 @@ export default {
       } else if (this.order.last_name.length < 3 || this.order.last_name.length > 30) {
         this.errors.last_name = 'Il cognome deve avere tra 3 e 30 caratteri.';
         valid = false;
-      }else {
+      } else {
         this.order.last_name = this.order.last_name.charAt(0).toUpperCase() + this.order.last_name.slice(1).toLowerCase();
       }
 
@@ -101,7 +101,7 @@ export default {
         // Verifica se há pelo menos um dígito numérico no endereço
         this.errors.address = 'L\'indirizzo deve contenere almeno un numero.';
         valid = false;
-      }else {
+      } else {
         this.order.address = this.order.address.charAt(0).toUpperCase() + this.order.address.slice(1).toLowerCase();
       }
 
@@ -132,24 +132,18 @@ export default {
           email: this.order.email,
           phone_number: this.order.phone_number,
           address: this.order.address,
-            total: this.order.total,
+          total: this.order.total,
           items: this.store.cart.map((item) => ({
             plate_id: item.id,
             quantity: item.quantity,
           })),
         };
-
-
-
-
         // Invia l'ordine al server
         axios
-        .post("http://127.0.0.1:8000/api/orders", orderData)
+          .post("http://127.0.0.1:8000/api/orders", orderData)
           .then((response) => {
             console.log("Ordine completato con successo!", response);
-            // Svuota il carrello dopo l'ordine
             this.store.clearCart();
-          // Reindirizza alla pagina di pagamento
             this.$router.push(`/payment/${response.data.orderId}`);
           })
           .catch((error) => {
@@ -157,7 +151,6 @@ export default {
             alert("Errore durante l'invio. Riprova.");
 
           });
-
       }
     },
   },
