@@ -10,6 +10,8 @@ export default {
       store,
       apiRestaurants: "http://127.0.0.1:8000/api/restaurants",
       apiTypes: "http://127.0.0.1:8000/api/types",
+      lastPageNumber: 1,
+      currentPageNumber: 1
     };
   },
   components: {
@@ -19,13 +21,15 @@ export default {
     getRestaurants(pageNumber) {
       console.log('chiamata axios iniziata')
       axios.get(this.apiRestaurants, {
-        params:{
+        params: {
           page: pageNumber
         }
       })
         .then((response) => {
           console.log(response.data.results.data);
           store.restaurantsList = response.data.results.data;
+          this.lastPageNumber = response.data.results.last_page;
+          this.currentPageNumber = pageNumber;
           console.log("Ristoranti:", store.restaurantsList);
         })
         .catch((error) => {
@@ -54,6 +58,20 @@ export default {
       });
       console.log("Ristoranti filtrati:", store.filteredRestaurants);
     },
+
+    // bottone della paginazione delle card ristorant
+    previusPage() {
+      if (this.currentPageNumber > 1) {
+        this.currentPageNumber--;
+        this.getRestaurants(this.currentPageNumber);
+      }
+    },
+    nextPage() {
+      if (this.currentPageNumber < this.lastPageNumber) {
+        this.currentPageNumber++;
+        this.getRestaurants(this.currentPageNumber);
+      }
+    }
   },
   computed: {
     displayedRestaurants() {
@@ -62,6 +80,15 @@ export default {
       }
       return store.restaurantsList;
     },
+
+    // disabilito i bottone delle paginazione
+    firstPage(){
+      return this.currentPageNumber === 1;
+    },
+    lastPage(){
+      return this.currentPageNumber >= this.lastPageNumber;
+    }
+
   },
   watch: {
     "store.clickedTypes": {
@@ -79,14 +106,29 @@ export default {
 </script>
 <template>
   <div class="container">
-    <div class="row">
-      <div v-for="restaurant in displayedRestaurants" :key="restaurant.id" class="col-6 col-md-4">
-        <RouterLink class="text-decoration-none" :to="{ name: 'singleRestaurant', params: { id: restaurant.id } }">
-          <RestaurantCard :restaurantObject="restaurant" />
-        </RouterLink>
+    <section>
+      <div class="row">
+        <div v-for="restaurant in displayedRestaurants" :key="restaurant.id" class="col-6 col-md-4">
+          <RouterLink class="text-decoration-none" :to="{ name: 'singleRestaurant', params: { id: restaurant.id } }">
+            <RestaurantCard :restaurantObject="restaurant" />
+          </RouterLink>
+        </div>
       </div>
-    </div>
+    </section>
+    <section>
+      <nav>
+        <ul class="list_unstyled d-flex justify-content-between">
+          <li>
+            <button class="btn btn-outline-dark" @click="previusPage" :class="{ 'disabled' : firstPage}"><< Prev</button>
+          </li>
+          <li>
+            <button class="btn btn-outline-dark" @click="nextPage" :class="{ 'disabled' : lastPage}">Next >></button>
+          </li>
+        </ul>
+      </nav>
+    </section>
   </div>
+
 </template>
 
 <style scoped lang="scss">
