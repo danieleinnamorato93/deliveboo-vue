@@ -21,8 +21,12 @@ export default {
   <div class="card mb-2 p-2">
     <h5 class="card-title">{{ restaurantObject.name }}</h5>
     <p class="card-text">{{ restaurantObject.address }}</p>
-    <div v-for="(type, index) in restaurantObject.types" :key="index" class="d-flex  mb-1">
-      <span class="badge rounded-pill text-bg-danger ">
+    <div
+      v-for="(type, index) in restaurantObject.types"
+      :key="index"
+      class="d-flex mb-1"
+    >
+      <span class="badge rounded-pill text-bg-danger">
         {{ type.name }}
       </span>
     </div>
@@ -34,10 +38,9 @@ export default {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   transition: border 0.3s ease, box-shadow 0.3s ease;
 
-
   &:hover {
     border: 3px solid #fc7a1e;
-    box-shadow: 0 0 10px rgba(94, 47, 3, 0.7);
+    box-shadow: 0 0 10px rgba(94, 55, 3, 0.7);
     transform: scale(1.05);
   }
 }
