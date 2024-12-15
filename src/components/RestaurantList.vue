@@ -23,7 +23,7 @@ export default {
   methods: {
 
     addFilters() {
-      this.filters = this.clickedTypes.map((typeID, index) => {
+      this.filters = store.clickedTypes.map((typeID, index) => {
         return {
           array: `[${index}]`,
           id: typeID,
@@ -56,18 +56,15 @@ export default {
     getFilteredRestaurants() {
       this.addFilters()
       this.currentFilters.push(...this.filters);
-
       const filtersQuery = this.currentFilters.map((filter, index) => {
         return `filters[$and][${index}][types][id]${filter.filterType}=${filter.id}`;
       }).join('&')
+      let apiFilters = `${this.apiRestaurants}?${filtersQuery}`;
 
-      console.log('Filters Query:', filtersQuery);
-      
-      axios
-        .get(`${this.apiRestaurants}?${filtersQuery}`)
-        .then((response) => {
-          store.clickedTypes = response.data.results;
-          console.log("Filtered Ristoranti:", store.clickedTypes);
+      axios.get(apiFilters)
+      .then((response) => {
+          store.filteredRestaurants = response.data.results;
+          console.log("Filtered Ristoranti:", store.filteredRestaurants);
         })
         .catch((error) => {
           console.error("Errore nel caricamento dei ristoranti:", error);
@@ -86,7 +83,7 @@ export default {
         });
     },
 
-    showRestaurantTypes() {
+   showRestaurantTypes() {
       store.filteredRestaurants = store.restaurantsList.filter((restaurant) => {
         for (let type of restaurant.types) {
           if (store.clickedTypes.includes(type.id)) {
@@ -97,7 +94,7 @@ export default {
       });
       console.log("Ristoranti filtrati:", store.filteredRestaurants);
     },
-
+ 
     // bottone della paginazione delle card ristorant
     previusPage() {
       if (this.currentPageNumber > 1) {
@@ -116,6 +113,7 @@ export default {
   computed: {
     displayedRestaurants() {
       if (store.clickedTypes.length > 0 ) {
+        
         return store.filteredRestaurants;
       }
       return store.restaurantsList;
