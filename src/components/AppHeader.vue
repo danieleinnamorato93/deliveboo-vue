@@ -76,6 +76,9 @@ nav {
   min-height: 2.5rem;
   background-color: #fc7a1e;
   box-shadow: 0 0 10px rgba(94, 44, 3, 0.7);
+  position: sticky;
+  top: 0;
+  z-index: 1;
 
   a {
     text-decoration: none;
