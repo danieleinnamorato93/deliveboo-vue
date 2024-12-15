@@ -1,5 +1,5 @@
 <script>
-import { store } from "../js/store.js"; // Importa la store
+import { store } from "../js/store.js";
 import { RouterLink } from "vue-router";
 
 export default {
@@ -7,13 +7,12 @@ export default {
   data() {
     return {
       isHidden: true,
-      store, // Aggiungi la store ai dati
+      store, 
     };
   },
   computed: {
-    // Usa direttamente il getter cartCount dalla store
     cartCount() {
-      return this.store.cartCount; // Usa il getter definito nella store
+      return this.store.cartCount; 
     },
   },
 };
@@ -91,6 +90,7 @@ nav {
   box-shadow: 0 0 10px rgba(94, 44, 3, 0.7);
   position: sticky;
   top: 0;
+  left:0;
   z-index: 1;
 
   a {
