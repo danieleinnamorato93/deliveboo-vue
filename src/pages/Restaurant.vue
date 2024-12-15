@@ -90,20 +90,10 @@ export default {
           </div>
         </div>
         <div v-else>
-          <section class="mb-3">
-            <div class="row justify-content-center">
-              <RestaurantCard :restaurantObject="restaurant" />
-            </div>
-          </section>
-          <section id="restaurant">
+          <section id="restaurant" class="pt-3">
             <div class="row">
               <div class="col-12 d-flex justify-content-center">
-                <div class="card" style="width: 18rem">
-                  <div class="card-body text-center">
-                    <h5 class="card-title fw-bold">{{ restaurant.name }}</h5>
-                    <p class="card-text">Indirizzo: {{ restaurant.address }}</p>
-                  </div>
-                </div>
+                <RestaurantCard :restaurantObject="restaurant" />
               </div>
             </div>
             <div id="plates" class="mt-4">

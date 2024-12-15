@@ -18,7 +18,7 @@ export default {
 </script>
 
 <template>
-  <div class="card mb-2 p-2">
+  <div class="card mb-2 p-2" style="width: 18rem;">
     <h5 class="card-title">{{ restaurantObject.name }}</h5>
     <p class="card-text">{{ restaurantObject.address }}</p>
     <div
