@@ -42,7 +42,7 @@ export default {
       })
         .then((response) => {
           
-          store.restaurantsList = response.data.results.data;
+          store.restaurantsList = [...response.data.results.data];
           this.lastPageNumber = response.data.results.last_page;
           this.currentPageNumber = pageNumber;
           console.log("Ristoranti:", store.restaurantsList);
@@ -54,17 +54,19 @@ export default {
 // rivedi dove usarla in questa pagina
     
     getFilteredRestaurants() {
+
       this.addFilters()
       this.currentFilters.push(...this.filters);
       const filtersQuery = this.currentFilters.map((filter, index) => {
         return `filters[$and][${index}][types][id]${filter.filterType}=${filter.id}`;
       }).join('&')
       let apiFilters = `${this.apiRestaurants}?${filtersQuery}`;
-
+      console.log('Api Filters Query:', apiFilters)
       axios.get(apiFilters)
       .then((response) => {
-          store.filteredRestaurants = response.data.results;
-          console.log("Filtered Ristoranti:", store.filteredRestaurants);
+        if (Array.isArray(response.data.results)) {
+      store.filteredRestaurants = [...response.data.results];
+      console.log("Filtered Ristoranti:", store.filteredRestaurants)}
         })
         .catch((error) => {
           console.error("Errore nel caricamento dei ristoranti:", error);
@@ -82,7 +84,7 @@ export default {
           console.error("Errore nel caricamento delle tipologie:", error);
         });
     },
-
+/* 
    showRestaurantTypes() {
       store.filteredRestaurants = store.restaurantsList.filter((restaurant) => {
         for (let type of restaurant.types) {
@@ -93,7 +95,7 @@ export default {
         return false;
       });
       console.log("Ristoranti filtrati:", store.filteredRestaurants);
-    },
+    }, */
  
     // bottone della paginazione delle card ristorant
     previusPage() {
@@ -112,12 +114,12 @@ export default {
 
   computed: {
     displayedRestaurants() {
-      if (store.clickedTypes.length > 0 ) {
-        
-        return store.filteredRestaurants;
-      }
-      return store.restaurantsList;
-    },
+    const restaurants = store.clickedTypes.length > 0 ? store.filteredRestaurants : store.restaurantsList;
+    if (Array.isArray(restaurants)) {
+      return restaurants
+    }
+    return []; 
+  },
 
     // disabilito i bottone delle paginazione
     firstPage(){
@@ -132,7 +134,7 @@ export default {
   watch: {
     "store.clickedTypes": {
       handler() {
-        this.showRestaurantTypes();
+        this.getFilteredRestaurants();
       },
       deep: true,
     },

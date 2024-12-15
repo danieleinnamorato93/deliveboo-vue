@@ -34,7 +34,7 @@ export default {
     },
     getTypeId(typeId) {
       // cerca indice typeid
-      const index = store.clickedTypes.indexOf(typeId);
+      const index = [...store.clickedTypes].indexOf(typeId);
       // Se non è presente, aggiungilo
       if (index === -1) {
         store.clickedTypes.push(typeId);
