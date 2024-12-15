@@ -80,7 +80,7 @@ export default {
         <div class="thumbnails-wrapper d-flex align-items-center">
           <!-- Pulsante precedente -->
           <button class="btn btn-outline-dark me-4 fs-5 d-md-block" @click="prev" aria-label="Previous">
-            &lsaquo;
+            <font-awesome-icon icon="arrow-left" />
           </button>
 
           <!-- Miniature -->
@@ -98,7 +98,7 @@ export default {
 
           <!-- Pulsante successivo -->
           <button class="btn btn-outline-dark ms-4 fs-5 d-md-block" @click="next" aria-label="Next">
-            &rsaquo;
+            <font-awesome-icon icon="arrow-right" />
           </button>
         </div>
       </div>
