@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid footer text-white">
+  <div class="container-fluid footer text-white overflow-y-hidden">
     <div class="row justify-content-center py-4 text-center">
       <div class="col-md-3">
         <h5 class="fw-bold">Link Utili</h5>

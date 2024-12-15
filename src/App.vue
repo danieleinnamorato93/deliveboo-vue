@@ -18,7 +18,9 @@ export default {
 <template>
   <main>
     <AppHeader />
-    <RouterView />
+    <div class="wrapper-box">
+      <RouterView />
+    </div>
     <AppFooter />
   </main>
 </template>
@@ -27,5 +29,11 @@ export default {
 @use "../node_modules/bootstrap/scss/bootstrap.scss" as *;
 @use "../src/scss/general.scss" as *;
 
-main {}
+main {
+
+  .wrapper-box{
+    // tolgo in ordine altezza navbar e footer
+    min-height: calc( 100vh - 100px - 200px);
+  }
+}
 </style>
