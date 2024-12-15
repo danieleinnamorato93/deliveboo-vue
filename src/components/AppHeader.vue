@@ -23,7 +23,7 @@ export default {
     <!-- Logo -->
     <div class="d-flex align-items-center">
       <RouterLink to="/">
-        <img src="../assets/imgs/gufetto.png" alt="logo" />
+        <img src="../assets/imgs/logo.jpeg" alt="logo" />
       </RouterLink>
 
       <RouterLink to="/">
@@ -43,14 +43,25 @@ export default {
         }}</span>
       </RouterLink>
 
-      <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      <button
+        type="button"
+        data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop"
+      >
         Sei un Ristoratore?
       </button>
     </div>
 
     <!-- Modale -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div
+      class="modal fade"
+      id="staticBackdrop"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-body">
@@ -58,7 +69,9 @@ export default {
               <a href="http://127.0.0.1:8000/login">Accedi al tuo ristorante</a>
             </button>
             <button type="button" class="log-btn m-1">
-              <a href="http://127.0.0.1:8000/register">Registra il tuo ristorante</a>
+              <a href="http://127.0.0.1:8000/register"
+                >Registra il tuo ristorante</a
+              >
             </button>
             <button type="button" class="close-btn" data-bs-dismiss="modal">
               Chiudi
@@ -115,7 +128,7 @@ nav {
       color: white;
       border-radius: 50%;
       transform: translate(85%, -65%);
-      }
+    }
   }
 }
 
