@@ -9,19 +9,32 @@ export default {
     return {
       store,
       apiRestaurants: "http://127.0.0.1:8000/api/restaurants",
-      filters: "?filters[types][id][$in]",
+      filters: [],
       clickedTypes: store.clickedTypes,
       apiTypes: "http://127.0.0.1:8000/api/types",
       lastPageNumber: 1,
       currentPageNumber: 1
     };
-  },
-
+  }, 
   components: {
     RestaurantCard,
   },
 
   methods: {
+
+    methods: {
+
+    addFilters() {
+      this.filters = this.clickedTypes.map((typeID, index) => {
+        return {
+          array: `[${index}]`,
+          id: typeID,
+          filterType: '[$in]',
+        };
+      });
+      console.log('Filters:', this.filters);
+    },
+
     getRestaurants(pageNumber) {
       console.log('chiamata axios iniziata')
       axios.get(this.apiRestaurants, {
@@ -42,9 +55,14 @@ export default {
     },
 // rivedi dove usarla in questa pagina
     getFilteredRestaurants() {
+      addFilters()
 
+      const filtersQuery = this.filters.map((filter, index) => {
+        return `filters[$and][${index}][types][id]${filter.filterType}=${filter.id}`;
+      }).join('&')
+      
       axios
-        .get(`${this.apiRestaurants}${this.filters}=[${this.clickedTypes.join(',')}]`)
+        .get(`${this.apiRestaurants}?${this.filtersQuery}`)
         .then((response) => {
           store.clickedTypes = response.data.results;
           console.log("Filtered Ristoranti:", store.clickedTypes);
@@ -95,7 +113,7 @@ export default {
 
   computed: {
     displayedRestaurants() {
-      if (store.clickedTypes.length > 0 && store.clickedTypes) {
+      if (store.clickedTypes.length > 0 ) {
         this.getFilteredRestaurants();
         return store.filteredRestaurants;
       }
@@ -125,6 +143,7 @@ export default {
     this.getRestaurants(1);
     this.getTypes();
   },
+}
 
 }
 </script>
