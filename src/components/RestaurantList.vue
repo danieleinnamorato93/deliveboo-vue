@@ -21,18 +21,6 @@ export default {
   },
 
   methods: {
-
-    addFilters() {
-      this.filters = store.clickedTypes.map((typeID, index) => {
-        return {
-          array: `[${index}]`,
-          id: typeID,
-          filterType: '[$in]',
-        };
-      });
-      console.log('Filters:', this.filters);
-    },
-
     getRestaurants(pageNumber) {
       console.log('chiamata axios iniziata')
       axios.get(this.apiRestaurants, {
@@ -51,22 +39,29 @@ export default {
           console.error("Errore nel caricamento dei ristoranti:", error);
         });
     },
-// rivedi dove usarla in questa pagina
-    
-    getFilteredRestaurants() {
 
-      this.addFilters()
+  updateCurrentFilters() {
+    this.currentFilters = [];
+    store.clickedTypes.forEach((typeID, index) => {
+      this.currentFilters.push({
+        array: `[${index}]`,
+        id: typeID,
+        filterType: '[$in]',
+      });
+    });
+
+  },
+    getFilteredRestaurants() {
+      this.updateCurrentFilters()
       this.currentFilters.push(...this.filters);
       const filtersQuery = this.currentFilters.map((filter, index) => {
         return `filters[$and][${index}][types][id]${filter.filterType}=${filter.id}`;
       }).join('&')
       let apiFilters = `${this.apiRestaurants}?${filtersQuery}`;
-      console.log('Api Filters Query:', apiFilters)
+  
       axios.get(apiFilters)
       .then((response) => {
-        if (Array.isArray(response.data.results)) {
-      store.filteredRestaurants = [...response.data.results];
-      console.log("Filtered Ristoranti:", store.filteredRestaurants)}
+      store.filteredRestaurants = [...response.data.results.data];
         })
         .catch((error) => {
           console.error("Errore nel caricamento dei ristoranti:", error);
@@ -84,20 +79,7 @@ export default {
           console.error("Errore nel caricamento delle tipologie:", error);
         });
     },
-/* 
-   showRestaurantTypes() {
-      store.filteredRestaurants = store.restaurantsList.filter((restaurant) => {
-        for (let type of restaurant.types) {
-          if (store.clickedTypes.includes(type.id)) {
-            return true;
-          }
-        }
-        return false;
-      });
-      console.log("Ristoranti filtrati:", store.filteredRestaurants);
-    }, */
- 
-    // bottone della paginazione delle card ristorant
+
     previusPage() {
       if (this.currentPageNumber > 1) {
         this.currentPageNumber--;
@@ -145,7 +127,6 @@ export default {
     this.getTypes();
   },
 }
-
 
 </script>
 <template>
