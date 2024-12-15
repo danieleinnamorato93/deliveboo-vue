@@ -63,7 +63,7 @@ export default {
 <style scoped>
 .footer {
   background-color: #6b717e;
-  height: 230px;
+  height: 200px;
 }
 .footer h5 {
   margin-bottom: 15px;

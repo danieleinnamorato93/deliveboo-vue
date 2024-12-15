@@ -16,12 +16,16 @@ export default {
 </script>
 
 <template>
-  <AppHeader />
-  <RouterView />
-  <AppFooter />
+  <main>
+    <AppHeader />
+    <RouterView />
+    <AppFooter />
+  </main>
 </template>
 
 <style lang="scss">
 @use "../node_modules/bootstrap/scss/bootstrap.scss" as *;
 @use "../src/scss/general.scss" as *;
+
+main {}
 </style>
