@@ -7,18 +7,19 @@ export default {
   data() {
     return {
       isHidden: true,
-      store, 
+      store,
+      isModalOpened:false,
     };
   },
   computed: {
     cartCount() {
-      return this.store.cartCount; 
+      return this.store.cartCount;
     },
   },
 };
 </script>
 <template>
-  <nav class="d-flex align-items-center justify-content-between p-1">
+  <nav class="d-flex align-items-center justify-content-between p-1" :class="{'opened-modal': isModalOpened }">
     <!-- Logo -->
     <div class="d-flex align-items-center">
       <RouterLink to="/">
@@ -42,25 +43,14 @@ export default {
         }}</span>
       </RouterLink>
 
-      <button
-        type="button"
-        data-bs-toggle="modal"
-        data-bs-target="#staticBackdrop"
-      >
+      <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" @click="isModalOpened=true">
         Sei un Ristoratore?
       </button>
     </div>
 
     <!-- Modale -->
-    <div
-      class="modal fade"
-      id="staticBackdrop"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabindex="-1"
-      aria-labelledby="staticBackdropLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-body">
@@ -68,11 +58,9 @@ export default {
               <a href="http://127.0.0.1:8000/login">Accedi al tuo ristorante</a>
             </button>
             <button type="button" class="log-btn m-1">
-              <a href="http://127.0.0.1:8000/register"
-                >Registra il tuo ristorante</a
-              >
+              <a href="http://127.0.0.1:8000/register">Registra il tuo ristorante</a>
             </button>
-            <button type="button" class="close-btn" data-bs-dismiss="modal">
+            <button type="button" class="close-btn" data-bs-dismiss="modal" @click="isModalOpened=false">
               Chiudi
             </button>
           </div>
@@ -90,8 +78,12 @@ nav {
   box-shadow: 0 0 10px rgba(94, 44, 3, 0.7);
   position: sticky;
   top: 0;
-  left:0;
+  left: 0;
   z-index: 1;
+
+  &.opened-modal{
+    position: initial
+  }
 
   a {
     text-decoration: none;
