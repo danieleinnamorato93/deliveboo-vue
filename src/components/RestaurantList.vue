@@ -10,12 +10,11 @@ export default {
       store,
       apiRestaurants: "http://127.0.0.1:8000/api/restaurants",
       currentFilters: [],
-      filters: [],
       apiTypes: "http://127.0.0.1:8000/api/types",
       lastPageNumber: 1,
       currentPageNumber: 1
     };
-  }, 
+  },
   components: {
     RestaurantCard,
   },
@@ -29,7 +28,7 @@ export default {
         }
       })
         .then((response) => {
-          
+
           store.restaurantsList = [...response.data.results.data];
           this.lastPageNumber = response.data.results.last_page;
           this.currentPageNumber = pageNumber;
@@ -40,28 +39,27 @@ export default {
         });
     },
 
-  updateCurrentFilters() {
-    this.currentFilters = [];
-    store.clickedTypes.forEach((typeID, index) => {
-      this.currentFilters.push({
-        array: `[${index}]`,
-        id: typeID,
-        filterType: '[$in]',
+    updateCurrentFilters() {
+      this.currentFilters = [];
+      store.clickedTypes.forEach((typeID, index) => {
+        this.currentFilters.push({
+          array: `[${index}]`,
+          id: typeID,
+          filterType: '[$in]',
+        });
       });
-    });
 
-  },
+    },
     getFilteredRestaurants() {
       this.updateCurrentFilters()
-      this.currentFilters.push(...this.filters);
       const filtersQuery = this.currentFilters.map((filter, index) => {
         return `filters[$and][${index}][types][id]${filter.filterType}=${filter.id}`;
       }).join('&')
       let apiFilters = `${this.apiRestaurants}?${filtersQuery}`;
-  
+
       axios.get(apiFilters)
-      .then((response) => {
-      store.filteredRestaurants = [...response.data.results.data];
+        .then((response) => {
+          store.filteredRestaurants = [...response.data.results.data];
         })
         .catch((error) => {
           console.error("Errore nel caricamento dei ristoranti:", error);
@@ -96,18 +94,18 @@ export default {
 
   computed: {
     displayedRestaurants() {
-    const restaurants = store.clickedTypes.length > 0 ? store.filteredRestaurants : store.restaurantsList;
-    if (Array.isArray(restaurants)) {
-      return restaurants
-    }
-    return []; 
-  },
+      const restaurants = store.clickedTypes.length > 0 ? store.filteredRestaurants : store.restaurantsList;
+      if (Array.isArray(restaurants)) {
+        return restaurants
+      }
+      return [];
+    },
 
     // disabilito i bottone delle paginazione
-    firstPage(){
+    firstPage() {
       return this.currentPageNumber === 1;
     },
-    lastPage(){
+    lastPage() {
       return this.currentPageNumber >= this.lastPageNumber;
     }
 
@@ -121,7 +119,7 @@ export default {
       deep: true,
     },
   },
-  
+
   created() {
     this.getRestaurants(1);
     this.getTypes();
@@ -144,10 +142,11 @@ export default {
       <nav>
         <ul class="list_unstyled d-flex justify-content-center gap-2">
           <li>
-            <button class="btn btn-outline-dark" @click="previusPage" :class="{ 'disabled' : firstPage}"><< Prev</button>
+            <button class="btn btn-outline-dark" @click="previusPage" :class="{ 'disabled': firstPage }">
+              << Prev</button>
           </li>
           <li>
-            <button class="btn btn-outline-dark" @click="nextPage" :class="{ 'disabled' : lastPage}">Next >></button>
+            <button class="btn btn-outline-dark" @click="nextPage" :class="{ 'disabled': lastPage }">Next >></button>
           </li>
         </ul>
       </nav>
