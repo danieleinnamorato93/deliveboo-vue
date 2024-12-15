@@ -9,8 +9,8 @@ export default {
     return {
       store,
       apiRestaurants: "http://127.0.0.1:8000/api/restaurants",
+      currentFilters: [],
       filters: [],
-      clickedTypes: store.clickedTypes,
       apiTypes: "http://127.0.0.1:8000/api/types",
       lastPageNumber: 1,
       currentPageNumber: 1
@@ -21,8 +21,6 @@ export default {
   },
 
   methods: {
-
-    methods: {
 
     addFilters() {
       this.filters = this.clickedTypes.map((typeID, index) => {
@@ -43,7 +41,7 @@ export default {
         }
       })
         .then((response) => {
-          console.log(response.data.results.data);
+          
           store.restaurantsList = response.data.results.data;
           this.lastPageNumber = response.data.results.last_page;
           this.currentPageNumber = pageNumber;
@@ -54,15 +52,19 @@ export default {
         });
     },
 // rivedi dove usarla in questa pagina
+    
     getFilteredRestaurants() {
-      addFilters()
+      this.addFilters()
+      this.currentFilters.push(...this.filters);
 
-      const filtersQuery = this.filters.map((filter, index) => {
+      const filtersQuery = this.currentFilters.map((filter, index) => {
         return `filters[$and][${index}][types][id]${filter.filterType}=${filter.id}`;
       }).join('&')
+
+      console.log('Filters Query:', filtersQuery);
       
       axios
-        .get(`${this.apiRestaurants}?${this.filtersQuery}`)
+        .get(`${this.apiRestaurants}?${filtersQuery}`)
         .then((response) => {
           store.clickedTypes = response.data.results;
           console.log("Filtered Ristoranti:", store.clickedTypes);
@@ -114,7 +116,6 @@ export default {
   computed: {
     displayedRestaurants() {
       if (store.clickedTypes.length > 0 ) {
-        this.getFilteredRestaurants();
         return store.filteredRestaurants;
       }
       return store.restaurantsList;
@@ -145,7 +146,7 @@ export default {
   },
 }
 
-}
+
 </script>
 <template>
   <div class="container">
