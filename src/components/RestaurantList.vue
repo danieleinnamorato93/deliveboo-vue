@@ -22,14 +22,14 @@ export default {
 
   methods: {
     getRestaurants(pageNumber) {
-      console.log('chiamata axios iniziata')
-      axios.get(this.apiRestaurants, {
-        params: {
-          page: pageNumber
-        }
-      })
+      console.log("chiamata axios iniziata");
+      axios
+        .get(this.apiRestaurants, {
+          params: {
+            page: pageNumber,
+          },
+        })
         .then((response) => {
-
           store.restaurantsList = [...response.data.results.data];
           this.lastPageNumber = response.data.results.last_page;
           this.currentPageNumber = pageNumber;
@@ -46,20 +46,22 @@ export default {
         this.currentFilters.push({
           array: `[${index}]`,
           id: typeID,
-          filterType: '[$in]',
+          filterType: "[$in]",
         });
       });
-
     },
     getFilteredRestaurants() {
       store.filteredRestaurants = [];
-      this.updateCurrentFilters()
-      const filtersQuery = this.currentFilters.map((filter, index) => {
-        return `filters[$and][${index}][types][id]${filter.filterType}=${filter.id}`;
-      }).join('&')
+      this.updateCurrentFilters();
+      const filtersQuery = this.currentFilters
+        .map((filter, index) => {
+          return `filters[$and][${index}][types][id]${filter.filterType}=${filter.id}`;
+        })
+        .join("&");
       let apiFilters = `${this.apiRestaurants}?${filtersQuery}`;
 
-      axios.get(apiFilters)
+      axios
+        .get(apiFilters)
         .then((response) => {
           store.filteredRestaurants = [...response.data.results.data];
         })
@@ -91,14 +93,17 @@ export default {
         this.currentPageNumber++;
         this.getRestaurants(this.currentPageNumber);
       }
-    }
+    },
   },
 
   computed: {
     displayedRestaurants() {
-      const restaurants = store.clickedTypes.length > 0 ? store.filteredRestaurants : store.restaurantsList;
+      const restaurants =
+        store.clickedTypes.length > 0
+          ? store.filteredRestaurants
+          : store.restaurantsList;
       if (Array.isArray(restaurants)) {
-        return restaurants
+        return restaurants;
       }
       return [];
     },
@@ -109,8 +114,7 @@ export default {
     },
     lastPage() {
       return this.currentPageNumber >= this.lastPageNumber;
-    }
-
+    },
   },
 
   watch: {
@@ -126,39 +130,58 @@ export default {
     this.getRestaurants(1);
     this.getTypes();
   },
-}
-
+};
 </script>
 <template>
-<section id="restaurant-cards">
-  <div class="container">
-    <h3 class="mb-4">I migliori ristoranti, a un clic di distanza.</h3>
-    <section>
-      <div class="row">
-        <div v-if="store.clickedTypes.length > 0" class="col-12 my-2 fw-bold text-center">Ristoranti
-          trovati: <p class="fs-5 d-inline">
-            {{ store.filteredRestaurants.length }}</p>
+  <section id="restaurant-cards">
+    <div class="container">
+      <h3 class="mb-4">I migliori ristoranti, a un clic di distanza.</h3>
+      <section>
+        <div class="row">
+          <div
+            v-if="store.clickedTypes.length > 0"
+            class="col-12 my-2 fw-bold text-center"
+          >
+            Ristoranti trovati:
+            <p class="fs-5 d-inline">
+              {{ store.filteredRestaurants.length }}
+            </p>
+          </div>
+          <div
+            v-for="restaurant in displayedRestaurants"
+            :key="restaurant.id"
+            class="col-6 col-md-4"
+          >
+            <RouterLink
+              class="text-decoration-none"
+              :to="{ name: 'singleRestaurant', params: { id: restaurant.id } }"
+            >
+              <RestaurantCard :restaurantObject="restaurant" />
+            </RouterLink>
+          </div>
         </div>
-        <div v-for="restaurant in displayedRestaurants" :key="restaurant.id" class="col-6 col-md-3">
-          <RouterLink class="text-decoration-none" :to="{ name: 'singleRestaurant', params: { id: restaurant.id } }">
-            <RestaurantCard :restaurantObject="restaurant" />
-          </RouterLink>
-        </div>
-      </div>
-    </section>
-    <section>
+      </section>
+      <section>
         <div class="d-flex justify-content-center gap-2 mb-3">
-            <button class="btn btn-outline-dark fs-5" @click="previusPage" :class="{ 'disabled': firstPage }">
-              <font-awesome-icon icon="arrow-left" /></button>
+          <button
+            class="btn btn-outline-dark fs-5"
+            @click="previusPage"
+            :class="{ disabled: firstPage }"
+          >
+            <font-awesome-icon icon="arrow-left" />
+          </button>
 
-            <button class="btn btn-outline-dark fs-5" @click="nextPage" :class="{ 'disabled': lastPage }">
-              <font-awesome-icon icon="arrow-right" /></button>
+          <button
+            class="btn btn-outline-dark fs-5"
+            @click="nextPage"
+            :class="{ disabled: lastPage }"
+          >
+            <font-awesome-icon icon="arrow-right" />
+          </button>
         </div>
-    </section>
-  </div>
-</section>
+      </section>
+    </div>
+  </section>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>
