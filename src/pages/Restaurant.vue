@@ -64,6 +64,10 @@ export default {
       this.store.addToCart(item);
       alert(`${plateObj.name} aggiunto al carrello con quantità ${quantity}`);
     },
+    // metodo da inserire nel bottone per prendere quello dalla store
+    removeFromCart(itemId) {
+      this.store.removeFromCart(itemId);
+    },
   },
   created() {
     // Carica il carrello all'avvio
