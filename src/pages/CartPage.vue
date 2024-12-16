@@ -183,7 +183,7 @@ export default {
         </div>
         <!-- Carrello con contenuto -->
         <div v-else>
-          <div v-for="(item, index) in store.cart" :key="item.id" class="mb-3">
+          <div v-for="(item, index) in store.cart" :key="item.id" class="m-3">
             <div>
               <h4>{{ item.name }}</h4>
               <p>Prezzo: €{{ item.price }}</p>
