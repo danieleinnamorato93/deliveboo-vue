@@ -182,15 +182,14 @@ export default {
 </script>
 
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-12">
+      <div class="col-12 text-center mt-4">
         <!-- PRIMO CONTROLLO NEL CASO SIA VUOTO -->
-        <div v-if="store.cart.length === 0" class="text-center mt-5">
-          <h5 class="fw-bold">
-            Il carrello è vuoto. Aggiungi piatti al carrello per procedere
-            all'ordine.
-          </h5>
+        <div v-if="store.cart.length === 0">
+          <h3>
+            Il carrello è vuoto. Aggiungi piatti al carrello per procedere all'ordine.
+          </h3>
           <router-link to="/">Torna al menu</router-link>
         </div>
         <!-- Carrello con contenuto -->
@@ -203,14 +202,8 @@ export default {
             <div class="d-flex align-items-baseline">
               <div class="mb-2">
                 <!-- Modifica la quantità -->
-                <input
-                  type="number"
-                  v-model.number="item.quantity"
-                  min="1"
-                  @change="updateCartItem(index)"
-                  class="form-control"
-                  style="width: 80px"
-                />
+                <input type="number" v-model.number="item.quantity" min="1" @change="updateCartItem(index)"
+                  class="form-control" style="width: 80px" />
               </div>
               <button @click="removeFromCart(item.id)" class="btn btn-danger">
                 Rimuovi una quantità
@@ -232,85 +225,43 @@ export default {
               <h3 class="my-4">Dati per l'ordine</h3>
             </div>
             <div class="col-12">
-              <form
-                @submit.prevent="submitOrder"
-                class="mb-4"
-                method="POST"
-                autocomplete="off"
-              >
+              <form @submit.prevent="submitOrder" class="mb-4" method="POST" autocomplete="off">
                 <div class="mb-3">
                   <label for="first_name" class="form-label">Nome</label>
-                  <input
-                    type="text"
-                    v-model="order.first_name"
-                    id="first_name"
-                    name="first_name"
-                    class="form-control"
-                    placeholder="Minimo 3 caratteri"
-                    required
-                  />
+                  <input type="text" v-model="order.first_name" id="first_name" name="first_name" class="form-control"
+                    placeholder="Minimo 3 caratteri" required />
                   <span v-if="errors.first_name" class="text-danger">{{
                     errors.first_name
                   }}</span>
                 </div>
                 <div class="mb-3">
                   <label for="last_name" class="form-label">Cognome</label>
-                  <input
-                    type="text"
-                    v-model="order.last_name"
-                    id="last_name"
-                    name="last_name"
-                    class="form-control"
-                    placeholder="Minimo 3 caratteri"
-                    required
-                  />
+                  <input type="text" v-model="order.last_name" id="last_name" name="last_name" class="form-control"
+                    placeholder="Minimo 3 caratteri" required />
                   <span v-if="errors.last_name" class="text-danger">{{
                     errors.last_name
                   }}</span>
                 </div>
                 <div class="mb-3">
-                  <label for="phone_number" class="form-label"
-                    >Numero di Telefono</label
-                  >
-                  <input
-                    type="text"
-                    v-model="order.phone_number"
-                    id="phone_number"
-                    name="phone_number"
-                    placeholder="10 cifre numeriche. es.:3332224455"
-                    class="form-control"
-                    required
-                  />
+                  <label for="phone_number" class="form-label">Numero di Telefono</label>
+                  <input type="text" v-model="order.phone_number" id="phone_number" name="phone_number"
+                    placeholder="10 cifre numeriche. es.:3332224455" class="form-control" required />
                   <span v-if="errors.phone_number" class="text-danger">{{
                     errors.phone_number
                   }}</span>
                 </div>
                 <div class="mb-3">
                   <label for="address" class="form-label">Indirizzo</label>
-                  <input
-                    type="text"
-                    v-model="order.address"
-                    id="address"
-                    name="address"
-                    class="form-control"
-                    placeholder="Via e numero"
-                    required
-                  />
+                  <input type="text" v-model="order.address" id="address" name="address" class="form-control"
+                    placeholder="Via e numero" required />
                   <span v-if="errors.address" class="text-danger">{{
                     errors.address
                   }}</span>
                 </div>
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
-                  <input
-                    type="email"
-                    v-model="order.email"
-                    id="email"
-                    name="email"
-                    class="form-control"
-                    placeholder="es. utente@example.com"
-                    required
-                  />
+                  <input type="email" v-model="order.email" id="email" name="email" class="form-control"
+                    placeholder="es. utente@example.com" required />
                   <span v-if="errors.email" class="text-danger">{{
                     errors.email
                   }}</span>
@@ -333,9 +284,16 @@ export default {
   color: red;
 }
 
-.container {
-  max-width: 800px;
-  margin: 0 auto;
+.container-fluid {
+  // max-width: 800px;
+  min-height: 300px;
+  // margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fae7d3;
+
 
   h1,
   h3 {
