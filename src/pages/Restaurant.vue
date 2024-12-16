@@ -40,6 +40,8 @@ export default {
         price: plateObj.price,
         quantity: quantity,
         restaurantId: this.$route.params.id,
+        // mi serve anche il nome
+        restaurantName: this.restaurant.name,
       };
 
       if (this.store.cart.length > 0) {
