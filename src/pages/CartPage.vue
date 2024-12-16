@@ -12,7 +12,6 @@ export default {
         phone_number: '',
         address: '',
         email: '',
-        paymentMethod: 'cash',
         total: 0
       },
       errors: {
@@ -39,11 +38,13 @@ export default {
     },
   },
   methods: {
+    // per poter usare il metodo nella store devo splittare il metodo che avevo creato
+    // in questo modo potrà eliminare uno alla volta gli elementi nel carrello con il metodo creato ora nella store
+    // e dovrò creare un metodo separato qui per poter fare la sync con il localstorage
     removeFromCart(index) {
       this.store.cart.splice(index, 1);
       this.store.syncWithLocalStorage();
     },
-
 
     //------------------------VALIDAZIONI--------------------------
     validateForm() {
