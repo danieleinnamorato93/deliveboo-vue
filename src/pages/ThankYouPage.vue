@@ -20,7 +20,7 @@ export default {
           Se hai dubbi, non esitare a contattarci
         </h3>
         <RouterLink to="/">
-          <button class="btn btn-primary mt-4">Torna alla home</button>
+          <button class="btn btn-success mt-4">Torna alla home</button>
         </RouterLink>
       </div>
     </div>
@@ -53,7 +53,7 @@ button {
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: #146841;
   }
 }
 </style>
