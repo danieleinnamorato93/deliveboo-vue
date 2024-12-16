@@ -63,7 +63,6 @@ export default {
         }
       }
       this.store.addToCart(item);
-      alert(`${plateObj.name} aggiunto al carrello con quantità ${quantity}`);
     },
     // metodo da inserire nel bottone per prendere quello dalla store
     removeFromCart(itemId) {
@@ -93,7 +92,7 @@ export default {
       </div>
     </div>
     <div v-else>
-      <section id="restaurant" class="pt-3" v-if="restaurant && restaurant.plates">
+      <section id="restaurant" class="pt-3" v-if="restaurant && restaurant.plates" @click="showModal = false">
         <div class="row">
           <div class="col-12 d-flex justify-content-center">
             <RestaurantCard :restaurantObject="restaurant" />
@@ -111,9 +110,18 @@ export default {
                   <label for="quantity">Quantità</label>
                   <input type="number" v-model.number="plate.quantity" min="1" placeholder="1" id="quantity"
                     class="quantity-input" />
-                  <button class="btn btn-success" @click="addToCart(plate)">
-                    Aggiungi al carrello
-                  </button>
+                  <div id="modalAdd">
+                    <button class="btn btn-success" @click="addToCart(plate), showModal = true">
+                      Aggiungi al carrello
+                    </button>
+                    <transition name="fade" mode="out-in" appear>
+                      <div
+                        class="model-overlay text-center badge rounded-pill d-flex align-items-center justify-content-center pt-4"
+                        v-if="showModal">
+                        <p class="fw-bold fs-6 py-3"> Prodotto aggiunto al carrello</p>
+                      </div>
+                    </transition>
+                  </div>
                   <!-- aggiungo bottone per gestire la rimozione del singolo elelemento -->
                   <button class="btn btn-danger" @click="removeFromCart(plate.id)">
                     Rimuovi dal carrello
