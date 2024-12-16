@@ -129,6 +129,7 @@ export default {
 </script>
 <template>
   <div class="container">
+    <h3>I migliori ristoranti, a un clic di distanza.</h3>
     <section>
       <div class="row">
         <div v-for="restaurant in displayedRestaurants" :key="restaurant.id" class="col-6 col-md-4">
