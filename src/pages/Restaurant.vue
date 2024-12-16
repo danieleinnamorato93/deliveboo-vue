@@ -98,7 +98,7 @@ export default {
             <RestaurantCard :restaurantObject="restaurant" />
           </div>
         </div>
-        <div id="plates" class="mt-4" >
+        <div id="plates" class="mt-4">
           <ul class="list-unstyled mb-4">
             <li v-for="plate in restaurant.plates" :key="plate.id" class="m-4">
               <div v-if="plate.visibility === 1">
@@ -112,6 +112,10 @@ export default {
                     class="quantity-input" />
                   <button class="btn btn-success" @click="addToCart(plate)">
                     Aggiungi al carrello
+                  </button>
+                  <!-- aggiungo bottone per gestire la rimozione del singolo elelemento -->
+                  <button class="btn btn-danger" @click="removeFromCart(plate.id)">
+                    Rimuovi dal carrello
                   </button>
                 </div>
               </div>
