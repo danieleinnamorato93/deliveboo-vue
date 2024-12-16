@@ -98,30 +98,22 @@ export default {
             </div>
             <div id="plates" class="mt-4">
               <ul class="list-unstyled mb-4">
-                <li
-                  v-for="plate in restaurant.plates"
-                  :key="plate.id"
-                  class="m-4"
-                >
+                <li v-for="plate in restaurant.plates" :key="plate.id" class="m-4">
                   <div v-if="plate.visibility === 1">
                     <h3>{{ plate.name }}</h3>
                     <p>{{ plate.description }}</p>
                     <p>Ingredienti: {{ plate.ingredients }}</p>
                     <p>Prezzo: €{{ plate.price }}</p>
-                    <div
-                      class="d-flex align-items-baseline justify-content-start gap-3 border-bottom pb-4"
-                    >
+                    <div class="d-flex align-items-baseline justify-content-start gap-3 border-bottom pb-4">
                       <label for="quantity">Quantità</label>
-                      <input
-                        type="number"
-                        v-model.number="plate.quantity"
-                        min="1"
-                        placeholder="1"
-                        id="quantity"
-                        class="quantity-input"
-                      />
+                      <input type="number" v-model.number="plate.quantity" min="1" placeholder="1" id="quantity"
+                        class="quantity-input" />
                       <button class="btn btn-success" @click="addToCart(plate)">
                         Aggiungi al carrello
+                      </button>
+                      <!-- aggiungo bottone per gestire la rimozione del singolo elelemento -->
+                      <button class="btn btn-danger" @click="removeFromCart(plate.id)">
+                        Rimuovi dal carrello
                       </button>
                     </div>
                   </div>
@@ -139,6 +131,7 @@ h1 {
   color: #f24c00;
   font-weight: bold;
 }
+
 h3 {
   color: #fc7a1e;
 }
