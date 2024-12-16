@@ -30,8 +30,8 @@ export default {
 .bg-img-container {
   //background-image: url("../../public/");
   background-color: #fae7d3;
-  background-size: contain;
-  background-position: center;
+  // background-size: contain;
+  // background-position: center;
   background-attachment: fixed;
   min-height: 100vh;
   display: flex;
