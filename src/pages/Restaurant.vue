@@ -1,7 +1,6 @@
 <script>
 import { store } from "../js/store.js";
 import axios from "axios";
-import RestaurantCard from "../components/RestaurantCard.vue";
 
 
 export default {
@@ -14,10 +13,6 @@ export default {
       store,
       showModal: false
     }
-  },
-  // LO DEVI INCLUDEREE!!!!!!
-  components: {
-    RestaurantCard,
   },
   methods: {
     getSingleRestaurant() {
@@ -94,8 +89,9 @@ export default {
     <div v-else>
       <section id="restaurant" class="pt-3" v-if="restaurant && restaurant.plates" @click="showModal = false">
         <div class="row">
-          <div class="col-12 d-flex justify-content-center">
-            <RestaurantCard :restaurantObject="restaurant" />
+          <div class="col-12 text-center">
+            <h2 class="fw-bold">{{ restaurant.name }}</h2>
+            <h5>{{ restaurant.address }}</h5>
           </div>
         </div>
         <div id="plates" class="mt-4">
@@ -136,13 +132,7 @@ export default {
   </div>
 </template>
 <style scoped lang="scss">
-h1 {
-  color: #f24c00;
-  font-weight: bold;
-}
-
-
-h3 {
+h2 {
   color: #fc7a1e;
 }
 
