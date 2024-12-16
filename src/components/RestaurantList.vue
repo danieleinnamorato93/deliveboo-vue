@@ -129,10 +129,10 @@ export default {
 </script>
 <template>
   <div class="container">
-    <h3>I migliori ristoranti, a un clic di distanza.</h3>
+    <h3 class="mb-4">I migliori ristoranti, a un clic di distanza.</h3>
     <section>
       <div class="row">
-        <div v-for="restaurant in displayedRestaurants" :key="restaurant.id" class="col-6 col-md-4">
+        <div v-for="restaurant in displayedRestaurants" :key="restaurant.id" class="col-6 col-md-4 mb-3">
           <RouterLink class="text-decoration-none" :to="{ name: 'singleRestaurant', params: { id: restaurant.id } }">
             <RestaurantCard :restaurantObject="restaurant" />
           </RouterLink>
