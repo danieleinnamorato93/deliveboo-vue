@@ -28,7 +28,7 @@ export default {
 </template>
 <style scoped lang="scss">
 .bg-img-container {
-  background-image: url("../assets/imgs/");
+  //background-image: url("../../public/");
   background-color: #fae7d3;
   background-size: contain;
   background-position: center;
