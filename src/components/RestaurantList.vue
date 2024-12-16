@@ -133,8 +133,8 @@ export default {
   <div class="container">
     <section>
       <div class="row">
-        <div v-if="store.clickedTypes.length > 0" class="col-12 my-2 fw-bold">Ristoranti trovati: <p
-            class="fs-5 d-inline">
+        <div v-if="store.clickedTypes.length > 0" class="col-12 my-2 fw-bold text-center">Ristoranti
+          trovati: <p class="fs-5 d-inline">
             {{ store.filteredRestaurants.length }}</p>
         </div>
         <div v-for="restaurant in displayedRestaurants" :key="restaurant.id" class="col-6 col-md-4">
