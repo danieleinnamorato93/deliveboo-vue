@@ -12,6 +12,7 @@ export default {
       restaurant: null,
       notFound: false,
       store,
+      showModal: false
     }
   },
   // LO DEVI INCLUDEREE!!!!!!
@@ -132,6 +133,7 @@ h1 {
   font-weight: bold;
 }
 
+
 h3 {
   color: #fc7a1e;
 }
@@ -140,5 +142,37 @@ h3 {
   width: 60px;
   padding: 5px;
   margin-left: 10px;
+}
+
+#modalAdd {
+  position: relative;
+}
+
+.model-overlay {
+  position: fixed;
+  /* padding: 15px 20px; */
+  top: 10%;
+  right: 20%;
+  left: 80%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 250px;
+  height: 50px;
+  border: 1px solid black;
+  border-radius: 16px;
+  background-color: #06af3e;
+  box-shadow: 3px 3px rgba(0, 0, 0, 0.2);
+  transition: 1s ease-in-out;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity(2s);
+}
+
+.fade-enter,
+.fade-leave-to {
+  transition-delay: 0.8s;
+  opacity: 0;
 }
 </style>
