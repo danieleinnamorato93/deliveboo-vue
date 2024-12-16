@@ -28,7 +28,11 @@ export default {
 </template>
 <style scoped lang="scss">
 .bg-img-container {
+  background-image: url("../assets/imgs/");
   background-color: #fae7d3;
+  background-size: contain;
+  background-position: center;
+  background-attachment: fixed;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -36,13 +40,14 @@ export default {
   text-align: center;
 
   h1 {
+    font-size: 3rem;
     font-weight: bold;
   }
 }
 
 .highlighted-text {
-  color: black;
-  // text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+  color: #ffffff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
 }
 
 button {
