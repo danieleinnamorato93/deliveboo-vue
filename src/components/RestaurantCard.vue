@@ -37,6 +37,7 @@ export default {
 .card {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   transition: border 0.3s ease, box-shadow 0.3s ease;
+  height: 12rem;
 
   &:hover {
     border: 3px solid #fc7a1e;

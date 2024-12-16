@@ -14,9 +14,7 @@ export default {
       Dalla cucina alla tua tavola, un viaggio di gusto
     </h1>
   </div>
-  <h3 class="call mt-3 fw-bold text-wrap text-center fs-5 fs-md-4 fs-lg-3">
-    Hai fame? Scegli il ristorante perfetto per te e ordina subito!
-  </h3>
+ 
 </template>
 
 <style lang="scss" scoped>
