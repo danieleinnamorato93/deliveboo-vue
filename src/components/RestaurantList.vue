@@ -139,7 +139,7 @@ export default {
             class="fs-5 d-inline">
             {{ store.filteredRestaurants.length }}</p>
         </div>
-        <div v-for="restaurant in displayedRestaurants" :key="restaurant.id" class="col-6 col-md-4">
+        <div v-for="restaurant in displayedRestaurants" :key="restaurant.id" class="col-6 col-md-3">
           <RouterLink class="text-decoration-none" :to="{ name: 'singleRestaurant', params: { id: restaurant.id } }">
             <RestaurantCard :restaurantObject="restaurant" />
           </RouterLink>
