@@ -12,10 +12,10 @@ export const store = reactive({
     get cartCount() {
         let total = 0;
         for (let i = 0; i < this.cart.length; i++) {
-          total += this.cart[i].quantity;
+            total += this.cart[i].quantity;
         }
         return total;
-      },
+    },
 
     // Metodo per aggiungere un articolo al carrello
     addToCart(item) {
@@ -30,7 +30,7 @@ export const store = reactive({
 
     // Metodo per svuotare il carrello
     clearCart() {
-        this.cart.length = 0; 
+        this.cart.length = 0;
         this.syncWithLocalStorage();
     },
 
@@ -44,6 +44,20 @@ export const store = reactive({
         const storedCart = JSON.parse(localStorage.getItem("cart"));
         if (storedCart) {
             this.cart = storedCart;
+        }
+    },
+    // definisco un metodo per rimuovere gli elementi dal carrello uno ad uno
+    removeFromCart(itemId) {
+        const itemIndex = this.cart.findIndex(cartItem => cartItem.id === itemId);
+        if (itemIndex !== -1) {
+            // qui li decrementa
+            if (this.cart[itemIndex].quantity > 1) {
+                this.cart[itemIndex].quantity--;
+            } else {
+                // qui li toglie del tutto
+                this.cart.splice(itemIndex, 1);
+            }
+            this.syncWithLocalStorage();
         }
     },
 });
