@@ -99,11 +99,11 @@ export default {
         <h1 class="text-center">Pagamento per ordine con numero: {{ $route.params.orderId }}</h1>
       </div>
       <div class="col-12">
-        <form id="payment-form" @submit="handlePayment">
+        <form id="payment-form" @submit="handlePayment" class="mb-3">
           <!-- Putting the empty container you plan to pass to 'braintree.dropin.create' inside a form will make layout and flow
       easier to manage -->
           <div id="dropin-container"></div>
-          <input type="submit" />
+          <input class="btn btn-success text-center" type="submit" />
           <input type="hidden" id="nonce" :value="nonce" name="payment_method_nonce" />
         </form>
       </div>
