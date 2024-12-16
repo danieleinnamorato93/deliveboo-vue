@@ -12,7 +12,8 @@ export default {
       currentFilters: [],
       apiTypes: "http://127.0.0.1:8000/api/types",
       lastPageNumber: 1,
-      currentPageNumber: 1
+      currentPageNumber: 1,
+      restaurants: [],
     };
   },
   components: {
@@ -51,6 +52,7 @@ export default {
 
     },
     getFilteredRestaurants() {
+      store.filteredRestaurants = [];
       this.updateCurrentFilters()
       const filtersQuery = this.currentFilters.map((filter, index) => {
         return `filters[$and][${index}][types][id]${filter.filterType}=${filter.id}`;
@@ -131,6 +133,10 @@ export default {
   <div class="container">
     <section>
       <div class="row">
+        <div v-if="store.clickedTypes.length > 0" class="col-12 my-2 fw-bold">Ristoranti trovati: <p
+            class="fs-5 d-inline">
+            {{ store.filteredRestaurants.length }}</p>
+        </div>
         <div v-for="restaurant in displayedRestaurants" :key="restaurant.id" class="col-6 col-md-4">
           <RouterLink class="text-decoration-none" :to="{ name: 'singleRestaurant', params: { id: restaurant.id } }">
             <RestaurantCard :restaurantObject="restaurant" />
