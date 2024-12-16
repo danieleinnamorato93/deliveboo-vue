@@ -292,7 +292,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #fae7d3;
+  // background-color: #fae7d3;
 
 
   h1,

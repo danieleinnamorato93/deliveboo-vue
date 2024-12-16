@@ -81,7 +81,7 @@ export default {
 </script>
 
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <div v-if="notFound">
       <div class="row py-3">
         <div class="col-12 text-center mt-3">
