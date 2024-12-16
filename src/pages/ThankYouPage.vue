@@ -9,7 +9,7 @@ export default {
 </script>
 
 <template>
-  <div class="flud-container bg-img-container">
+  <div class="container-fluid bg-img-container">
     <div class="row d-flex justify-content-center align-items-center">
       <div class="col-12 text-center">
         <h1 class="mt-4 highlighted-text">
