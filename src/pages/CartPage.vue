@@ -41,8 +41,16 @@ export default {
     // per poter usare il metodo nella store devo splittare il metodo che avevo creato
     // in questo modo potrà eliminare uno alla volta gli elementi nel carrello con il metodo creato ora nella store
     // e dovrò creare un metodo separato qui per poter fare la sync con il localstorage
-    removeFromCart(index) {
-      this.store.cart.splice(index, 1);
+    // removeFromCart(index) {
+    // qui li toglieva tutti in una botta
+    // this.store.cart.splice(index, 1);
+    // this.store.syncWithLocalStorage();
+    // },
+    removeFromCart(itemId) {
+      this.store.removeFromCart(itemId);
+    },
+    updateCartItem(index) {
+      // Sincronizza il carrello nel localStorage quando cambia la quantità
       this.store.syncWithLocalStorage();
     },
 
@@ -186,8 +194,8 @@ export default {
                 <input type="number" v-model.number="item.quantity" min="1" @change="updateCartItem(index)"
                   class="form-control" style="width: 80px" />
               </div>
-              <button @click="removeFromCart(index)" class="btn btn-danger">
-                Rimuovi
+              <button @click="removeFromCart(item.id)" class="btn btn-danger">
+                Rimuovi una quantità
               </button>
             </div>
             <p class="mb-3 fw-bold border-bottom">
