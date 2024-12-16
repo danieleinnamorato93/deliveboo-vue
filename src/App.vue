@@ -30,10 +30,9 @@ export default {
 @use "../src/scss/general.scss" as *;
 
 main {
-
-  .wrapper-box{
+  .wrapper-box {
     // tolgo in ordine altezza navbar e footer
-    min-height: calc( 100vh - 100px - 200px);
+    min-height: calc(100vh - 100px - 200px);
   }
 }
 </style>
