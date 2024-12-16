@@ -174,11 +174,11 @@ export default {
     <div class="row">
       <div class="col-12">
         <!-- PRIMO CONTROLLO NEL CASO SIA VUOTO -->
-        <div v-if="store.cart.length === 0">
-          <p>
+        <div v-if="store.cart.length === 0" class="text-center mt-5">
+          <h5 class="fw-bold">
             Il carrello è vuoto. Aggiungi piatti al carrello per procedere
             all'ordine.
-          </p>
+          </h5>
           <router-link to="/">Torna al menu</router-link>
         </div>
         <!-- Carrello con contenuto -->
