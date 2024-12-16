@@ -128,6 +128,7 @@ export default {
 
 </script>
 <template>
+<section id="restaurant-cards">
   <div class="container">
     <h3 class="mb-4">I migliori ristoranti, a un clic di distanza.</h3>
     <section>
@@ -140,24 +141,18 @@ export default {
       </div>
     </section>
     <section>
-      <nav>
-        <ul class="list_unstyled d-flex justify-content-center gap-2">
-          <li>
-            <button class="btn btn-outline-dark" @click="previusPage" :class="{ 'disabled': firstPage }">
-              << Prev</button>
-          </li>
-          <li>
-            <button class="btn btn-outline-dark" @click="nextPage" :class="{ 'disabled': lastPage }">Next >></button>
-          </li>
-        </ul>
-      </nav>
+        <div class="d-flex justify-content-center gap-2 mb-3">
+            <button class="btn btn-outline-dark fs-5" @click="previusPage" :class="{ 'disabled': firstPage }">
+              <font-awesome-icon icon="arrow-left" /></button>
+
+            <button class="btn btn-outline-dark fs-5" @click="nextPage" :class="{ 'disabled': lastPage }">
+              <font-awesome-icon icon="arrow-right" /></button>
+        </div>
     </section>
   </div>
-
+</section>
 </template>
 
 <style scoped lang="scss">
-ul {
-  list-style-type: none;
-}
+
 </style>
