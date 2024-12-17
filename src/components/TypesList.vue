@@ -73,7 +73,7 @@ export default {
 <template>
   <section id="carousel-types" class="container-fluid mt-5">
     <!-- Titolo della sezione -->
-    <h3 class=" mt-3 fw-bold text-wrap text-center fs-5 fs-md-4 fs-lg-3">Di che cosa hai voglia? </h3>
+    <h3 class=" mt-3 pt-4 fw-bold text-wrap text-center fs-4 ">Di che cosa hai voglia? </h3>
 
     <div class="row justify-content-center">
       <div class="col-12 col-lg-10">
@@ -118,6 +118,10 @@ h6 {
 
 h5 {
   color: darkslategray;
+}
+
+#carousel-types {
+  background-color: white;
 }
 
 .thumbnails-wrapper {

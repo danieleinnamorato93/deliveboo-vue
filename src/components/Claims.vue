@@ -7,7 +7,7 @@ export default {
 </script>
 
 <template>
-  <div class="claim-container text-center">
+  <div class="claim-container text-center pb-0">
     <h1 class="claim display-5 display-md-4 display-lg-3 text-wrap">
       Dalla cucina alla tua tavola, un viaggio di gusto
     </h1>

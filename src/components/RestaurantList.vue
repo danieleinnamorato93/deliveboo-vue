@@ -135,47 +135,29 @@ export default {
 <template>
   <section id="restaurant-cards">
     <div class="container">
-      <h3 class="mb-4">I migliori ristoranti, a un clic di distanza.</h3>
+      <h3 class="my-4">I migliori ristoranti, a un clic di distanza.</h3>
       <section>
         <div class="row">
-          <div
-            v-if="store.clickedTypes.length > 0"
-            class="col-12 my-2 fw-bold text-center"
-          >
+          <div v-if="store.clickedTypes.length > 0" class="col-12 my-2 fw-bold text-center">
             Ristoranti trovati:
             <p class="fs-5 d-inline">
               {{ store.filteredRestaurants.length }}
             </p>
           </div>
-          <div
-            v-for="restaurant in displayedRestaurants"
-            :key="restaurant.id"
-            class="col-6 col-md-4"
-          >
-            <RouterLink
-              class="text-decoration-none"
-              :to="{ name: 'singleRestaurant', params: { id: restaurant.id } }"
-            >
+          <div v-for="restaurant in displayedRestaurants" :key="restaurant.id" class="col-6 col-md-4">
+            <RouterLink class="text-decoration-none" :to="{ name: 'singleRestaurant', params: { id: restaurant.id } }">
               <RestaurantCard :restaurantObject="restaurant" />
             </RouterLink>
           </div>
         </div>
       </section>
       <section>
-        <div class="d-flex justify-content-center gap-2 mb-3">
-          <button
-            class="btn btn-outline-dark fs-5"
-            @click="previusPage"
-            :class="{ disabled: firstPage }"
-          >
+        <div class="d-flex justify-content-center gap-2 my-3">
+          <button class="btn btn-outline-dark fs-5" @click="previusPage" :class="{ disabled: firstPage }">
             <font-awesome-icon icon="arrow-left" />
           </button>
 
-          <button
-            class="btn btn-outline-dark fs-5"
-            @click="nextPage"
-            :class="{ disabled: lastPage }"
-          >
+          <button class="btn btn-outline-dark fs-5" @click="nextPage" :class="{ disabled: lastPage }">
             <font-awesome-icon icon="arrow-right" />
           </button>
         </div>
