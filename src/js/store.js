@@ -60,4 +60,6 @@ export const store = reactive({
             this.syncWithLocalStorage();
         }
     },
+    // metodo per aggiornare il carrello con la qauntità
+    
 });
