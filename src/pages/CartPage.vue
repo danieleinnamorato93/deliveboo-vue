@@ -210,7 +210,7 @@ export default {
                 class="form-control" style="width: 80px" />
             </div>
             <button @click="removeFromCart(item.id)" class="btn btn-danger">
-              Rimuovi una quantità
+              Rimuovi
             </button>
           </div>
           <p class="my-3 fw-bold">

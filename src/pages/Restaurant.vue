@@ -110,7 +110,7 @@ export default {
                     class="quantity-input" />
                   <div id="modalAdd">
                     <button class="btn btn-success" @click="addToCart(plate), showModal = true">
-                      Aggiungi al carrello
+                      Aggiungi 
                     </button>
                     <transition name="fade" mode="out-in" appear>
                       <div
@@ -122,7 +122,7 @@ export default {
                   </div>
                   <!-- aggiungo bottone per gestire la rimozione del singolo elelemento -->
                   <button class="btn btn-danger" @click="removeFromCart(plate.id)">
-                    Rimuovi dal carrello
+                    Rimuovi
                   </button>
                 </div>
               </div>
