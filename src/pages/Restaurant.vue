@@ -61,9 +61,35 @@ export default {
       }
       this.store.addToCart(item);
     },
-    // metodo da inserire nel bottone per prendere quello dalla store
     removeFromCart(itemId) {
-      this.store.removeFromCart(itemId);
+      // Trova l'elemento nel carrello
+      const itemIndex = this.store.cart.findIndex((item) => item.id === itemId);
+
+      if (itemIndex !== -1) {
+        const item = this.store.cart[itemIndex];
+
+        // Decrementa la quantità di 1
+        if (item.quantity > 1) {
+          item.quantity -= 1;
+        } else {
+          // Se la quantità è 1, rimuovi l'elemento dal carrello
+          this.store.removeFromCart(itemId);
+        }
+        this.store.syncWithLocalStorage();
+      }
+      // Trova il piatto nel ristorante e aggiorna la sua quantità
+      const plate = this.restaurant.plates.find((plate) => plate.id === itemId);
+      if (plate && plate.quantity > 1) {
+        plate.quantity -= 1; 
+      }
+    },
+    updateCartItem(itemId, newQuantity) {
+      const itemIndex = this.store.cart.findIndex((item) => item.id === itemId);
+      if (itemIndex !== -1) {
+        // qui mi deve aggiornare la quantità
+        this.store.cart[itemIndex].quantity = newQuantity;
+        this.store.syncWithLocalStorage();
+      }
     },
   },
   created() {
@@ -98,7 +124,7 @@ export default {
         </div>
         <div id="plates" class="mt-4">
           <ul class="list-unstyled mb-4">
-            <li v-for="plate in restaurant.plates" :key="plate.id" class="m-4">
+            <li v-for="(plate, index) in restaurant.plates" :key="plate.id" class="m-4">
               <div v-if="plate.visibility === 1">
                 <h3>{{ plate.name }}</h3>
                 <p>{{ plate.description }}</p>
@@ -106,11 +132,11 @@ export default {
                 <p>Prezzo: €{{ plate.price }}</p>
                 <div class="d-flex align-items-baseline justify-content-start gap-3 border-bottom pb-4">
                   <label for="quantity">Quantità</label>
-                  <input type="number" v-model.number="plate.quantity" min="1" placeholder="1" id="quantity"
-                    class="quantity-input" />
+                  <input type="number" v-model.number="plate.quantity" min="1" placeholder="0" id="quantity"
+                    class="quantity-input" @change="updateCartItem(plate.id, plate.quantity)" />
                   <div id="modalAdd">
                     <button class="btn btn-success btn-sm" @click="addToCart(plate), showModal = true">
-                      Aggiungi 
+                      Aggiungi
                     </button>
                     <transition name="fade" mode="out-in" appear>
                       <div

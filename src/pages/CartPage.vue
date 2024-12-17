@@ -143,7 +143,6 @@ export default {
 
       return valid;
     },
-
     // Invia l'ordine al server
     submitOrder() {
       //validare prima del invio del'ordine
