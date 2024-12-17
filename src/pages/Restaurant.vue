@@ -109,7 +109,7 @@ export default {
                   <input type="number" v-model.number="plate.quantity" min="1" placeholder="1" id="quantity"
                     class="quantity-input" />
                   <div id="modalAdd">
-                    <button class="btn btn-success" @click="addToCart(plate), showModal = true">
+                    <button class="btn btn-success btn-sm" @click="addToCart(plate), showModal = true">
                       Aggiungi 
                     </button>
                     <transition name="fade" mode="out-in" appear>
@@ -121,7 +121,7 @@ export default {
                     </transition>
                   </div>
                   <!-- aggiungo bottone per gestire la rimozione del singolo elelemento -->
-                  <button class="btn btn-danger" @click="removeFromCart(plate.id)">
+                  <button class="btn btn-danger btn-sm" @click="removeFromCart(plate.id)">
                     Rimuovi
                   </button>
                 </div>
